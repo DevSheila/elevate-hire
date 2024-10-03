@@ -162,7 +162,7 @@ const ProjectsSection = () => {
               <h3 className="font-bold text-lg">{project.title}</h3>
               <p className="text-gray-500">{project.dates}</p>
               {project.present && <p className="text-gray-500">Present</p>}
-              <a href={project.link} className="text-blue-500 hover:underline">
+              <a href={project.link} className="text-blue-500 hover:underline truncate">
                 {project.link}
               </a>
               <p className="text-gray-500">{project.description}</p>
