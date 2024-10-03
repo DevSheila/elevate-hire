@@ -134,7 +134,7 @@ const ProjectsSection = () => {
                 name="link"
                 value={project.link}
                 onChange={(e) => handleChange(e, index)}
-                className="border-b mb-2 w-full outline-none py-2"
+                className="border-b mb-2 w-full outline-none py-2 truncate"
                 placeholder="Project Link"
               />
               <textarea

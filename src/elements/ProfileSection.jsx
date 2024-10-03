@@ -38,7 +38,7 @@ function ProfileSection() {
                   <BsEnvelopeFill className="mr-2" />
                   <a
                     href="mailto:sheilasharon10@gmail.com"
-                    className="text-white hover:underline"
+                    className="text-white hover:underline truncate"
                   >
                     sheilasharon10@gmail.com
                   </a>
@@ -47,7 +47,7 @@ function ProfileSection() {
                   <BsLink45Deg className="mr-2" />
                   <a
                     href="https://devsheila.github.io/sheilaSite/"
-                    className="text-white hover:underline"
+                    className="text-white hover:underline truncate"
                   >
                     devsheila.github.io/sheilaSite/
                   </a>
@@ -56,7 +56,7 @@ function ProfileSection() {
                   <BsTwitter className="mr-2" />
                   <a
                     href="https://twitter.com/SheilaWambui0"
-                    className="text-white hover:underline"
+                    className="text-white hover:underline truncate"
                   >
                     twitter.com/SheilaWambui0
                   </a>
@@ -67,7 +67,7 @@ function ProfileSection() {
                   <BsFillPhoneFill className="mr-2" />
                   <a
                     href="tel:+254710617776"
-                    className="text-white hover:underline"
+                    className="text-white hover:underline truncate"
                   >
                     +254710617776
                   </a>
@@ -76,7 +76,7 @@ function ProfileSection() {
                   <BsLinkedin className="mr-2" />
                   <a
                     href="https://www.linkedin.com/in/SheilaSharonWambui"
-                    className="text-white hover:underline"
+                    className="text-white hover:underline truncate"
                   >
                     linkedin.com/in/SheilaSharonWambui
                   </a>
@@ -85,7 +85,7 @@ function ProfileSection() {
                   <BsGithub className="mr-2" />
                   <a
                     href="https://github.com/DevSheila"
-                    className="text-white hover:underline"
+                    className="text-white hover:underline truncate"
                   >
                     github.com/DevSheila
                   </a>
