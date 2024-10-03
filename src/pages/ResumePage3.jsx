@@ -7,9 +7,9 @@ import ProjectsSection from "@/elements/ProjectsSection";
 import CertificatesSection from "@/elements/CertificatesSection";
 import InterestsSection from "@/elements/InterestsSection";
 
-const ResumePage = () => {
+const ResumePage3 = () => {
   return (
-    <div className="container mx-auto p-8">
+    <div className="container mx-auto p-8" style={{ maxWidth: "500px" }}>
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Sheila Sharon.</h1>
         <h2 className="text-lg font-semibold">Full Stack Engineer</h2>
@@ -74,42 +74,44 @@ const ResumePage = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-8">
-        {/* HALF ONE */}
+      <div className="grid grid-cols-1 gap-8">
         <div>
-          <div className="mt-8">
-            <EducationSection />
-          </div>
-
-          <div className="mt-8">
-            <WorkExperienceSection />
-          </div>
-          <div className="mt-8">
-            <AchievementsSection />
-          </div>
+          <h2 className="text-xl font-semibold mb-4">EDUCATION</h2>
+          <EducationSection />
         </div>
 
-        {/* HALF TWO */}
         <div>
-          <div className="mt-8">
-            <SkillsSection />
-          </div>
+          <h2 className="text-xl font-semibold mb-4">WORK EXPERIENCE</h2>
+          <WorkExperienceSection />
+        </div>
 
-          <div className="mt-8">
-            <ProjectsSection />
-          </div>
+        <div>
+          <h2 className="text-xl font-semibold mb-4">SKILLS</h2>
+          <SkillsSection />
+        </div>
 
-          <div className="mt-8">
-            <CertificatesSection />
-          </div>
+        <div>
+          <h2 className="text-xl font-semibold mb-4">PROJECTS</h2>
+          <ProjectsSection />
+        </div>
 
-          <div className="mt-8">
-            <InterestsSection />
-          </div>
+        <div>
+          <h2 className="text-xl font-semibold mb-4">CERTIFICATES</h2>
+          <CertificatesSection />
+        </div>
+
+        <div>
+          <h2 className="text-xl font-semibold mb-4">ACHIEVEMENTS</h2>
+          <AchievementsSection />
+        </div>
+
+        <div>
+          <h2 className="text-xl font-semibold mb-4">INTERESTS</h2>
+          <InterestsSection />
         </div>
       </div>
     </div>
   );
 };
 
-export default ResumePage;
+export default ResumePage3;

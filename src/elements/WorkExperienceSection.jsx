@@ -11,7 +11,7 @@ const WorkExperienceSection = () => {
     achievements: [
       'Collaborated with a team of 3 developers to create a finances budget tracking mobile app.',
       'Fixed bugs on a client’s (Chamasoft) investment group mobile app.',
-      'Created end to end Figma designs for a tenant mobile app for the company’s clients.',
+      'Created end-to-end Figma designs for a tenant mobile app for the company’s clients.',
     ],
   });
 
@@ -77,17 +77,17 @@ const WorkExperienceSection = () => {
   }, [isEditing]);
 
   return (
-    <div className="p-4 border-b border-gray-300">
-      <h2 className="text-lg font-semibold mb-2">WORK EXPERIENCE</h2>
+    <div className="p-4 max-w-3xl mx-auto">
+      <h2 className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2">WORK EXPERIENCE</h2>
 
       {isEditing ? (
-        <div ref={formRef} className=" p-4">
+        <div ref={formRef} className="rounded-md ">
           <input
             type="text"
             name="jobTitle"
             value={workExperienceData.jobTitle}
             onChange={handleChange}
-            className="border-b mb-2 w-full outline-none"
+            className="border-b mb-2 w-full outline-none p-2"
             placeholder="Job Title"
           />
           <input
@@ -95,16 +95,16 @@ const WorkExperienceSection = () => {
             name="companyName"
             value={workExperienceData.companyName}
             onChange={handleChange}
-            className="border-b mb-2 w-full outline-none"
+            className="border-b mb-2 w-full outline-none p-2"
             placeholder="Company Name"
           />
-          <div className="flex space-x-2">
+          <div className="flex flex-col md:flex-row md:space-x-2">
             <input
               type="text"
               name="startDate"
               value={workExperienceData.startDate}
               onChange={handleChange}
-              className="border-b w-1/2 outline-none"
+              className="border-b mb-2 w-full md:w-1/2 outline-none p-2"
               placeholder="Start Date"
             />
             <input
@@ -112,7 +112,7 @@ const WorkExperienceSection = () => {
               name="endDate"
               value={workExperienceData.endDate}
               onChange={handleChange}
-              className="border-b w-1/2 outline-none"
+              className="border-b mb-2 w-full md:w-1/2 outline-none p-2"
               placeholder="End Date"
             />
           </div>
@@ -121,7 +121,7 @@ const WorkExperienceSection = () => {
             name="location"
             value={workExperienceData.location}
             onChange={handleChange}
-            className="border-b mb-2 w-full outline-none"
+            className="border-b mb-2 w-full outline-none p-2"
             placeholder="Location"
           />
 
@@ -132,7 +132,7 @@ const WorkExperienceSection = () => {
                 <textarea
                   value={achievement}
                   onChange={(e) => handleAchievementChange(index, e.target.value)}
-                  className=" outline-none border-b w-full  mr-2"
+                  className="outline-none border-b w-full mr-2 p-2"
                   placeholder="Achievement"
                 />
                 {workExperienceData.achievements.length > 1 && (
@@ -143,7 +143,7 @@ const WorkExperienceSection = () => {
               </li>
             ))}
           </ul>
-          <button onClick={addAchievement} className="bg-blue-500 text-white px-4 py-2 rounded">
+          <button onClick={addAchievement} className="bg-blue-500 text-white px-4 py-2 rounded mt-2">
             Add Achievement
           </button>
 

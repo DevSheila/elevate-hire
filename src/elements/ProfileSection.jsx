@@ -28,21 +28,19 @@ function ProfileSection() {
         <DialogTrigger asChild>
           <div>
             <div className="flex flex-col items-start mb-8">
-              {" "}
-              {/* Change justify-between to flex-col and items-start */}
               <h1 className="text-3xl font-bold">Sheila Sharon.</h1>
-              <h2 className="text-lg font-semibold ">Full Stack Engineer</h2>
+              <h2 className="text-lg font-semibold">Full Stack Engineer</h2>
               <p className="text-gray-600">Short pitch about yourself</p>
             </div>
-            <div className="flex justify-between mb-8 p-10 bg-gray-800 text-white">
-              <ul className="list-none flex flex-col gap-4">
+            <div className="flex flex-col md:flex-row justify-between mb-8 p-6 md:p-10 bg-gray-800 text-white">
+              <ul className="list-none flex flex-col gap-4 mb-6 md:mb-0">
                 <li className="flex items-center">
                   <BsEnvelopeFill className="mr-2" />
                   <a
-                    href="mailto:sheilaSharon10@gmail.com"
+                    href="mailto:sheilasharon10@gmail.com"
                     className="text-white hover:underline"
                   >
-                    sheilaSharon10@gmail.com
+                    sheilasharon10@gmail.com
                   </a>
                 </li>
                 <li className="flex items-center">
@@ -105,7 +103,7 @@ function ProfileSection() {
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
               <Label htmlFor="name" className="text-right">
                 Name
               </Label>
@@ -115,7 +113,7 @@ function ProfileSection() {
                 className="col-span-3"
               />
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
               <Label htmlFor="username" className="text-right">
                 Username
               </Label>

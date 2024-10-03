@@ -1,29 +1,29 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 
 const SkillsSection = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [skillsData, setSkillsData] = useState([
-    'React JS',
-    'Next.JS',
-    'Java',
-    'Jenkins',
-    'Git',
-    'AngularJS',
-    'Ajax',
-    'Node JS',
-    'Next JS',
-    'React Native',
-    'Mongo DB',
-    'Spring-boot',
-    'C#',
-    '.NET',
-    'Tailwind CSS',
-    'Laravel',
-    'Typescript',
-    'MySql',
-    'Linux',
-    'Jira',
-    'Python',
+    "React JS",
+    "Next.JS",
+    "Java",
+    "Jenkins",
+    "Git",
+    "AngularJS",
+    "Ajax",
+    "Node JS",
+    "Next JS",
+    "React Native",
+    "Mongo DB",
+    "Spring-boot",
+    "C#",
+    ".NET",
+    "Tailwind CSS",
+    "Laravel",
+    "Typescript",
+    "MySql",
+    "Linux",
+    "Jira",
+    "Python",
   ]);
 
   const formRef = useRef(null);
@@ -43,7 +43,7 @@ const SkillsSection = () => {
   };
 
   const addSkill = () => {
-    setSkillsData([...skillsData, '']);
+    setSkillsData([...skillsData, ""]);
   };
 
   const removeSkill = (index) => {
@@ -60,23 +60,25 @@ const SkillsSection = () => {
     };
 
     if (isEditing) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     } else {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isEditing]);
 
   return (
-    <div className="p-4 border-b border-gray-300">
-      <h2 className="text-xl font-semibold mb-4">SKILLS</h2>
+    <div className="p-4">
+      <h2 className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2">
+        SKILLS
+      </h2>
 
       {isEditing ? (
-        <div ref={formRef} className="border p-4">
-          <div className="grid grid-cols-5 gap-2">
+        <div ref={formRef} className="rounded-md">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
             {skillsData.map((skill, index) => (
               <div key={index}>
                 <input
@@ -88,7 +90,7 @@ const SkillsSection = () => {
                 {skillsData.length > 1 && (
                   <button
                     onClick={() => removeSkill(index)}
-                    className="bg-red-500 text-white px-2 py-1 rounded mt-2"
+                    className="bg-red-500 text-white px-2 py-1 rounded mt-2 w-full"
                   >
                     Remove
                   </button>
@@ -97,23 +99,26 @@ const SkillsSection = () => {
             ))}
           </div>
 
-          <button onClick={addSkill} className="bg-blue-500 text-white px-4 py-2 rounded mt-4">
+          <button
+            onClick={addSkill}
+            className="bg-blue-500 text-white px-4 py-2 rounded mt-4 w-full sm:w-auto"
+          >
             Add Skill
           </button>
           <button
             onClick={handleSaveClick}
-            className="bg-green-500 text-white px-4 py-2 mt-4 rounded"
+            className="bg-green-500 text-white px-4 py-2 mt-4 rounded w-full sm:w-auto"
           >
             Save
           </button>
         </div>
       ) : (
         <div onClick={handleEditClick} className="cursor-pointer">
-          <div className="grid grid-cols-5 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
             {skillsData.map((skill, index) => (
               <button
                 key={index}
-                className="bg-gray-300 text-gray-700 px-3 py-1 rounded"
+                className="text-gray-900 px-3 py-1 border-2 border-solid rounded w-full"
               >
                 {skill}
               </button>

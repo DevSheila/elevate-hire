@@ -10,41 +10,40 @@ import ProfileSection from "@/elements/ProfileSection";
 
 const ResumePage = () => {
   return (
-    <div className="container mx-auto p-8">
-
-
+    <div className="container mx-auto p-4 sm:p-8">
       <ProfileSection />
 
-      <div className="grid grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* HALF ONE */}
         <div>
-          <div className="mt-8">
+          <div className="mt-2">
             <EducationSection />
           </div>
 
-          <div className="mt-8">
+          <div className="mt-2">
             <WorkExperienceSection />
           </div>
-          <div className="mt-8">
+
+          <div className="mt-2">
             <AchievementsSection />
           </div>
         </div>
 
         {/* HALF TWO */}
         <div>
-          <div className="mt-8">
+          <div className="mt-2">
             <SkillsSection />
           </div>
 
-          <div className="mt-8">
+          <div className="mt-2">
             <ProjectsSection />
           </div>
 
-          <div className="mt-8">
+          <div className="mt-2">
             <CertificatesSection />
           </div>
 
-          <div className="mt-8">
+          <div className="mt-2">
             <InterestsSection />
           </div>
         </div>
@@ -54,3 +53,7 @@ const ResumePage = () => {
 };
 
 export default ResumePage;
+
+
+
+

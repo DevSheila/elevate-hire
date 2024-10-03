@@ -53,24 +53,26 @@ const InterestsSection = () => {
   }, [isEditing]);
 
   return (
-    <div className="p-4 border-b border-gray-300" >
-      <h2 className="text-xl font-semibold mb-4">INTERESTS</h2>
+    <div className="p-4 sm:p-6 lg:p-8">
+      <h2 className="font-bold text-gray-700 text-xl sm:text-2xl leading-7 mb-4 pb-2">
+        INTERESTS
+      </h2>
 
       {isEditing ? (
-        <div ref={formRef} className="border p-4">
-          <div className="grid grid-cols-3 gap-2">
+        <div ref={formRef} className="rounded-md">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {interestsData.map((interest, index) => (
               <div key={index}>
                 <input
                   type="text"
                   value={interest}
                   onChange={(e) => handleChange(e, index)}
-                  className="border-b w-full outline-none px-3 py-1 rounded"
+                  className="border-b w-full outline-none px-3 py-2 rounded"
                 />
                 {interestsData.length > 1 && (
                   <button
                     onClick={() => removeInterest(index)}
-                    className="bg-red-500 text-white px-2 py-1 rounded mt-2"
+                    className="bg-red-500 text-white px-3 py-1 rounded mt-2 w-full"
                   >
                     Remove
                   </button>
@@ -79,23 +81,26 @@ const InterestsSection = () => {
             ))}
           </div>
 
-          <button onClick={addInterest} className="bg-blue-500 text-white px-4 py-2 rounded mt-4">
+          <button
+            onClick={addInterest}
+            className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
+          >
             Add Interest
           </button>
           <button
             onClick={handleSaveClick}
-            className="bg-green-500 text-white px-4 py-2 mt-4 rounded"
+            className="bg-green-500 text-white px-4 py-2 rounded mt-4 ml-2"
           >
             Save
           </button>
         </div>
       ) : (
         <div onClick={handleEditClick} className="cursor-pointer">
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {interestsData.map((interest, index) => (
               <button
                 key={index}
-                className="bg-gray-300 text-gray-700 px-3 py-1 rounded"
+                className="text-gray-900 px-3 py-2 border-2 border-solid rounded w-full"
               >
                 {interest}
               </button>
