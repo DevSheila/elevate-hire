@@ -1,9 +1,11 @@
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
-import SignIn from './pages/Auth/SignIn';
-import ResumePage from './pages/ResumePage';
 
-// PAGES 
+// PAGES
+import SignIn from './SignIn';
+import ResumePage from './pages/ResumePage';
+import NotFound from './pages/NotFound';
+
 
 // PrivateRoute component to protect routes that require authentication
 function PrivateRoute({ element, ...rest }) {
@@ -29,6 +31,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<ResumePage />} />
         <Route exact path="/sign-in" element={<PublicRoute element={<SignIn />} />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
