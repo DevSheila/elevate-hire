@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 const ProjectsSection = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -134,7 +135,7 @@ const ProjectsSection = () => {
                 name="link"
                 value={project.link}
                 onChange={(e) => handleChange(e, index)}
-                className="border-b mb-2 w-full outline-none py-2 truncate"
+                className="border-b mb-2 w-full outline-none py-2 "
                 placeholder="Project Link"
               />
               <textarea
@@ -162,7 +163,12 @@ const ProjectsSection = () => {
               <h3 className="font-bold text-lg">{project.title}</h3>
               <p className="text-gray-500">{project.dates}</p>
               {project.present && <p className="text-gray-500">Present</p>}
-              <a href={project.link} className="text-blue-500 hover:underline truncate">
+              {/* <Link to={project.link}>
+              <p className="text-blue-500 hover:underline text-clip overflow-hidden ...">
+                {project.link}
+              </p>
+              </Link> */}
+              <a href={project.link} className="text-blue-500 hover:underline text-clip overflow-hidden ...">
                 {project.link}
               </a>
               <p className="text-gray-500">{project.description}</p>

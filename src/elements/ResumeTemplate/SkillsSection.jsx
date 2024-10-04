@@ -118,7 +118,7 @@ const SkillsSection = () => {
             {skillsData.map((skill, index) => (
               <button
                 key={index}
-                className="text-gray-900 px-3 py-1 border-2 border-solid rounded w-full"
+                className="text-gray-900 px-3 py-1 border-2 border-solid rounded w-full truncate"
               >
                 {skill}
               </button>

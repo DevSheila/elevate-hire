@@ -1,11 +1,11 @@
 import React from "react";
-import WorkExperienceSection from "@/elements/WorkExperienceSection";
-import EducationSection from "@/elements/EducationSection";
-import AchievementsSection from "@/elements/AchievementsSection";
-import SkillsSection from "@/elements/SkillsSection";
-import ProjectsSection from "@/elements/ProjectsSection";
-import CertificatesSection from "@/elements/CertificatesSection";
-import InterestsSection from "@/elements/InterestsSection";
+import WorkExperienceSection from "@/elements/ResumeTemplate/WorkExperienceSection";
+import EducationSection from "@/elements/ResumeTemplate/EducationSection";
+import AchievementsSection from "@/elements/ResumeTemplate/AchievementsSection";
+import SkillsSection from "@/elements/ResumeTemplate/SkillsSection";
+import ProjectsSection from "@/elements/ResumeTemplate/ProjectsSection";
+import CertificatesSection from "@/elements/ResumeTemplate/CertificatesSection";
+import InterestsSection from "@/elements/ResumeTemplate/InterestsSection";
 
 const ResumePage3 = () => {
   return (

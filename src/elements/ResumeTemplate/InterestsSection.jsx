@@ -100,7 +100,7 @@ const InterestsSection = () => {
             {interestsData.map((interest, index) => (
               <button
                 key={index}
-                className="text-gray-900 px-3 py-2 border-2 border-solid rounded w-full"
+                className="text-gray-900 px-3 py-2 border-2 border-solid rounded w-full truncate"
               >
                 {interest}
               </button>

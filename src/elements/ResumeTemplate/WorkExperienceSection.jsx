@@ -8,6 +8,7 @@ const WorkExperienceSection = () => {
     startDate: '12/2023',
     endDate: 'Ongoing',
     location: 'Nairobi, Kenya',
+    companyDesc: 'Digital Vision is a company dealing with provision of web/mobile based solutions, content applications and technological innovation.',
     achievements: [
       'Collaborated with a team of 3 developers to create a finances budget tracking mobile app.',
       'Fixed bugs on a client’s (Chamasoft) investment group mobile app.',
@@ -157,10 +158,11 @@ const WorkExperienceSection = () => {
       ) : (
         <div onClick={handleEditClick} className="cursor-pointer">
           <h3 className="font-bold text-lg">{workExperienceData.jobTitle}</h3>
-          <p className="text-gray-600">{workExperienceData.companyName}</p>
+          <p className="text-gray-600 ">{workExperienceData.companyName}</p>
           <p className="text-gray-500">{`${workExperienceData.startDate} - ${workExperienceData.endDate}`}</p>
           <p className="text-gray-500">{workExperienceData.location}</p>
-          <h3 className="font-bold text-lg mt-4 mb-2">Achievements/Tasks</h3>
+          <p className="text-gray-500 font-normal italic">{workExperienceData.companyDesc}</p>
+          <h3 className="text-gray-600 font-normal italic mt-4 mb-2">Achievements/Tasks</h3>
           <ul>
             {workExperienceData.achievements.map((achievement, index) => (
               <li key={index} className="text-gray-500 mb-2">
