@@ -2,9 +2,10 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import { useUser } from '@clerk/clerk-react';
 
 // PAGES
-import SignIn from './SignIn';
 import ResumePage from './pages/ResumePage';
 import NotFound from './pages/NotFound';
+import LandingPage from './pages/LandingPage';
+import SignIn from './pages/SignIn';
 
 
 // PrivateRoute component to protect routes that require authentication
@@ -22,18 +23,19 @@ function PublicRoute({ element, ...rest }) {
 
   if (!isLoaded) return null; // Avoid rendering anything until the user state is loaded
 
-  return !isSignedIn ? element : <Navigate to="/" />;
+  return !isSignedIn ? element : <Navigate to="/resume" />;
 }
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route exact path="/" element={<ResumePage />} />
-        <Route exact path="/sign-in" element={<PublicRoute element={<SignIn />} />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Router>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<LandingPage />} />
+          <Route exact path="/resumebuilder" element={<PrivateRoute element={<ResumePage />} />} />
+          <Route exact path="/sign-in" element={<PublicRoute element={<SignIn />} />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
   );
 }
 
