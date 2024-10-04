@@ -20,7 +20,7 @@ function LandingPage() {
                       Elevate Hire
                     </span>
                   </h1>
-                  
+
                   <p className="mt-4 text-base sm:text-lg text-gray-600 sm:mt-8">
                     By employing the best practices and innovative tech, Elevate
                     Hire boosts your chances of landing a better job.
@@ -65,7 +65,7 @@ function LandingPage() {
               <div className="relative bg-transparent">
                 <img
                   className="relative w-full h-auto"
-                  src="/hero.png"
+                  src="/landing/hero.png"
                   alt="Hero"
                 />
               </div>
@@ -74,83 +74,85 @@ function LandingPage() {
         </div>
 
         {/* ABOUT */}
-        <div class="mx-auto flex max-w-lg flex-col px-4 py-20 lg:max-w-screen-xl lg:flex-row">
-          <div class="mb-10 max-w-lg lg:mb-0 lg:pr-16 xl:pr-20">
-            <div class="mb-5 text-4xl font-bold text-blue-600">
-              Analytics App With a an Edge. Innovation.
-            </div>
-            <div class="mb-5 text-gray-600">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus
-              modi, magni repellat doloremque autem tempore facere adipisci nam
-              ratione vitae quibusdam earum optio laudantium ipsum aliquid harum
-              nulla.
-            </div>
-            <div class="">
-              <p class="font-bold text-blue-600">JAMES EDWARD</p>
-              <p class="text-gray-500">CEO, Analytica</p>
-            </div>
-          </div>
-          <div class="mr-10 mb-6 lg:mb-0">
+        <section class="mx-auto flex max-w-lg flex-col px-4 py-10 lg:max-w-screen-xl lg:flex-row">
+          <div class="max-w-md pr-20 lg:pt-28">
             <img
-              src="/images/Rs9HCLrp_0y7g8Zp8h8p9.png"
-              class="shadow-blue-600/10 w-full max-w-sm object-contain object-left shadow-lg"
+              src="https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/601074ed0f05cd25097215a4_6002086f72b7277e1f01d682_ryan-morrison-illustration-1.png"
+              alt="AI-driven hiring process illustration"
             />
-            <div class="p-4">
-              <p class="mb-1 font-medium uppercase text-blue-600">Who we are</p>
-              <h5 class="text-gray-600">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quae,
-                temporibus!
-              </h5>
-              <div class="mt-2 flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="h-6 w-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                  />
-                </svg>
-              </div>
-            </div>
           </div>
           <div class="">
-            <img
-              src="/images/aaFKzowNcgxqSdxMw11na.png"
-              class="shadow-blue-600/10 w-full max-w-sm object-contain object-left shadow-lg"
-            />
-            <div class="p-4">
-              <p class="mb-1 font-medium uppercase text-blue-600">
-                Our Practices
-              </p>
-              <h5 class="text-gray-600">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quae,
-                temporibus!
-              </h5>
-              <div class="mt-2 flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="h-6 w-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                  />
-                </svg>
+            <div class="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg shadow-blue-600/20">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="h-6 w-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z"
+                />
+              </svg>
+            </div>
+            <h2 class="mb-10 max-w-lg text-4xl font-bold leading-snug lg:text-5xl lg:leading-snug">
+              What we offer
+            </h2>
+            <div class="grid gap-y-12 gap-x-8 lg:grid-cols-2">
+              <div>
+                <p class="mb-6 border-l-4 border-blue-600 pl-4 text-2xl leading-10">
+                  AI Resume Builder
+                </p>
+                <p class="text-lg text-gray-800">
+                  ElevateHire's AI analyzes your experience and crafts a resume
+                  that stands out, optimizing for keywords and tailoring to
+                  specific industries. No more generic templates—just impactful,
+                  personalized resumes.
+                </p>
+              </div>
+
+              <div>
+                <p class="mb-6 border-l-4 border-blue-600 pl-4 text-2xl leading-10">
+                  Mock Interviews with AI
+                </p>
+                <p class="text-lg text-gray-800">
+                  Simulate real interview scenarios with our AI-powered mock
+                  interviews. Practice answering industry-specific questions and
+                  get instant feedback to refine your responses and improve
+                  confidence.
+                </p>
+              </div>
+
+              <div>
+                <p class="mb-6 border-l-4 border-blue-600 pl-4 text-2xl leading-10">
+                  AI-Generated Cover Letters
+                </p>
+                <p class="text-lg text-gray-800">
+                  Craft the perfect cover letter with ease. Our AI generates
+                  personalized letters that align with your resume and target
+                  job descriptions, ensuring you make the right first
+                  impression.
+                </p>
+              </div>
+
+              <div>
+                <p class="mb-6 border-l-4 border-blue-600 pl-4 text-2xl leading-10">
+                  Skills Gap Analysis
+                </p>
+                <p class="text-lg text-gray-800">
+                  Identify skill gaps in your resume and receive actionable
+                  recommendations on courses or certifications to boost your
+                  career prospects. ElevateHire helps you stay competitive in a
+                  dynamic job market.
+                </p>
               </div>
             </div>
           </div>
-        </div>
+        </section>
+
         {/* STATS */}
         <section class="py-6 text-blue-900 sm:py-16">
           <div class="mx-auto max-w-lg lg:max-w-screen-xl px-4 sm:px-6 ">
@@ -200,7 +202,7 @@ function LandingPage() {
                   This Year's Growth
                 </h2>
                 <div class="mt-8">
-                  <button class="rounded-lg border-2 border-blue-700 bg-blue-700 px-6 py-2 font-medium text-white transition hover:translate-y-1">
+                  <button class="rounded-full border-2 border-blue-700 bg-blue-700 px-6 py-2 font-medium text-white transition hover:translate-y-1">
                     Learn More
                   </button>
                 </div>
@@ -214,7 +216,7 @@ function LandingPage() {
                       <span class="relative">328</span>
                     </h3>
                     <span class="ml-3 text-base font-medium capitalize">
-                      Great Achievements
+                      Career Transformations
                     </span>
                   </div>
                 </div>
@@ -226,7 +228,7 @@ function LandingPage() {
                       <span class="relative">16</span>
                     </h3>
                     <span class="ml-3 text-base font-medium capitalize">
-                      Graduations sponsored
+                      Successful Job Placements
                     </span>
                   </div>
                 </div>
@@ -235,10 +237,10 @@ function LandingPage() {
                   <div class="flex items-center">
                     <h3 class="relative ml-2 inline-block text-4xl font-bold leading-none">
                       <span class="absolute -top-6 -left-6 h-16 w-16 rounded-full bg-blue-200"></span>
-                      <span class="relative">41+</span>
+                      <span class="relative">75+</span>
                     </h3>
                     <span class="ml-3 text-base font-medium capitalize">
-                      jobs created
+                      Successful Career Pivots
                     </span>
                   </div>
                 </div>
@@ -259,10 +261,10 @@ function LandingPage() {
           </div>
         </section>
         {/* TESTIMONIALS */}
-        <section class="py-6 text-blue-900 sm:py-16 ">
-          <div class="mx-auto max-w-lg lg:max-w-screen-xl px-4 sm:px-6 ">
+        <section class="py-6 text-blue-900 sm:py-16">
+          <div class="mx-auto max-w-lg lg:max-w-screen-xl px-4 sm:px-6">
             <div class="flex flex-col lg:flex-row">
-              <div class="relative  mb-10 flex h-96 overflow-hidden rounded-xl bg-blue-600 shadow sm:mt-20 lg:h-auto lg:max-w-md lg:pt-20">
+              <div class="relative mb-10 flex h-96 overflow-hidden rounded-xl bg-blue-600 shadow sm:mt-20 lg:h-auto lg:max-w-md lg:pt-20">
                 <img
                   class="absolute top-0 h-full w-full object-cover opacity-10"
                   src="https://images.unsplash.com/photo-1551721434-8b94ddff0e6d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80"
@@ -273,8 +275,8 @@ function LandingPage() {
                     <div class="">
                       <blockquote class="">
                         <p class="text-3xl font-bold text-white sm:text-5xl">
-                          "I cannot overstate how much this has helped our
-                          startup"
+                          "ElevateHire completely transformed the way I prepare
+                          for job interviews!"
                         </p>
                       </blockquote>
                     </div>
@@ -282,13 +284,13 @@ function LandingPage() {
                     <div class="mt-10 flex items-center">
                       <img
                         class="h-11 w-11 flex-shrink-0 rounded-full object-cover"
-                        src="/images/ddHJYlQqOzyOKm4CSCY8o.png"
+                        src="/landing/user4.avif"
                         alt=""
                       />
                       <div class="ml-4 text-white">
-                        <p class="text-base font-bold">Jacob Jones</p>
+                        <p class="text-base font-bold">John Mitchell</p>
                         <p class="text-blue-90 mt-0.5 text-sm">
-                          Youtube Personality
+                          Software Engineer, TechNova
                         </p>
                       </div>
                     </div>
@@ -301,9 +303,8 @@ function LandingPage() {
                   <div class="">
                     <blockquote class="">
                       <p class="text-lg leading-relaxed">
-                        "Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Praesentium dolores facere repellendus, velit quis
-                        fugiat."
+                        "The AI-powered resume builder helped me create a resume
+                        that landed me my dream job!"
                       </p>
                     </blockquote>
                   </div>
@@ -311,7 +312,30 @@ function LandingPage() {
                   <div class="mt-4 flex items-center">
                     <img
                       class="h-11 w-11 flex-shrink-0 rounded-full object-cover"
-                      src="/images/y9s3xOJV6rnQPKIrdPYJy.png"
+                      src="/landing/user1.avif"
+                      alt=""
+                    />
+                    <div class="ml-4">
+                      <p class="text-base font-bold">Sarah Thompson</p>
+                      <p class="mt-0.5 text-sm">HR Manager, NexaCorp</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex flex-col bg-white">
+                  <div class="">
+                    <blockquote class="">
+                      <p class="text-lg leading-relaxed">
+                        "ElevateHire's AI mock interviews gave me the confidence
+                        I needed for real interviews. A must-have!"
+                      </p>
+                    </blockquote>
+                  </div>
+
+                  <div class="mt-4 flex items-center">
+                    <img
+                      class="h-11 w-11 flex-shrink-0 rounded-full object-cover"
+                      src="/landing/user2.avif"
                       alt=""
                     />
                     <div class="ml-4">
@@ -325,9 +349,8 @@ function LandingPage() {
                   <div class="">
                     <blockquote class="">
                       <p class="text-lg leading-relaxed">
-                        "Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Praesentium dolores facere repellendus, velit quis
-                        fugiat."
+                        "From cover letters to personalized interview prep,
+                        ElevateHire has been an invaluable tool for my career!"
                       </p>
                     </blockquote>
                   </div>
@@ -335,33 +358,7 @@ function LandingPage() {
                   <div class="mt-4 flex items-center">
                     <img
                       class="h-11 w-11 flex-shrink-0 rounded-full object-cover"
-                      src="/images/Ju6-1negUEjTnBKw_ZP4r.png"
-                      alt=""
-                    />
-                    <div class="ml-4">
-                      <p class="text-base font-bold">Jacob Jones</p>
-                      <p class="text-blue-90 mt-0.5 text-sm">
-                        Youtube Personality
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="flex flex-col bg-white">
-                  <div class="">
-                    <blockquote class="">
-                      <p class="text-lg leading-relaxed">
-                        "Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Praesentium dolores facere repellendus, velit quis
-                        fugiat."
-                      </p>
-                    </blockquote>
-                  </div>
-
-                  <div class="mt-4 flex items-center">
-                    <img
-                      class="h-11 w-11 flex-shrink-0 rounded-full object-cover"
-                      src="/images/fR71TFZIDTv2jhvKsOMhC.png"
+                      src="/landing/user3.avif"
                       alt=""
                     />
                     <div class="ml-4">
@@ -376,6 +373,94 @@ function LandingPage() {
             </div>
           </div>
         </section>
+
+        {/* Footer  */}
+        <footer class="bg-gray-50">
+          <div class="mx-auto grid max-w-screen-xl gap-y-8 gap-x-12 px-4 py-10 md:grid-cols-2 xl:grid-cols-4 xl:px-10">
+            <div class="max-w-sm">
+              <div class="mb-6 flex h-12 items-center space-x-2">
+                <span class="text-2xl font-bold">
+                  Elevate <span class="text-blue-600">Hire</span>.
+                </span>
+              </div>
+              <div class="text-gray-500">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis
+                ad a officia ea expedita!
+              </div>
+            </div>
+            <div class="">
+              <div class="mt-4 mb-2 font-medium xl:mb-4">Address</div>
+              <div class="text-gray-500">
+                35 Remida Heights, <br />
+                45 Street, <br />
+                South Caroline, US
+              </div>
+            </div>
+            <div class="">
+              <div class="mt-4 mb-2 font-medium xl:mb-4">Links</div>
+              <nav aria-label="Footer Navigation" class="text-gray-500">
+                <ul class="space-y-3">
+                  <li>
+                    <a class="hover:text-blue-600 hover:underline" href="#">
+                      Pricing
+                    </a>
+                  </li>
+                  <li>
+                    <a class="hover:text-blue-600 hover:underline" href="#">
+                      Demo
+                    </a>
+                  </li>
+                  <li>
+                    <a class="hover:text-blue-600 hover:underline" href="#">
+                      Press
+                    </a>
+                  </li>
+                  <li>
+                    <a class="hover:text-blue-600 hover:underline" href="#">
+                      Support Hub
+                    </a>
+                  </li>
+                  <li>
+                    <a class="hover:text-blue-600 hover:underline" href="#">
+                      Contact
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div class="">
+              <div class="mt-4 mb-2 font-medium xl:mb-4">
+                Subscribe to our Newsletter
+              </div>
+              <div class="flex flex-col">
+                <div class="mb-4">
+                  <input
+                    type="email"
+                    class="focus:outline mb-2 block h-14 w-full rounded-xl bg-gray-200 px-4 sm:w-80 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                    placeholder="Enter your email"
+                  />
+                  <button class="block rounded-xl bg-blue-600 px-6 py-3 font-medium text-white">
+                    Subscribe
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-100">
+            <div class="mx-auto flex max-w-screen-xl flex-col gap-y-4 px-4 py-3 text-center text-gray-500 sm:flex-row sm:justify-between sm:text-left">
+              <div class="">© 2022 ElevateHire | All Rights Reserved</div>
+              <div class="">
+                <a class="" href="#">
+                  Privacy Policy
+                </a>
+                <span>|</span>
+                <a class="" href="#">
+                  Terms of Service
+                </a>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
     </>
   );

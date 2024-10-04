@@ -18,7 +18,9 @@ function NavBar() {
           <span className="mr-2 w-8">
             <img src="/logo.svg" alt="" />
           </span>
-          Elevate Hire
+          <span class="text-2xl font-bold">
+            Elevate <span class="text-blue-600">Hire</span>.
+          </span>
         </a>
         <input type="checkbox" className="peer hidden" id="navbar-open" />
         <label
@@ -87,7 +89,9 @@ function NavBar() {
                 </div>
               ) : (
                 <Link to={"/sign-in"}>
-                  <Button className="rounded-full bg-blue-600 text-white hover:bg-blue-800 hover:text-white">Get Started</Button>
+                  <Button className="rounded-full bg-blue-600 text-white hover:bg-blue-800 hover:text-white">
+                    Get Started
+                  </Button>
                 </Link>
               )}
             </div>
