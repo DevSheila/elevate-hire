@@ -1,5 +1,5 @@
 import React from "react";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/verticaltabs";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 import {
   AiOutlinePlusCircle,
@@ -10,7 +10,7 @@ import {
   AiOutlineDelete,
 } from "react-icons/ai";
 
-function ToolTabs() {
+function VerticalToolTabs() {
   return (
     <Tabs defaultValue="add" className="w-fit bg-gray">
       <div className="flex">
@@ -44,4 +44,4 @@ function ToolTabs() {
   );
 }
 
-export default ToolTabs;
+export default VerticalToolTabs;

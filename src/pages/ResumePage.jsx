@@ -7,31 +7,16 @@ import ProjectsSection from "@/elements/ResumeTemplate/ProjectsSection";
 import CertificatesSection from "@/elements/ResumeTemplate/CertificatesSection";
 import InterestsSection from "@/elements/ResumeTemplate/InterestsSection";
 import ProfileSection from "@/elements/ResumeTemplate/ProfileSection";
+import HorizontalToolTabs from "@/elements/Tabs/HorizontalToolTabs";
+import HorizontalToolTabs1 from "@/elements/Tabs/HorizontalToolTabs1";
 
 const ResumePage = () => {
   return (
     <>
-      {/* 
-      <div className="bg-gray-600 flex justify-center items-center">
-        <div className="bg-white rounded-lg shadow-md mt-8 mb-8 p-8">
-          <ResumePage />
-        </div>
-      </div> 
-      */}
-
-      {/* 
-      <div className="bg-gray-600 flex justify-center items-center min-h-screen p-4">
-        <h1 className="text-3xl font-bold text-white bg-white">My Resume</h1>
-        //<div className="bg-white rounded-lg shadow-md w-full max-w-4xl mt-8 mb-8 p-8"> 
-
-        <div className="bg-white shadow-md w-full max-w-6xl mt-8 mb-8 p-4">
-          <ResumePage />
-        </div>
-      </div> 
-      */}
+      <HorizontalToolTabs1/>
 
       <div className="bg-gray-700 flex flex-col justify-center items-center min-h-screen p-4 sm:p-6 md:p-8">
-        <h1 className="text-xl font-bold text-white">My Resume</h1>
+        {/* <h1 className="text-xl font-bold text-white">My Resume</h1> */}
 
         <div className="bg-white shadow-md w-full max-w-2xl md:max-w-4xl lg:max-w-6xl mt-4 sm:mt-6 md:mt-8 mb-4 sm:mb-6 md:mb-8 p-4 sm:p-6 md:p-8 rounded">
           <div className="container mx-auto p-4 sm:p-8">
