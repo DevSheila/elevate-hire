@@ -1,6 +1,5 @@
 import React from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/verticaltabs";
-import { BsFillPlusCircleFill } from "react-icons/bs";
 import {
   AiOutlinePlusCircle,
   AiOutlineUpCircle,

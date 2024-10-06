@@ -1,8 +1,17 @@
 import React from "react";
-import { Tabs,TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
 
 import { SlActionUndo, SlActionRedo, SlGrid, SlLayers } from "react-icons/sl";
 import { TfiBrush } from "react-icons/tfi";
+import { ThemeSelector } from "../TabItems/ThemeSelector";
+import ThemeColor from "../TabItems/ThemeColor";
+
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+
 const HorizontalToolTabs1 = () => {
   return (
     <div
@@ -48,6 +57,10 @@ const HorizontalToolTabs1 = () => {
                 <span className="hidden md:inline">Template</span>
               </TabsTrigger>
             </TabsList>
+
+            <TabsContent value="theme">
+              <ThemeSelector />
+            </TabsContent>
           </Tabs>
         </div>
       </div>
