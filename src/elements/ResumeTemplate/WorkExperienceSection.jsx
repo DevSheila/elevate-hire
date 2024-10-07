@@ -49,10 +49,6 @@ const WorkExperienceSection = () => {
   };
 
   const handleRichTextEditor = (e, name, index) => {
-    console.log("e", e);
-    console.log("name", name);
-    console.log("index", index);
-
     const updatedWorkExperience = [...workExperienceData];
     updatedWorkExperience[index]["achievements"] = e.target.value;
     setworkExperienceData(updatedWorkExperience);

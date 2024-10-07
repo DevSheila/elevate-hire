@@ -5,15 +5,9 @@ import { SlActionUndo, SlActionRedo, SlGrid, SlLayers } from "react-icons/sl";
 import { AiOutlineFileSearch } from "react-icons/ai";
 import { TfiBrush } from "react-icons/tfi";
 import { ThemeSelector } from "../TabItems/ThemeSelector";
-import ThemeColor from "../TabItems/ThemeColor";
 
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 
-const HorizontalToolTabs1 = () => {
+const HorizontalToolTabs = () => {
   return (
     <div
       className="fixed top-0 left-0 w-full z-10 bg-transparent py-2 px-4 rounded-lg"
@@ -21,13 +15,13 @@ const HorizontalToolTabs1 = () => {
         transform: "translateY(-5px)",
       }}
     >
-      <div className="flex justify-center items-center bg-transparent py-2 px-4  ">
-        <div className=" flex justify-center items-center space-x-2 bg-gray-600 px-4">
-          {/* <Tabs className="w-full">
+      <div className="flex justify-center items-center bg-transparent py-2 px-4 rounded-lg">
+        <div className=" flex justify-center items-center space-x-2">
+          <Tabs className="w-full">
             <TabsList className="flex justify-center">
               <TabsTrigger value="undo">
                 <div className="m-1 text-lg">
-                  <SlActionUndo />Open
+                  <SlActionUndo />
                 </div>
               </TabsTrigger>
 
@@ -69,37 +63,11 @@ const HorizontalToolTabs1 = () => {
             <TabsContent value="theme">
               <ThemeSelector />
             </TabsContent>
-          </Tabs> */}
-
-          <Popover className="rounded-full px-4">
-            <PopoverTrigger className="text-white">
-              <div className="m-1 text-lg">
-                <SlActionUndo />Open
-              </div>
-              
-            </PopoverTrigger>
-            <PopoverContent>Place content for the popover here.</PopoverContent>
-          </Popover>
-          <Popover>
-            <PopoverTrigger className="text-white">
-              <div className="m-1 text-lg">
-                <SlActionUndo />Open
-              </div>
-            </PopoverTrigger>
-            <PopoverContent>Place content for the popover here.</PopoverContent>
-          </Popover>
-          <Popover>
-            <PopoverTrigger className="text-white">
-              <div className="m-1 text-lg">
-                <SlActionUndo />Open
-              </div>
-            </PopoverTrigger>
-            <PopoverContent>Place content for the popover here.</PopoverContent>
-          </Popover>
+          </Tabs>
         </div>
       </div>
     </div>
   );
 };
 
-export default HorizontalToolTabs1;
+export default HorizontalToolTabs;

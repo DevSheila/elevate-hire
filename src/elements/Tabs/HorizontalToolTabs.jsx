@@ -1,13 +1,29 @@
-import React from "react";
-import {
-  FiActivity,
-  FiAlertOctagon,
-  FiAnchor,
-  FiAperture,
-  FiCamera,
-} from "react-icons/fi";
+import React, { useRef, useEffect, useState } from "react";
+import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
+import { SlActionUndo, SlActionRedo, SlGrid, SlLayers } from "react-icons/sl";
+import { AiOutlineFileSearch } from "react-icons/ai";
+import { TfiBrush } from "react-icons/tfi";
+import { ThemeSelector } from "../TabItems/ThemeSelector";
 
 const HorizontalToolTabs = () => {
+  const [activeTab, setActiveTab] = useState(""); // Track active tab
+  const tabsRef = useRef(null); // Ref for the tabs container
+
+  // Handle clicks outside the active tab
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Check if the click is outside the active tab container
+      if (tabsRef.current && !tabsRef.current.contains(event.target)) {
+        setActiveTab(""); // Reset to a default tab, change as needed
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div
       className="fixed top-0 left-0 w-full z-10 bg-transparent py-2 px-4 rounded-lg"
@@ -15,65 +31,63 @@ const HorizontalToolTabs = () => {
         transform: "translateY(-5px)",
       }}
     >
-      <div className="flex justify-between items-center bg-transparent py-2 px-4 rounded-lg">
-        <div className="flex items-center">
-          <a href="/" className="flex items-center">
-            <img
-              src="/logo.svg"
-              alt="Logo"
-              className="w-6 h-6 mr-2 rounded-full" // Adjusted size
-            />
-            <span className="text-white font-bold">Elevate Hire</span>
-          </a>
-        </div>
-        <div className="flex items-center space-x-2">
-          {/* Buttons with responsive text */}
-          <button className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full">
-            <FiActivity className="w-4 h-4 mr-2" />
-            <span className="hidden sm:inline">Layout</span>
-            <span className="sm:hidden">L</span> {/* Shortened text for small screens */}
-          </button>
-          <button className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full">
-            <FiActivity className="w-4 h-4 mr-2" />
-            <span className="hidden sm:inline">Fonts</span>
-            <span className="sm:hidden">F</span> {/* Shortened text for small screens */}
-          </button>
-          <button className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full">
-            <FiActivity className="w-4 h-4 mr-2" />
-            <span className="hidden sm:inline">Themes</span>
-            <span className="sm:hidden">T</span> {/* Shortened text for small screens */}
-          </button>
-          <button className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full">
-            <FiActivity className="w-4 h-4 mr-2" />
-            <span className="hidden sm:inline">Format</span>
-            <span className="sm:hidden">Fo</span> {/* Shortened text for small screens */}
-          </button>
-          <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full">
-            <FiActivity className="w-4 h-4 mr-2" />
-            <span className="hidden sm:inline">Download</span>
-            <span className="sm:hidden">D</span> {/* Shortened text for small screens */}
-          </button>
-        </div>
-        <div className="flex items-center">
-          <button className="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
-            My Documents
-          </button>
-          <button className="ml-2 bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+      <div className="flex justify-center items-center bg-transparent py-2 px-4 rounded-lg">
+        <div className="flex justify-center items-center space-x-2">
+          <Tabs
+            value={activeTab}
+            onValueChange={setActiveTab}
+            className="w-full"
+          >
+            <TabsList
+              className="flex justify-center"
+              ref={tabsRef} // Attach the ref to the tabs container
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16m-7 6h7"
-              />
-            </svg>
-          </button>
+              <TabsTrigger value="undo">
+                <div className="m-1 text-lg">
+                  <SlActionUndo />
+                </div>
+              </TabsTrigger>
+
+              <TabsTrigger value="redo">
+                <div className="m-1 text-lg">
+                  <SlActionRedo />
+                </div>
+              </TabsTrigger>
+
+              <TabsTrigger value="theme">
+                <div className="m-1 text-lg">
+                  <TfiBrush />
+                </div>
+                <span className="hidden md:inline">Theme</span>
+              </TabsTrigger>
+
+              <TabsTrigger value="layout">
+                <div className="m-1 text-lg">
+                  <SlGrid />
+                </div>
+                <span className="hidden md:inline">Layout</span>
+              </TabsTrigger>
+
+              <TabsTrigger value="template">
+                <div className="m-1 text-lg">
+                  <SlLayers />
+                </div>
+                <span className="hidden md:inline">Template</span>
+              </TabsTrigger>
+
+              <TabsTrigger value="preview">
+                <div className="m-1 text-xl">
+                  <AiOutlineFileSearch />
+                </div>
+                <span className="hidden md:inline">Preview</span>
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="theme">
+              <ThemeSelector />
+            </TabsContent>
+            {/* Add other TabsContent for the respective tabs */}
+          </Tabs>
         </div>
       </div>
     </div>

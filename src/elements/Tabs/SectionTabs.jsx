@@ -1,7 +1,12 @@
 import React from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import {SlArrowUpCircle ,SlArrowDownCircle , SlBulb ,SlTrash   } from "react-icons/sl";
+import {
+  SlArrowUpCircle,
+  SlArrowDownCircle,
+  SlBulb,
+  SlTrash,
+} from "react-icons/sl";
 import { TfiBrush } from "react-icons/tfi";
 const SectionTabs = () => {
   return (
@@ -31,8 +36,6 @@ const SectionTabs = () => {
               <SlTrash />
             </div>
           </TabsTrigger>
-
-
         </TabsList>
       </Tabs>
     </>
