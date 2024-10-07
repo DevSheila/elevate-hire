@@ -2,23 +2,6 @@ import { Button } from "@/components/ui/button";
 import { AIChatSession } from "@/services/AIModal";
 import { Brain, LoaderCircle } from "lucide-react";
 import React, { useContext, useState } from "react";
-// import {
-//   BtnBold,
-//   BtnBulletList,
-//   BtnClearFormatting,
-//   BtnItalic,
-//   BtnLink,
-//   BtnNumberedList,
-//   BtnStrikeThrough,
-//   BtnStyles,
-//   BtnUnderline,
-//   Editor,
-//   EditorProvider,
-//   HtmlButton,
-//   Separator,
-//   Toolbar,
-// } from "react-simple-wysiwyg";
-
 import {
   Editor,
   EditorContext,

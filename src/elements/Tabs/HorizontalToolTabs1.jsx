@@ -2,6 +2,7 @@ import React from "react";
 import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
 
 import { SlActionUndo, SlActionRedo, SlGrid, SlLayers } from "react-icons/sl";
+import { AiOutlineFileSearch } from "react-icons/ai";
 import { TfiBrush } from "react-icons/tfi";
 import { ThemeSelector } from "../TabItems/ThemeSelector";
 import ThemeColor from "../TabItems/ThemeColor";
@@ -20,13 +21,13 @@ const HorizontalToolTabs1 = () => {
         transform: "translateY(-5px)",
       }}
     >
-      <div className="flex justify-center items-center bg-transparent py-2 px-4 rounded-lg">
-        <div className=" flex justify-center items-center space-x-2">
-          <Tabs className="w-full">
+      <div className="flex justify-center items-center bg-transparent py-2 px-4  ">
+        <div className=" flex justify-center items-center space-x-2 bg-gray-600 px-4">
+          {/* <Tabs className="w-full">
             <TabsList className="flex justify-center">
               <TabsTrigger value="undo">
                 <div className="m-1 text-lg">
-                  <SlActionUndo />
+                  <SlActionUndo />Open
                 </div>
               </TabsTrigger>
 
@@ -56,12 +57,45 @@ const HorizontalToolTabs1 = () => {
                 </div>
                 <span className="hidden md:inline">Template</span>
               </TabsTrigger>
+
+              <TabsTrigger value="preview">
+                <div className="m-1 text-xl">
+                  <AiOutlineFileSearch />
+                </div>
+                <span className="hidden md:inline">Preview</span>
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="theme">
               <ThemeSelector />
             </TabsContent>
-          </Tabs>
+          </Tabs> */}
+
+          <Popover className="rounded-full px-4">
+            <PopoverTrigger className="text-white">
+              <div className="m-1 text-lg">
+                <SlActionUndo />Open
+              </div>
+              
+            </PopoverTrigger>
+            <PopoverContent>Place content for the popover here.</PopoverContent>
+          </Popover>
+          <Popover>
+            <PopoverTrigger className="text-white">
+              <div className="m-1 text-lg">
+                <SlActionUndo />Open
+              </div>
+            </PopoverTrigger>
+            <PopoverContent>Place content for the popover here.</PopoverContent>
+          </Popover>
+          <Popover>
+            <PopoverTrigger className="text-white">
+              <div className="m-1 text-lg">
+                <SlActionUndo />Open
+              </div>
+            </PopoverTrigger>
+            <PopoverContent>Place content for the popover here.</PopoverContent>
+          </Popover>
         </div>
       </div>
     </div>
