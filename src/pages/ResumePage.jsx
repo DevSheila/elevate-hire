@@ -17,7 +17,7 @@ const ResumePage = () => {
       <HorizontalToolTabs1 />
 
       <div className="bg-gray-700 flex flex-col justify-center items-center min-h-screen p-4 sm:p-6 md:p-8">
-        <div className="bg-white shadow-md w-full max-w-2xl md:max-w-4xl lg:max-w-6xl mt-4 sm:mt-6 md:mt-8 mb-4 sm:mb-6 md:mb-8 p-1 sm:p-6 md:p-1 rounded">
+        <div className="bg-white overflow-hidden shadow-md w-full max-w-2xl md:max-w-4xl lg:max-w-6xl mt-4 sm:mt-6 md:mt-8 mb-4 sm:mb-6 md:mb-8 p-1 sm:p-6 md:p-1 rounded">
           <div className="container p-1 sm:p-1">
             <ProfileSection />
 

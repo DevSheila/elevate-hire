@@ -81,36 +81,49 @@ function RichTextEditor({ onRichTextEditorChange, index, defaultValue }) {
           )}
         </Button>
       </div>
+      <EditorProvider>
+        <Editor
+          value={value}
+          onChange={(e) => {
+            const newValue = e.target.value;
+            console.log("e.target.value", e.target.value);
 
-      <div className=" mb-2 w-full outline-none p-0">
-        <EditorProvider>
-          <Editor
-            value={value}
-            onChange={(e) => {
-              const newValue = e.target.value;
-              console.log("e.target.value", e.target.value);
+            setValue(newValue);
+            onRichTextEditorChange(e);
+          }}
+        >
+          {/* <Toolbar>
+            <BtnBold />
+            <BtnItalic />
+            <BtnUnderline />
+            <BtnStrikeThrough />
+            <Separator />
+            <BtnNumberedList />
+            <BtnBulletList />
+            <Separator />
+            <BtnLink />
+          </Toolbar> */}
 
-              setValue(newValue);
-              onRichTextEditorChange(e);
-            }}
-          >
-            <Toolbar>
-              <BtnUndo />
-              <BtnRedo />
-              <Separator />
-              <BtnBold />
-              <BtnItalic />
-              <BtnUnderline />
-              <BtnStrikeThrough />
-              <Separator />
-              <BtnNumberedList />
-              <BtnBulletList />
-              <Separator />
-              <BtnLink />
-            </Toolbar>
-          </Editor>
-        </EditorProvider>
-      </div>
+          <Toolbar>
+            <BtnUndo />
+            <BtnRedo />
+            <Separator />
+            <BtnBold />
+            <BtnItalic />
+            <BtnUnderline />
+            <BtnStrikeThrough />
+            <Separator />
+            <BtnNumberedList />
+            <BtnBulletList />
+            <Separator />
+            <BtnLink />
+            <BtnClearFormatting />
+            <HtmlButton />
+            <Separator />
+            <BtnStyles />
+          </Toolbar>
+        </Editor>
+      </EditorProvider>
     </div>
   );
 }
