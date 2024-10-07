@@ -4,9 +4,22 @@ import { SlActionUndo, SlActionRedo, SlGrid, SlLayers } from "react-icons/sl";
 import { AiOutlineFileSearch } from "react-icons/ai";
 import { TfiBrush } from "react-icons/tfi";
 import { ThemeSelector } from "../TabItems/ThemeSelector";
+import TemplatePreview from "../TemplatePreview";
+import TemplatePreview2 from "../TemplatePreview2";
+
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { listenNowAlbums } from "../data/albums";
+import { AlbumArtwork } from "../AlbumArtwork";
 
 const HorizontalToolTabs = () => {
   const [activeTab, setActiveTab] = useState(""); // Track active tab
+  const [isSheetOpen, setIsSheetOpen] = useState(false); // Track sheet open state
   const tabsRef = useRef(null); // Ref for the tabs container
 
   // Handle clicks outside the active tab
@@ -15,6 +28,7 @@ const HorizontalToolTabs = () => {
       // Check if the click is outside the active tab container
       if (tabsRef.current && !tabsRef.current.contains(event.target)) {
         setActiveTab(""); // Reset to a default tab, change as needed
+        setIsSheetOpen(false); // Close the sheet if clicked outside
       }
     };
 
@@ -23,6 +37,15 @@ const HorizontalToolTabs = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  // Open sheet when the layout tab is clicked
+  useEffect(() => {
+    if (activeTab === "layout") {
+      setIsSheetOpen(true);
+    } else {
+      setIsSheetOpen(false);
+    }
+  }, [activeTab]);
 
   return (
     <div
@@ -86,8 +109,17 @@ const HorizontalToolTabs = () => {
             <TabsContent value="theme">
               <ThemeSelector />
             </TabsContent>
-            {/* Add other TabsContent for the respective tabs */}
+
+            <TabsContent value="template">
+              <TemplatePreview />
+            </TabsContent>
+
+            <TabsContent value="layout">
+              <TemplatePreview2 />
+            </TabsContent>
           </Tabs>
+
+
         </div>
       </div>
     </div>
