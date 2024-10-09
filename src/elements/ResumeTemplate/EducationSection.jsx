@@ -22,10 +22,6 @@ const EducationSection = () => {
     setIsEditing(true);
   };
 
-  const handleSaveClick = () => {
-    setIsEditing(false); // Switch back to view mode after saving
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEducationData({
@@ -127,13 +123,6 @@ const EducationSection = () => {
             className="border-b mb-2 w-full outline-none"
             placeholder="Courses/Thesis/Project"
           />
-
-          <button
-            onClick={handleSaveClick}
-            className="bg-green-500 text-white px-4 py-2 mt-4 rounded"
-          >
-            Save
-          </button>
         </div>
       ) : (
         // View Mode (content)

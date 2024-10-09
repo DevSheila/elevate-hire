@@ -26,10 +26,6 @@ const AchievementsSection = () => {
     setIsEditing(index);
   };
 
-  const handleSaveClick = (index) => {
-    setIsEditing(null);
-  };
-
   const handleChange = (e, index) => {
     const { name, value } = e.target;
     const updatedAchievements = [...achievementsData];
@@ -128,12 +124,6 @@ const AchievementsSection = () => {
                   className="border-b mb-2 w-full outline-none"
                   placeholder="Description"
                 />
-                <button
-                  onClick={() => handleSaveClick(index)}
-                  className="bg-green-500 text-white px-4 py-2 mt-4 rounded"
-                >
-                  Save
-                </button>
               </div>
             ) : (
               // View Mode (content)
@@ -159,7 +149,6 @@ const AchievementsSection = () => {
 
           <div className="border-t-2 border-dotted border-cyan-600 w-full ml-2"></div>
         </div>
-        
       </div>
     </div>
   );
