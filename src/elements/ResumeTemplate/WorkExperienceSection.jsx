@@ -57,21 +57,25 @@ const WorkExperienceSection = () => {
     setworkExperienceData(updatedWorkExperience);
   };
 
-  const addWorkExperience = () => {
-    setworkExperienceData([
-      ...workExperienceData,
-      {
-        jobTitle: "",
-        companyName: "",
-        dates: "",
-        location: "",
-        companyDesc: "",
-        achievements: "",
-        present: false,
-      },
-    ]);
-  };
-
+  const addWorkExperience = () => 
+    {
+      const updatedWorkExperience = [
+        ...workExperienceData,
+        {
+          jobTitle: "",
+          companyName: "",
+          dates: "",
+          location: "",
+          companyDesc: "",
+          achievements: "",
+          present: false,
+        },
+      ];
+      
+      setworkExperienceData(updatedWorkExperience);
+      setIsEditing(updatedWorkExperience.length - 1); // Set isEditing to the index of the new experience
+    };
+    
   const removeWorkExperience = (index) => {
     const updatedWorkExperience = [...workExperienceData];
     updatedWorkExperience.splice(index, 1);
@@ -108,7 +112,11 @@ const WorkExperienceSection = () => {
           <div key={index} className="mb-4">
             {isEditing === index ? (
               // Edit Mode (form inputs)
-              <div ref={formRef} className="rounded-md ">
+              <div ref={formRef} className="rounded-md  ">
+                <label className="text-gray-600 font-normal italic mt-4 mb-2">
+                  Title
+                </label>
+
                 <input
                   type="text"
                   name="jobTitle"
@@ -117,6 +125,9 @@ const WorkExperienceSection = () => {
                   className="border-b mb-2 w-full outline-none p-2"
                   placeholder="Job Title"
                 />
+                <label className="text-gray-600 font-normal italic mt-4 mb-2">
+                  Company
+                </label>
                 <input
                   type="text"
                   name="companyName"
@@ -126,6 +137,9 @@ const WorkExperienceSection = () => {
                   placeholder="Company Name"
                 />
                 <div className="flex flex-col md:flex-row md:space-x-2">
+                  <label className="text-gray-600 font-normal italic mt-4 mb-2">
+                    Dates
+                  </label>
                   <input
                     type="text"
                     name="dates"
@@ -146,6 +160,9 @@ const WorkExperienceSection = () => {
                     </label>
                   </div>
                 </div>
+                <label className="text-gray-600 font-normal italic mt-4 mb-2">
+                  Location
+                </label>
                 <input
                   type="text"
                   name="location"
@@ -154,6 +171,9 @@ const WorkExperienceSection = () => {
                   className="border-b mb-2 w-full outline-none p-2"
                   placeholder="Location"
                 />
+                <label className="text-gray-600 font-normal italic mt-4 mb-2">
+                  Achievements/Tasks
+                </label>
 
                 <RichTextEditor
                   index={index}

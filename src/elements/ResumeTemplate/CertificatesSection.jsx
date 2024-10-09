@@ -43,7 +43,7 @@ const CertificatesSection = () => {
   };
 
   const addCertificate = () => {
-    setCertificatesData([
+    const updatedCertificate = [
       ...certificatesData,
       {
         title: "",
@@ -51,7 +51,10 @@ const CertificatesSection = () => {
         present: false,
         organization: "",
       },
-    ]);
+    ];
+
+    setCertificatesData(updatedCertificate);
+    setIsEditing(updatedCertificate.length - 1);
   };
 
   const removeCertificate = (index) => {

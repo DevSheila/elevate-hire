@@ -44,16 +44,12 @@ function RichTextEditor({ onRichTextEditorChange, index, defaultValue }) {
   return (
     <div>
       <div className="flex justify-between my-2">
-        <label className="text-gray-600 font-normal italic mt-4 mb-2">
-          Achievements/Tasks
-        </label>
-
         <Button
           variant="outline"
           size="sm"
           onClick={GenerateSummeryFromAI}
           disabled={loading}
-          className="flex gap-2 border-primary text-primary"
+          className="flex gap-2 border-primary text-primary rounded-full"
         >
           {loading ? (
             <LoaderCircle className="animate-spin" />
@@ -65,7 +61,7 @@ function RichTextEditor({ onRichTextEditorChange, index, defaultValue }) {
         </Button>
       </div>
 
-      <div className=" mb-2 w-full outline-none p-0">
+      <div className=" mb-2  outline-none p-0">
         <EditorProvider>
           <Editor
             value={value}
