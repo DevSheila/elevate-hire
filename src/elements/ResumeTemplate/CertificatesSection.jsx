@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-
+import { SlPlus } from "react-icons/sl";
 const CertificatesSection = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [certificatesData, setCertificatesData] = useState([
@@ -153,12 +153,13 @@ const CertificatesSection = () => {
         </div>
       ))}
 
-      <button
-        onClick={addCertificate}
-        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-      >
-        Add Certificate
-      </button>
+      <div onClick={addCertificate} className="flex items-center mt-4">
+        <div className="text-cyan-600 text-2xl ">
+          <SlPlus />
+        </div>
+
+        <div className="border-t-2 border-dotted border-cyan-600 w-full ml-2"></div>
+      </div>
     </div>
   );
 };

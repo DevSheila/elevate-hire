@@ -1,4 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
+import {
+  SlArrowUpCircle,
+  SlArrowDownCircle,
+  SlTrash,
+  SlPlus,
+} from "react-icons/sl";
 
 const SkillsSection = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -88,29 +94,26 @@ const SkillsSection = () => {
                   className="border-b w-full outline-none px-3 py-1 rounded"
                 />
                 {skillsData.length > 1 && (
-                  <button
-                    onClick={() => removeSkill(index)}
-                    className="bg-red-500 text-white px-2 py-1 rounded mt-2 w-full"
-                  >
-                    Remove
-                  </button>
+                  <div className="flex flex-row">
+                    <div className="m-1 text-base text-gray-700 hover:text-emerald-500 focus:text-emerald-500">
+                      <SlArrowUpCircle />
+                    </div>
+
+                    <div className="m-1 text-base text-gray-700 hover:text-emerald-500 focus:text-emerald-500 ">
+                      <SlArrowDownCircle />
+                    </div>
+
+                    <div
+                      className="m-1 text-base text-gray-700 hover:text-red-500 focus:text-red-500 "
+                      onClick={() => removeSkill(index)}
+                    >
+                      <SlTrash />
+                    </div>
+                  </div>
                 )}
               </div>
             ))}
           </div>
-
-          <button
-            onClick={addSkill}
-            className="bg-blue-500 text-white px-4 py-2 rounded mt-4 w-full sm:w-auto"
-          >
-            Add Skill
-          </button>
-          <button
-            onClick={handleSaveClick}
-            className="bg-green-500 text-white px-4 py-2 mt-4 rounded w-full sm:w-auto"
-          >
-            Save
-          </button>
         </div>
       ) : (
         <div onClick={handleEditClick} className="cursor-pointer">
@@ -126,6 +129,14 @@ const SkillsSection = () => {
           </div>
         </div>
       )}
+
+      <div onClick={addSkill} className="flex items-center mt-4">
+        <div className="text-cyan-600 text-2xl ">
+          <SlPlus />
+        </div>
+
+        <div className="border-t-2 border-dotted border-cyan-600 w-full ml-2"></div>
+      </div>
     </div>
   );
 };

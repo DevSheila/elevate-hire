@@ -1,11 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
+import {
+  SlArrowUpCircle,
+  SlArrowDownCircle,
+  SlTrash,
+  SlPlus,
+} from "react-icons/sl";
 
 const InterestsSection = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [interestsData, setInterestsData] = useState([
-    'Mountaineering',
-    'Board games',
-    'Sculpting',
+    "Mountaineering",
+    "Board games",
+    "Sculpting",
   ]);
 
   const formRef = useRef(null);
@@ -25,7 +31,7 @@ const InterestsSection = () => {
   };
 
   const addInterest = () => {
-    setInterestsData([...interestsData, '']);
+    setInterestsData([...interestsData, ""]);
   };
 
   const removeInterest = (index) => {
@@ -42,13 +48,13 @@ const InterestsSection = () => {
     };
 
     if (isEditing) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     } else {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isEditing]);
 
@@ -70,12 +76,22 @@ const InterestsSection = () => {
                   className="border-b w-full outline-none px-3 py-2 rounded"
                 />
                 {interestsData.length > 1 && (
-                  <button
-                    onClick={() => removeInterest(index)}
-                    className="bg-red-500 text-white px-3 py-1 rounded mt-2 w-full"
-                  >
-                    Remove
-                  </button>
+                  <div className="flex flex-row">
+                    <div className="m-1 text-base text-gray-700 hover:text-emerald-500 focus:text-emerald-500">
+                      <SlArrowUpCircle />
+                    </div>
+
+                    <div className="m-1 text-base text-gray-700 hover:text-emerald-500 focus:text-emerald-500 ">
+                      <SlArrowDownCircle />
+                    </div>
+
+                    <div
+                      className="m-1 text-base text-gray-700 hover:text-red-500 focus:text-red-500 "
+                      onClick={() => removeInterest(index)}
+                    >
+                      <SlTrash />
+                    </div>
+                  </div>
                 )}
               </div>
             ))}
@@ -86,12 +102,6 @@ const InterestsSection = () => {
             className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
           >
             Add Interest
-          </button>
-          <button
-            onClick={handleSaveClick}
-            className="bg-green-500 text-white px-4 py-2 rounded mt-4 ml-2"
-          >
-            Save
           </button>
         </div>
       ) : (
@@ -108,6 +118,14 @@ const InterestsSection = () => {
           </div>
         </div>
       )}
+
+      <div onClick={addInterest} className="flex items-center mt-4">
+        <div className="text-cyan-600 text-2xl ">
+          <SlPlus />
+        </div>
+
+        <div className="border-t-2 border-dotted border-cyan-600 w-full ml-2"></div>
+      </div>
     </div>
   );
 };

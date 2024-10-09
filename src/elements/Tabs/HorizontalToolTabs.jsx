@@ -14,8 +14,6 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { listenNowAlbums } from "../data/albums";
-import { AlbumArtwork } from "../AlbumArtwork";
 
 const HorizontalToolTabs = () => {
   const [activeTab, setActiveTab] = useState(""); // Track active tab
@@ -84,13 +82,6 @@ const HorizontalToolTabs = () => {
                 <span className="hidden md:inline">Theme</span>
               </TabsTrigger>
 
-              <TabsTrigger value="layout">
-                <div className="m-1 text-lg">
-                  <SlGrid />
-                </div>
-                <span className="hidden md:inline">Layout</span>
-              </TabsTrigger>
-
               <TabsTrigger value="template">
                 <div className="m-1 text-lg">
                   <SlLayers />
@@ -111,15 +102,9 @@ const HorizontalToolTabs = () => {
             </TabsContent>
 
             <TabsContent value="template">
-              <TemplatePreview />
-            </TabsContent>
-
-            <TabsContent value="layout">
               <TemplatePreview2 />
             </TabsContent>
           </Tabs>
-
-
         </div>
       </div>
     </div>
