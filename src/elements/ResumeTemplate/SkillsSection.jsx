@@ -38,10 +38,6 @@ const SkillsSection = () => {
     setIsEditing(true);
   };
 
-  const handleSaveClick = () => {
-    setIsEditing(false);
-  };
-
   const handleChange = (e, index) => {
     const updatedSkills = [...skillsData];
     updatedSkills[index] = e.target.value;

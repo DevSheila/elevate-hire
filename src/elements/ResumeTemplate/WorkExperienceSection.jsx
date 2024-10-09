@@ -37,10 +37,6 @@ const WorkExperienceSection = () => {
     setIsEditing(index);
   };
 
-  const handleSaveClick = (index) => {
-    setIsEditing(null);
-  };
-
   const handleChange = (e, index) => {
     const { name, value } = e.target;
     const updatedWorkExperience = [...workExperienceData];
@@ -167,13 +163,6 @@ const WorkExperienceSection = () => {
                   }
                 />
 
-                <button
-                  onClick={() => handleSaveClick(index)}
-                  className="bg-green-500 text-white px-4 py-2 mt-4 rounded"
-                >
-                  Save
-                </button>
-
                 <SectionTabs />
               </div>
             ) : (
@@ -203,7 +192,6 @@ const WorkExperienceSection = () => {
             )}
           </div>
         ))}
-
 
         <div onClick={addWorkExperience} className="flex items-center mt-4">
           <div className="text-cyan-600 text-2xl ">

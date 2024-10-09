@@ -20,10 +20,6 @@ const InterestsSection = () => {
     setIsEditing(true);
   };
 
-  const handleSaveClick = () => {
-    setIsEditing(false);
-  };
-
   const handleChange = (e, index) => {
     const updatedInterests = [...interestsData];
     updatedInterests[index] = e.target.value;
@@ -96,13 +92,6 @@ const InterestsSection = () => {
               </div>
             ))}
           </div>
-
-          <button
-            onClick={addInterest}
-            className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
-          >
-            Add Interest
-          </button>
         </div>
       ) : (
         <div onClick={handleEditClick} className="cursor-pointer">

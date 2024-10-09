@@ -29,10 +29,6 @@ const CertificatesSection = () => {
     setIsEditing(index);
   };
 
-  const handleSaveClick = (index) => {
-    setIsEditing(null);
-  };
-
   const handleChange = (e, index) => {
     const { name, value } = e.target;
     const updatedCertificates = [...certificatesData];
@@ -130,13 +126,6 @@ const CertificatesSection = () => {
                 className="border-b mb-2 w-full outline-none py-2"
                 placeholder="Organization"
               />
-
-              <button
-                onClick={() => handleSaveClick(index)}
-                className="bg-green-500 text-white px-4 py-2 mt-4 rounded hover:bg-green-600"
-              >
-                Save
-              </button>
             </div>
           ) : (
             // View Mode (content)

@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import {
-  SlPlus,
-} from "react-icons/sl";
+import { SlPlus } from "react-icons/sl";
 const ProjectsSection = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [projectsData, setProjectsData] = useState([
@@ -36,10 +34,6 @@ const ProjectsSection = () => {
 
   const handleEditClick = (index) => {
     setIsEditing(index);
-  };
-
-  const handleSaveClick = (index) => {
-    setIsEditing(null);
   };
 
   const handleChange = (e, index) => {
@@ -148,13 +142,6 @@ const ProjectsSection = () => {
                 placeholder="Project Description"
                 rows="4"
               />
-
-              <button
-                onClick={() => handleSaveClick(index)}
-                className="bg-green-500 text-white px-4 py-2 mt-4 rounded"
-              >
-                Save
-              </button>
             </div>
           ) : (
             // View Mode (content)
@@ -170,7 +157,10 @@ const ProjectsSection = () => {
                 {project.link}
               </p>
               </Link> */}
-              <a href={project.link} className="text-blue-500 hover:underline text-clip overflow-hidden ...">
+              <a
+                href={project.link}
+                className="text-blue-500 hover:underline text-clip overflow-hidden ..."
+              >
                 {project.link}
               </a>
               <p className="text-gray-500">{project.description}</p>
@@ -178,8 +168,6 @@ const ProjectsSection = () => {
           )}
         </div>
       ))}
-
-
 
       <div onClick={addProject} className="flex items-center mt-4">
         <div className="text-cyan-600 text-2xl ">
