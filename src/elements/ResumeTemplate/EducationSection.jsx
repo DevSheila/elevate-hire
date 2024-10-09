@@ -6,14 +6,16 @@ const EducationSection = () => {
   const [isEditing, setIsEditing] = useState(false);
 
   // State to hold the education data
-  const [educationData, setEducationData] = useState({
-    degree: "Bsc Computer Science",
-    university: "Maseno University",
-    startDate: "08/2020",
-    endDate: "12/2024",
-    city: "",
-    courses: "",
-  });
+  const [educationData, setEducationData] = useState([
+    {
+      degree: "Bsc Computer Science",
+      university: "Maseno University",
+      startDate: "08/2020",
+      endDate: "12/2024",
+      city: "",
+      courses: "",
+    },
+  ]);
 
   // Ref for the form container
   const formRef = useRef(null);
@@ -31,7 +33,7 @@ const EducationSection = () => {
   };
 
   const addEducation = () => {
-    setEducationData([
+    const updatedEducation = [
       ...educationData,
       {
         degree: "",
@@ -41,7 +43,10 @@ const EducationSection = () => {
         city: "",
         courses: "",
       },
-    ]);
+    ];
+
+    setEducationData(updatedEducation);
+    setIsEditing(updatedEducation.length - 1);
   };
 
   // Effect to detect click outside the form to toggle back to view mode
@@ -70,74 +75,77 @@ const EducationSection = () => {
       <h2 className=" font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2">
         EDUCATION
       </h2>
-
-      {isEditing ? (
-        // Edit Mode (form inputs)
-        <div ref={formRef} className="rounded-md">
-          <input
-            type="text"
-            name="degree"
-            value={educationData.degree}
-            onChange={handleChange}
-            className="border-b mb-2 w-full outline-none"
-            placeholder="Degree"
-          />
-          <input
-            type="text"
-            name="university"
-            value={educationData.university}
-            onChange={handleChange}
-            className="border-b mb-2 w-full outline-none"
-            placeholder="University"
-          />
-          <div className="flex space-x-2">
-            <input
-              type="text"
-              name="startDate"
-              value={educationData.startDate}
-              onChange={handleChange}
-              className="border-b w-1/2 outline-none"
-              placeholder="Start Date"
-            />
-            <input
-              type="text"
-              name="endDate"
-              value={educationData.endDate}
-              onChange={handleChange}
-              className="border-b w-1/2 outline-none"
-              placeholder="End Date"
-            />
-          </div>
-          <input
-            type="text"
-            name="city"
-            value={educationData.city}
-            onChange={handleChange}
-            className="border-b mb-2 w-full outline-none"
-            placeholder="City, Country or GPA"
-          />
-          <textarea
-            name="courses"
-            value={educationData.courses}
-            onChange={handleChange}
-            className="border-b mb-2 w-full outline-none"
-            placeholder="Courses/Thesis/Project"
-          />
+      {educationData.map((education, index) => (
+        <div key={index} className="mb-4">
+          {isEditing === index ? (
+            // Edit Mode (form inputs)
+            <div ref={formRef} className="rounded-md">
+              <input
+                type="text"
+                name="degree"
+                value={education.degree}
+                onChange={handleChange}
+                className="border-b mb-2 w-full outline-none"
+                placeholder="Degree"
+              />
+              <input
+                type="text"
+                name="university"
+                value={education.university}
+                onChange={handleChange}
+                className="border-b mb-2 w-full outline-none"
+                placeholder="University"
+              />
+              <div className="flex space-x-2">
+                <input
+                  type="text"
+                  name="startDate"
+                  value={education.startDate}
+                  onChange={handleChange}
+                  className="border-b w-1/2 outline-none"
+                  placeholder="Start Date"
+                />
+                <input
+                  type="text"
+                  name="endDate"
+                  value={education.endDate}
+                  onChange={handleChange}
+                  className="border-b w-1/2 outline-none"
+                  placeholder="End Date"
+                />
+              </div>
+              <input
+                type="text"
+                name="city"
+                value={education.city}
+                onChange={handleChange}
+                className="border-b mb-2 w-full outline-none"
+                placeholder="City, Country or GPA"
+              />
+              <textarea
+                name="courses"
+                value={education.courses}
+                onChange={handleChange}
+                className="border-b mb-2 w-full outline-none"
+                placeholder="Courses/Thesis/Project"
+              />
+            </div>
+          ) : (
+            // View Mode (content)
+            <div onClick={handleEditClick} className="cursor-pointer">
+              <h3 className="font-bold text-lg">{education.degree}</h3>
+              <p className="text-gray-600">{education.university}</p>
+              <p className="font-italic  text-sm leading-5 text-gray-500">{`${education.startDate} - ${education.endDate}`}</p>
+              <p className="font-italic  text-sm leading-5 text-gray-500">
+                {education.city}
+              </p>
+              <p className="font-italic  text-sm leading-5 text-gray-500">
+                {education.courses}
+              </p>
+            </div>
+          )}
         </div>
-      ) : (
-        // View Mode (content)
-        <div onClick={handleEditClick} className="cursor-pointer">
-          <h3 className="font-bold text-lg">{educationData.degree}</h3>
-          <p className="text-gray-600">{educationData.university}</p>
-          <p className="font-italic  text-sm leading-5 text-gray-500">{`${educationData.startDate} - ${educationData.endDate}`}</p>
-          <p className="font-italic  text-sm leading-5 text-gray-500">
-            {educationData.city}
-          </p>
-          <p className="font-italic  text-sm leading-5 text-gray-500">
-            {educationData.courses}
-          </p>
-        </div>
-      )}
+      ))}
 
       <div onClick={addEducation} className="flex items-center mt-4">
         <div className="text-cyan-600 text-2xl ">

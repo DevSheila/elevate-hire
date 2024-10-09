@@ -40,7 +40,7 @@ const AchievementsSection = () => {
   };
 
   const addAchievement = () => {
-    setAchievementsData([
+    const updatedAchievement = [
       ...achievementsData,
       {
         title: "",
@@ -48,7 +48,10 @@ const AchievementsSection = () => {
         description: "",
         present: false,
       },
-    ]);
+    ];
+
+    setAchievementsData(updatedAchievement);
+    setIsEditing(updatedAchievement.length - 1);
   };
 
   const removeAchievement = (index) => {

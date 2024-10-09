@@ -4,16 +4,8 @@ import { SlActionUndo, SlActionRedo, SlGrid, SlLayers } from "react-icons/sl";
 import { AiOutlineFileSearch } from "react-icons/ai";
 import { TfiBrush } from "react-icons/tfi";
 import { ThemeSelector } from "../TabItems/ThemeSelector";
-import TemplatePreview from "../TemplatePreview";
 import TemplatePreview2 from "../TemplatePreview2";
 
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 const HorizontalToolTabs = () => {
   const [activeTab, setActiveTab] = useState(""); // Track active tab

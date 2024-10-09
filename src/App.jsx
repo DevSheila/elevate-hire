@@ -6,8 +6,7 @@ import ResumePage from './pages/ResumePage';
 import NotFound from './pages/NotFound';
 import LandingPage from './pages/LandingPage';
 import SignIn from './pages/SignIn';
-import TemplatePreview from './elements/TemplatePreview';
-import TemplatePreview2 from './elements/TemplatePreview2';
+import ResumeBuilderDashboard from './pages/ResumeBuilderDashboard/ResumeBuilderDashboard';
 
 
 // PrivateRoute component to protect routes that require authentication
@@ -34,8 +33,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
           <Route exact path="/resumebuilder" element={<PrivateRoute element={<ResumePage />} />} />
-          <Route exact path="/preview" element={<PrivateRoute element={<TemplatePreview />} />} />
-          <Route exact path="/preview2" element={<PrivateRoute element={<TemplatePreview2 />} />} />
+          <Route exact path="/dashboard" element={<PrivateRoute element={<ResumeBuilderDashboard />} />} />
           <Route exact path="/sign-in" element={<PublicRoute element={<SignIn />} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
