@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { SlPlus } from "react-icons/sl";
 
 const EducationSection = () => {
   // State to manage whether we are editing or viewing the content
@@ -33,6 +34,20 @@ const EducationSection = () => {
     });
   };
 
+  const addEducation = () => {
+    setEducationData([
+      ...educationData,
+      {
+        degree: "",
+        university: "",
+        startDate: "",
+        endDate: "",
+        city: "",
+        courses: "",
+      },
+    ]);
+  };
+
   // Effect to detect click outside the form to toggle back to view mode
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -56,7 +71,9 @@ const EducationSection = () => {
 
   return (
     <div className="p-4">
-      <h2 className=" font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2">EDUCATION</h2>
+      <h2 className=" font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2">
+        EDUCATION
+      </h2>
 
       {isEditing ? (
         // Edit Mode (form inputs)
@@ -124,10 +141,22 @@ const EducationSection = () => {
           <h3 className="font-bold text-lg">{educationData.degree}</h3>
           <p className="text-gray-600">{educationData.university}</p>
           <p className="font-italic  text-sm leading-5 text-gray-500">{`${educationData.startDate} - ${educationData.endDate}`}</p>
-          <p className="font-italic  text-sm leading-5 text-gray-500">{educationData.city}</p>
-          <p className="font-italic  text-sm leading-5 text-gray-500">{educationData.courses}</p> 
+          <p className="font-italic  text-sm leading-5 text-gray-500">
+            {educationData.city}
+          </p>
+          <p className="font-italic  text-sm leading-5 text-gray-500">
+            {educationData.courses}
+          </p>
         </div>
       )}
+
+      <div onClick={addEducation} className="flex items-center mt-4">
+        <div className="text-cyan-600 text-2xl ">
+          <SlPlus />
+        </div>
+
+        <div className="border-t-2 border-dotted border-cyan-600 w-full ml-2"></div>
+      </div>
     </div>
   );
 };

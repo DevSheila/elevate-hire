@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { SlPlus } from "react-icons/sl";
 
 const AchievementsSection = () => {
   const [isEditing, setIsEditing] = useState(null);
@@ -151,12 +152,14 @@ const AchievementsSection = () => {
           </div>
         ))}
 
-        <button
-          onClick={addAchievement}
-          className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
-        >
-          Add Achievement
-        </button>
+        <div onClick={addAchievement} className="flex items-center mt-4">
+          <div className="text-cyan-600 text-2xl ">
+            <SlPlus />
+          </div>
+
+          <div className="border-t-2 border-dotted border-cyan-600 w-full ml-2"></div>
+        </div>
+        
       </div>
     </div>
   );

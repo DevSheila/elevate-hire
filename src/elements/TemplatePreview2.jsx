@@ -4,49 +4,65 @@ function TemplatePreview2() {
   return (
     <>
       <div className="mt-1 p-2 max-w-sm grid grid-cols-2 grid-rows-2 gap-6 bg-gray-200 py-2 rounded-xl">
-        {/* <article className="relative bg-gray-200">
-          <div className="aspect-square overflow-hidden">
-            <img
-              width={250}
-              height={330}
-              className="rounded-xl group-hover:scale-125  object-cover transition-all duration-300"
-              src="https://images.unsplash.com/photo-1720048171419-b515a96a73b8?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt=""
-            />
+        <div class="relative flex items-end overflow-hidden rounded-xl hover:border hover:border-emerald-400">
+          <img
+            width={250}
+            height={250}
+            className="rounded-xl   object-cover transition-all duration-300"
+            src="/template/template1.png"
+            alt=""
+          />
+        </div>
+
+        <div class="relative flex items-end overflow-hidden rounded-xl hover:border hover:border-emerald-400">
+          <img
+            width={250}
+            height={250}
+            className="rounded-xl object-cover"
+            src="/template/template2.png"
+            alt=""
+          />
+        </div>
+
+        <div class="relative flex items-end overflow-hidden rounded-xl hover:border hover:border-emerald-400">
+          <img
+            width={250}
+            height={250}
+            className="rounded-xl   object-cover transition-all duration-300"
+            src="/template/template3.webp"
+            alt=""
+          />
+          <div class="absolute bottom-3 left-3 inline-flex items-center rounded-full bg-emerald-500 p-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 text-white"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
           </div>
-        </article> */}
+        </div>
 
-        <img
-          width={250}
-          height={250}
-          className="rounded-xl group-hover:scale-125  object-cover transition-all duration-300"
-          src="https://images.unsplash.com/photo-1720048171419-b515a96a73b8?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt=""
-        />
-
-        <img
-          width={250}
-          height={250}
-          className="rounded-xl group-hover:scale-125  object-cover transition-all duration-300"
-          src="https://images.unsplash.com/photo-1720048171419-b515a96a73b8?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt=""
-        />
-
-        <img
-          width={250}
-          height={250}
-          className="rounded-xl group-hover:scale-125  object-cover transition-all duration-300"
-          src="https://images.unsplash.com/photo-1720048171419-b515a96a73b8?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt=""
-        />
-
-        <img
-          width={250}
-          height={250}
-          className="rounded-xl group-hover:scale-125  object-cover transition-all duration-300"
-          src="https://images.unsplash.com/photo-1720048171419-b515a96a73b8?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt=""
-        />
+        <div class="relative flex items-end overflow-hidden rounded-xl hover:border hover:border-emerald-400 ">
+          <img
+            width={250}
+            height={250}
+            className="rounded-xl   object-cover transition-all duration-300"
+            src="/template/template4.png"
+            alt=""
+          />
+          <div class="absolute bottom-3 left-3 inline-flex items-center rounded-full bg-emerald-500 p-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 text-white"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+          </div>
+        </div>
       </div>
     </>
   );

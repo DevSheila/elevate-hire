@@ -2,7 +2,6 @@ import React from "react";
 
 function TemplatePreview() {
   return (
-    // <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 max-w-7xl mx-auto bg-slate-100 px-4 py-2 rounded-xl">
     <div className="grid grid-cols-2 gap-6 max-w-lg mx-auto bg-slate-100 px-4 py-2 rounded-xl">
       <article className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40">
         <img

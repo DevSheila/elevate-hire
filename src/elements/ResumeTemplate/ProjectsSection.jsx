@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-
+import {
+  SlPlus,
+} from "react-icons/sl";
 const ProjectsSection = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [projectsData, setProjectsData] = useState([
@@ -177,12 +179,15 @@ const ProjectsSection = () => {
         </div>
       ))}
 
-      <button
-        onClick={addProject}
-        className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
-      >
-        Add Project
-      </button>
+
+
+      <div onClick={addProject} className="flex items-center mt-4">
+        <div className="text-cyan-600 text-2xl ">
+          <SlPlus />
+        </div>
+
+        <div className="border-t-2 border-dotted border-cyan-600 w-full ml-2"></div>
+      </div>
     </div>
   );
 };

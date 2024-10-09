@@ -173,13 +173,7 @@ const WorkExperienceSection = () => {
                 >
                   Save
                 </button>
-                {/* <div onClick={addAchievement} className="flex items-center mt-4">
-                <div className="text-cyan-600 text-2xl ">
-                  <SlPlus />
-                </div>
 
-                <div className="border-t-2 border-dotted border-cyan-600 w-full ml-2"></div>
-              </div> */}
                 <SectionTabs />
               </div>
             ) : (
@@ -210,12 +204,14 @@ const WorkExperienceSection = () => {
           </div>
         ))}
 
-        <button
-          onClick={addWorkExperience}
-          className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
-        >
-          Add Achievement
-        </button>
+
+        <div onClick={addWorkExperience} className="flex items-center mt-4">
+          <div className="text-cyan-600 text-2xl ">
+            <SlPlus />
+          </div>
+
+          <div className="border-t-2 border-dotted border-cyan-600 w-full ml-2"></div>
+        </div>
       </div>
     </div>
   );
