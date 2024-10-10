@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateResume } from "@/store/slices/resumeSlice";
+
 import { Link } from "react-router-dom";
 import { SlPlus } from "react-icons/sl";
 const ProjectsSection = ({ currentProjectsData }) => {
+  const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
   const [projectsData, setProjectsData] = useState(currentProjectsData);
 
@@ -10,11 +14,21 @@ const ProjectsSection = ({ currentProjectsData }) => {
   const handleEditClick = (index) => {
     setIsEditing(index);
   };
+  useEffect(() => {
+    if (projectsData) {
+      dispatch(updateResume({ projectsData: projectsData }));
+    }
+  }, [projectsData, dispatch]);
 
   const handleChange = (e, index) => {
     const { name, value } = e.target;
     const updatedProjects = [...projectsData];
-    updatedProjects[index][name] = value;
+    updatedProjects[index] = {
+      ...updatedProjects[index],
+      [name]: value,
+    };
+
+    // Update the state with the new achievements array
     setProjectsData(updatedProjects);
   };
 

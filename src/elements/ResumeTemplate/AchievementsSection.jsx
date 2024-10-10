@@ -1,14 +1,23 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateResume } from "@/store/slices/resumeSlice";
+
 import { SlPlus } from "react-icons/sl";
 
 const AchievementsSection = ({ currentResumeAchievements }) => {
+  const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(null);
-
   const [achievementsData, setAchievementsData] = useState(
     currentResumeAchievements
   );
 
   const formRef = useRef(null);
+
+  useEffect(() => {
+    if (achievementsData) {
+      dispatch(updateResume({ achievementsData: achievementsData }));
+    }
+  }, [achievementsData, dispatch]);
 
   const handleEditClick = (index) => {
     setIsEditing(index);
@@ -17,7 +26,12 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
   const handleChange = (e, index) => {
     const { name, value } = e.target;
     const updatedAchievements = [...achievementsData];
-    updatedAchievements[index][name] = value;
+    updatedAchievements[index] = {
+      ...updatedAchievements[index],
+      [name]: value,
+    };
+
+    // Update the state with the new achievements array
     setAchievementsData(updatedAchievements);
   };
 

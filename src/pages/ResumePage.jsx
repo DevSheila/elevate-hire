@@ -30,7 +30,7 @@ const ResumePage = () => {
 
   useEffect(() => {
     if (currentResume) {
-      dispatch(updateResume(currentResume));
+      // dispatch(updateResume(currentResume));
     }
   }, [currentResume]);
   return (

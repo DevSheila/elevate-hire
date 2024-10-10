@@ -8,7 +8,7 @@ export const resumeInfo = {
       endDate: "12/2024",
       city: "",
       courses: "",
-    },
+    }
   ],
   workExperienceData: [
     {

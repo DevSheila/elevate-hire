@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+
 import { SlPlus } from "react-icons/sl";
 
 const EducationSection = ({ currentEducationSection }) => {

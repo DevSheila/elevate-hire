@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateResume } from "@/store/slices/resumeSlice";
 import { Link } from "react-router-dom";
 import SectionTabs from "../Tabs/SectionTabs";
 import { SlPlus } from "react-icons/sl";
 import RichTextEditor from "../RichTextEditor";
 
 const WorkExperienceSection = ({ currentWorkExperienceData }) => {
+  const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
   const [workExperienceData, setworkExperienceData] = useState(
     currentWorkExperienceData
@@ -16,13 +19,24 @@ const WorkExperienceSection = ({ currentWorkExperienceData }) => {
     setIsEditing(index);
   };
 
+  useEffect(() => {
+    if (workExperienceData) {
+      dispatch(updateResume({ workExperienceData: workExperienceData }));
+    }
+  }, [workExperienceData, dispatch]);
+
   const handleChange = (e, index) => {
     const { name, value } = e.target;
     const updatedWorkExperience = [...workExperienceData];
-    updatedWorkExperience[index][name] = value;
-    setworkExperienceData(updatedWorkExperience);
-  };
+    updatedWorkExperience[index] = {
+      ...updatedWorkExperience[index],
+      [name]: value,
+    };
 
+    // Update the state with the new achievements array
+    setworkExperienceData(updatedWorkExperience);
+    dispatch(updateResume({ workExperienceData: updatedWorkExperience }));
+  };
   const handleRichTextEditor = (e, name, index) => {
     const updatedWorkExperience = [...workExperienceData];
     updatedWorkExperience[index]["achievements"] = e.target.value;

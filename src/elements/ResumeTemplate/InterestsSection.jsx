@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateResume } from "@/store/slices/resumeSlice";
+
 import {
   SlArrowUpCircle,
   SlArrowDownCircle,
@@ -7,10 +10,16 @@ import {
 } from "react-icons/sl";
 
 const InterestsSection = ({ currentInterestsData }) => {
+  const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
   const [interestsData, setInterestsData] = useState(currentInterestsData);
 
   const formRef = useRef(null);
+  useEffect(() => {
+    if (interestsData) {
+      dispatch(updateResume({ interestsData: interestsData }));
+    }
+  }, [interestsData, dispatch]);
 
   const handleEditClick = () => {
     setIsEditing(true);
