@@ -1,24 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { SlPlus } from "react-icons/sl";
 
-const AchievementsSection = () => {
+const AchievementsSection = ({ currentResumeAchievements }) => {
   const [isEditing, setIsEditing] = useState(null);
-  const [achievementsData, setAchievementsData] = useState([
-    {
-      title: "Nairobi Innovation Week Winner (2023)",
-      dates: "05/2023 - 05/2023",
-      description:
-        "Led a team of 3 developers to create a web app that connects skilled artisans to clients in need of household services. The team came in 3rd place in NIW.",
-      present: false,
-    },
-    {
-      title: "GDSC Web Developer Lead (Maseno University)",
-      dates: "06/2021 - 07/2022",
-      description:
-        "Mentored and inspired over 120 fellow tech students through consistent weekly sessions.",
-      present: false,
-    },
-  ]);
+
+  const [achievementsData, setAchievementsData] = useState(
+    currentResumeAchievements
+  );
 
   const formRef = useRef(null);
 

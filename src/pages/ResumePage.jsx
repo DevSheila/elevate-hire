@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+// ELEMENTS
 import WorkExperienceSection from "@/elements/ResumeTemplate/WorkExperienceSection";
 import EducationSection from "@/elements/ResumeTemplate/EducationSection";
 import AchievementsSection from "@/elements/ResumeTemplate/AchievementsSection";
@@ -10,7 +13,26 @@ import ProfileSection from "@/elements/ResumeTemplate/ProfileSection";
 import HorizontalToolTabs from "@/elements/Tabs/HorizontalToolTabs";
 import Revision from "@/elements/Revision";
 
+// DATA
+import { resumeInfo } from "@/database/dummy/sampleResume";
+import {
+  createResume,
+  readResume,
+  updateResume,
+} from "@/store/slices/resumeSlice";
+
 const ResumePage = () => {
+  const [currentResume, setCurrentResume] = useState(resumeInfo);
+
+  const resume = useSelector((state) => state.resumeDetails.resume);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (currentResume) {
+      dispatch(updateResume(currentResume));
+    }
+  }, [currentResume]);
   return (
     <>
       <HorizontalToolTabs />
@@ -26,21 +48,21 @@ const ResumePage = () => {
                 <div className="mt-2">
                   <div className="flex  items-start mb-4">
                     <Revision />
-                    <EducationSection />
+                    <EducationSection currentEducationSection={resume.educationData}/>
                   </div>
                 </div>
 
                 <div className="mt-2">
                   <div className="flex items-start mb-4">
                     <Revision />
-                    <WorkExperienceSection />
+                    <WorkExperienceSection currentWorkExperienceData={resume.workExperienceData}/>
                   </div>
                 </div>
 
                 <div className="mt-2">
                   <div className="flex items-start mb-4">
                     <Revision />
-                    <AchievementsSection />
+                    <AchievementsSection currentResumeAchievements={resume.achievementsData}/>
                   </div>
                 </div>
               </div>
@@ -50,28 +72,28 @@ const ResumePage = () => {
                 <div className="mt-2">
                   <div className="flex items-start mb-4">
                     <Revision />
-                    <SkillsSection />
+                    <SkillsSection currentSkillsData={resume.skillsData}/>
                   </div>
                 </div>
 
                 <div className="mt-2">
                   <div className="flex items-start mb-4">
                     <Revision />
-                    <ProjectsSection />
+                    <ProjectsSection currentProjectsData={resume.projectsData}/>
                   </div>
                 </div>
 
                 <div className="mt-2">
                   <div className="flex items-start mb-4">
                     <Revision />
-                    <CertificatesSection />
+                    <CertificatesSection currentCertificatesData={resume.certificatesData}/>
                   </div>
                 </div>
 
                 <div className="mt-2">
                   <div className="flex  items-start mb-4">
                     <Revision />
-                    <InterestsSection />
+                    <InterestsSection currentInterestsData={resume.interestsData}/>
                   </div>
                 </div>
               </div>

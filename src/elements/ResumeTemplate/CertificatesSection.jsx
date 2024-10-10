@@ -1,27 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { SlPlus } from "react-icons/sl";
-const CertificatesSection = () => {
+const CertificatesSection = ({currentCertificatesData}) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [certificatesData, setCertificatesData] = useState([
-    {
-      title: "Web Applications Development",
-      dates: "",
-      present: false,
-      organization: "Moringa School",
-    },
-    {
-      title: "Android Mobile Applications Development",
-      dates: "",
-      present: false,
-      organization: "Moringa School",
-    },
-    {
-      title: "DevOps Engineering",
-      dates: "",
-      present: false,
-      organization: "Moringa School",
-    },
-  ]);
+  const [certificatesData, setCertificatesData] = useState(currentCertificatesData);
+
 
   const formRef = useRef(null);
 

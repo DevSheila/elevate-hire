@@ -6,13 +6,9 @@ import {
   SlPlus,
 } from "react-icons/sl";
 
-const InterestsSection = () => {
+const InterestsSection = ({ currentInterestsData }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [interestsData, setInterestsData] = useState([
-    "Mountaineering",
-    "Board games",
-    "Sculpting",
-  ]);
+  const [interestsData, setInterestsData] = useState(currentInterestsData);
 
   const formRef = useRef(null);
 

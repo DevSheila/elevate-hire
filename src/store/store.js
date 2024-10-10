@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // Use local storage for persistence
-import resumeSliceReducer from "../slices/resume/resumeSlice";
+import resumeSliceReducer from "./slices/resumeSlice";
 
 // Create a persist configuration object
 const persistConfig = {

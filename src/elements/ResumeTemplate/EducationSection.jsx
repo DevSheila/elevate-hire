@@ -1,21 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { SlPlus } from "react-icons/sl";
 
-const EducationSection = () => {
+const EducationSection = ({ currentEducationSection }) => {
   // State to manage whether we are editing or viewing the content
   const [isEditing, setIsEditing] = useState(false);
 
   // State to hold the education data
-  const [educationData, setEducationData] = useState([
-    {
-      degree: "Bsc Computer Science",
-      university: "Maseno University",
-      startDate: "08/2020",
-      endDate: "12/2024",
-      city: "",
-      courses: "",
-    },
-  ]);
+  const [educationData, setEducationData] = useState(currentEducationSection);
 
   // Ref for the form container
   const formRef = useRef(null);

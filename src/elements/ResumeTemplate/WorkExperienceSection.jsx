@@ -4,32 +4,11 @@ import SectionTabs from "../Tabs/SectionTabs";
 import { SlPlus } from "react-icons/sl";
 import RichTextEditor from "../RichTextEditor";
 
-const WorkExperienceSection = () => {
+const WorkExperienceSection = ({ currentWorkExperienceData }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [workExperienceData, setworkExperienceData] = useState([
-    {
-      jobTitle: "Software Developer",
-      companyName: "Uzapoint Limited",
-      dates: "04/2023 - 05/2023",
-      location: "Nairobi, Kenya",
-      companyDesc:
-        "Digital Vision is a company dealing with provision of web/mobile based solutions, content applications and technological innovation.",
-      achievements:
-        "Collaborated with a team of 3 developers to create a finances budget tracking mobile app.Fixed bugs on a client’s (Chamasoft) investment group mobile app.Created end-to-end Figma designs for a tenant mobile app for the company’s clients.",
-      present: false,
-    },
-    {
-      jobTitle: "Software Developer",
-      companyName: "Uzapoint Limited",
-      dates: "04/2023 - 05/2023",
-      location: "Nairobi, Kenya",
-      companyDesc:
-        "Digital Vision is a company dealing with provision of web/mobile based solutions, content applications and technological innovation.",
-      achievements:
-        "Collaborated with a team of 3 developers to create a finances budget tracking mobile app.Fixed bugs on a client’s (Chamasoft) investment group mobile app.Created end-to-end Figma designs for a tenant mobile app for the company’s clients.",
-      present: false,
-    },
-  ]);
+  const [workExperienceData, setworkExperienceData] = useState(
+    currentWorkExperienceData
+  );
 
   const formRef = useRef(null);
 
@@ -57,25 +36,24 @@ const WorkExperienceSection = () => {
     setworkExperienceData(updatedWorkExperience);
   };
 
-  const addWorkExperience = () => 
-    {
-      const updatedWorkExperience = [
-        ...workExperienceData,
-        {
-          jobTitle: "",
-          companyName: "",
-          dates: "",
-          location: "",
-          companyDesc: "",
-          achievements: "",
-          present: false,
-        },
-      ];
-      
-      setworkExperienceData(updatedWorkExperience);
-      setIsEditing(updatedWorkExperience.length - 1); // Set isEditing to the index of the new experience
-    };
-    
+  const addWorkExperience = () => {
+    const updatedWorkExperience = [
+      ...workExperienceData,
+      {
+        jobTitle: "",
+        companyName: "",
+        dates: "",
+        location: "",
+        companyDesc: "",
+        achievements: "",
+        present: false,
+      },
+    ];
+
+    setworkExperienceData(updatedWorkExperience);
+    setIsEditing(updatedWorkExperience.length - 1); // Set isEditing to the index of the new experience
+  };
+
   const removeWorkExperience = (index) => {
     const updatedWorkExperience = [...workExperienceData];
     updatedWorkExperience.splice(index, 1);
