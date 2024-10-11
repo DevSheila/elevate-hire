@@ -1,7 +1,21 @@
-import React from "react";
+import { saveUserToFirestore } from "@/database/firebase/service";
+import {  useUser } from "@clerk/clerk-react";
+import React, { useEffect } from "react";
 import NavBar from "@/elements/NavBar";
 
 function LandingPage() {
+  const { isLoaded, user } = useUser();
+
+  useEffect(() => {
+    const handleUserSave = async () => {
+      if (isLoaded && user) {
+        await saveUserToFirestore(user); // Wait for the save operation to complete
+      }
+    };
+
+    handleUserSave();
+  }, [isLoaded, user]);
+
   return (
     <>
       <div className="relative  text-gray-900">
