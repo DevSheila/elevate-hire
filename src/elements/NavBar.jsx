@@ -70,7 +70,7 @@ function NavBar() {
             <Link to={"/mockinterview"}>
               <li
                 className={`hover:text-blue-600  transition-all md:mr-12 cursor-pointer   ${
-                  path == "/dashboard" && "text-blue-600 font-bold"
+                  path == "/mockinterview" && "text-blue-600 font-bold"
                 }`}
               >
                 Mock Interview

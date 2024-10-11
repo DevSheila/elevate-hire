@@ -1,29 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { updateResume } from "@/store/slices/resumeSlice";
+
 import { SlPlus } from "react-icons/sl";
-const CertificatesSection = () => {
+const CertificatesSection = ({ currentCertificatesData }) => {
+  const dispatch = useDispatch();
+
   const [isEditing, setIsEditing] = useState(false);
-  const [certificatesData, setCertificatesData] = useState([
-    {
-      title: "Web Applications Development",
-      dates: "",
-      present: false,
-      organization: "Moringa School",
-    },
-    {
-      title: "Android Mobile Applications Development",
-      dates: "",
-      present: false,
-      organization: "Moringa School",
-    },
-    {
-      title: "DevOps Engineering",
-      dates: "",
-      present: false,
-      organization: "Moringa School",
-    },
-  ]);
+  const [certificatesData, setCertificatesData] = useState(
+    currentCertificatesData
+  );
 
   const formRef = useRef(null);
+  useEffect(() => {
+    if (certificatesData) {
+      dispatch(updateResume({ certificatesData: certificatesData }));
+    }
+  }, [certificatesData, dispatch]);
 
   const handleEditClick = (index) => {
     setIsEditing(index);
@@ -32,7 +25,12 @@ const CertificatesSection = () => {
   const handleChange = (e, index) => {
     const { name, value } = e.target;
     const updatedCertificates = [...certificatesData];
-    updatedCertificates[index][name] = value;
+    updatedCertificates[index] = {
+      ...updatedCertificates[index],
+      [name]: value,
+    };
+
+    // Update the state with the new certificates array
     setCertificatesData(updatedCertificates);
   };
 

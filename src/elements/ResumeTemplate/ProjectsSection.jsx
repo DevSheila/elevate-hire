@@ -1,45 +1,34 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateResume } from "@/store/slices/resumeSlice";
+
 import { Link } from "react-router-dom";
 import { SlPlus } from "react-icons/sl";
-const ProjectsSection = () => {
+const ProjectsSection = ({ currentProjectsData }) => {
+  const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
-  const [projectsData, setProjectsData] = useState([
-    {
-      title: "HustleHub",
-      dates: "04/2023 - 05/2023",
-      link: "https://github.com/DevSheila/HustleHubClient",
-      description:
-        "Led a team of 3 developers to create a React JS web app that connects skilled artisans to clients in need of household services. Implemented user authentication and authorization functionalities, leveraging redux for state management and react router for seamless navigation between different components and routes. Integrated identity verification API (Fal.lu), ensuring a secure and trustworthy platform for both artisans and clients. Employed Redux Thunk middleware to handle asynchronous operations such as API calls, enabling seamless data retrieval and updates.",
-      present: false,
-    },
-    {
-      title: "Restaurant Advisor",
-      dates: "04/2022 - 04/2022",
-      link: "https://github.com/DevSheila/restaurants",
-      description:
-        "Developed a React.js web application with an intuitive user interface, allowing users to search for restaurants based on various criteria, such as location, cuisine, and ratings. Utilized React.js components, state management, and routing to create a smooth and seamless user experience. Integrated external APIs and databases to retrieve and display relevant restaurant data.",
-      present: false,
-    },
-    {
-      title: "Movers API",
-      dates: "08/2021 - 08/2021",
-      link: "https://github.com/DevSheila/MoversAPI",
-      description:
-        "Led a team of 6 developers to successfully build an app for an application that allows users to find moving companies around their areas to help with their relocation. Created and managed our API and databases using Java (Java Spark) and Postgres. Integrated our REST API to app frontend.",
-      present: false,
-    },
-  ]);
+  const [projectsData, setProjectsData] = useState(currentProjectsData);
 
   const formRef = useRef(null);
 
   const handleEditClick = (index) => {
     setIsEditing(index);
   };
+  useEffect(() => {
+    if (projectsData) {
+      dispatch(updateResume({ projectsData: projectsData }));
+    }
+  }, [projectsData, dispatch]);
 
   const handleChange = (e, index) => {
     const { name, value } = e.target;
     const updatedProjects = [...projectsData];
-    updatedProjects[index][name] = value;
+    updatedProjects[index] = {
+      ...updatedProjects[index],
+      [name]: value,
+    };
+
+    // Update the state with the new achievements array
     setProjectsData(updatedProjects);
   };
 
