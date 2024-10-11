@@ -42,8 +42,11 @@ const ResumePage = () => {
 
   const handleSaveChanges = async () => {
     if (user && user.id) {
-      await saveResumeToFirestore(user.id, resume);
-      console.log("Resume saved successfully!");
+      try {
+        await saveResumeToFirestore(user.id, resume);
+      } catch (error) {
+        console.log("error ", error);
+      }
     } else {
       console.error("User is not signed in or user ID is missing.");
     }
@@ -64,7 +67,7 @@ const ResumePage = () => {
           <div className="container p-1 sm:p-1">
             <div className="flex justify-end mt-2 my-2">
               <button
-                onClick={handleSaveChanges} 
+                onClick={handleSaveChanges}
                 onMouseEnter={() => setIsFocused(true)}
                 onMouseLeave={() => setIsFocused(false)}
                 className={`relative px-4 py-2 rounded-full font-normal text-white transition-all duration-300 ease-in-out ${

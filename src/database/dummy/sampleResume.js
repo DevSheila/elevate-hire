@@ -1,5 +1,6 @@
+
 export const resumeInfo = {
-  id: "ghte786376GD89",
+  id: "ghte786376GD87",
   profileData: {
     name: "Sheila Sharon",
     jobTitle: "Full Stack Engineer",
@@ -133,4 +134,7 @@ export const resumeInfo = {
     },
   ],
   interestsData: ["Mountaineering", "Board games", "Sculpting"],
+  settings:{
+    themeColor:"#4287f5"
+  }
 };

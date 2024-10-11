@@ -69,6 +69,7 @@ export const saveResumeToFirestore = async (userId, resume) => {
       projectsData: resume.projectsData,
       certificatesData: resume.certificatesData,
       interestsData: resume.interestsData,
+      settings:resume.settings,
     };
 
     // If the document exists, update it; if not, create it
