@@ -23,38 +23,38 @@ import {
   readResume,
   updateResume,
 } from "@/store/slices/resumeSlice";
+import { saveResumeToFirestore } from "@/database/firebase/service";
 
 const ResumePage = () => {
+  const { user, isLoaded, isSignedIn } = useUser();
   const [isFocused, setIsFocused] = useState(false);
-
   const [currentResume, setCurrentResume] = useState(resumeInfo);
-
   const resume = useSelector((state) => state.resumeDetails.resume);
-
   const dispatch = useDispatch();
 
-  // Get the current user from Clerk
-  const { user, isLoaded, isSignedIn } = useUser();
-
-  // Check if user data is loaded
   if (!isLoaded) {
     return <div>Loading user data...</div>;
   }
 
-  // If user is not signed in, display a message
   if (!isSignedIn) {
     return <div>Please sign in to view your resume.</div>;
   }
 
+  const handleSaveChanges = async () => {
+    if (user && user.id) {
+      await saveResumeToFirestore(user.id, resume);
+      console.log("Resume saved successfully!");
+    } else {
+      console.error("User is not signed in or user ID is missing.");
+    }
+  };
+
   useEffect(() => {
     if (currentResume) {
-      // dispatch(updateResume(currentResume));
+      dispatch(updateResume(currentResume));
     }
   }, [currentResume]);
 
-  useEffect(() => {
-    console.log("user", user);
-  }, [user]);
   return (
     <>
       <HorizontalToolTabs />
@@ -64,6 +64,7 @@ const ResumePage = () => {
           <div className="container p-1 sm:p-1">
             <div className="flex justify-end mt-2 my-2">
               <button
+                onClick={handleSaveChanges} 
                 onMouseEnter={() => setIsFocused(true)}
                 onMouseLeave={() => setIsFocused(false)}
                 className={`relative px-4 py-2 rounded-full font-normal text-white transition-all duration-300 ease-in-out ${

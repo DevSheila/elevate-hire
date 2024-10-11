@@ -1,5 +1,18 @@
-
 export const resumeInfo = {
+  id: "ghte786376GD89",
+  profileData: {
+    name: "Sheila Sharon",
+    jobTitle: "Full Stack Engineer",
+    description: "Short pitch about yourself.",
+    email: "sheilasharon10@gmail.com",
+    phone: "+254710617776",
+    website: "https://sheilasharon.com",
+    twitter: "twitter.com/SheilaWambui",
+    linkedin: "linkedin.com/in/SheilaWambui",
+    instagram: "instagram.com/in/SheilaWambui",
+    github: "github.com/SheilaWambui",
+    behance: "behance.com/SheilaWambui",
+  },
   educationData: [
     {
       degree: "Bsc Computer Science",
@@ -8,7 +21,7 @@ export const resumeInfo = {
       endDate: "12/2024",
       city: "",
       courses: "",
-    }
+    },
   ],
   workExperienceData: [
     {
@@ -121,4 +134,3 @@ export const resumeInfo = {
   ],
   interestsData: ["Mountaineering", "Board games", "Sculpting"],
 };
-
