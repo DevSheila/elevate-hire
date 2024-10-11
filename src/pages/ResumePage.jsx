@@ -54,6 +54,7 @@ const ResumePage = () => {
 
   useEffect(() => {
     if (currentResume) {
+      // get resume id from props , fetch resume from 
       dispatch(updateResume(currentResume));
     }
   }, [currentResume]);

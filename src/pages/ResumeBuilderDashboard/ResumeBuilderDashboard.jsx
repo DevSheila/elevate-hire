@@ -1,12 +1,8 @@
 import NavBar from "@/elements/NavBar";
 import React, { useEffect, useState } from "react";
-
-
-import { BsArrowUpRight, BsPen } from "react-icons/bs";
 import { useUser } from "@clerk/clerk-react";
 import { getResumesByUserId } from "@/database/firebase/service";
-import ResumeCardItem from "./ResumeCardItem";
-import AddResume from "./AddResume";
+import ResumeCardItem3 from "./ResumeCardItem";
 
 function ResumeBuilderDashboard() {
   const { user, isLoaded, isSignedIn } = useUser();
@@ -41,23 +37,16 @@ function ResumeBuilderDashboard() {
   return (
     <>
       <NavBar />
+      <section class="py-20">
+        <h1 class="mb-12 text-center font-sans text-xl font-bold text-gray-900">
+          My Resumes<span class="text-blue-600">.</span>
+        </h1>
+        {/* <p>Start Creating AI resume to your next Job role</p> */}
 
-      <div className="p-10 md:px-20 lg:px-32">
-        <h2 className="font-bold text-3xl">My Resumes</h2>
-        <p>Start Creating AI resume to your next Job role</p>
-        <div
-          className="grid grid-cols-2 
-      md:grid-cols-3 lg:grid-cols-5 gap-5
-      mt-10
-      "
-        >
-          <AddResume />
+        <div class="mx-auto grid max-w-screen-xl grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-3">
           {resumes?.length > 0
             ? resumes.map((resume, index) => (
-                <ResumeCardItem
-                  resume={resume}
-                  key={index}
-                />
+                <ResumeCardItem3 resume={resume} key={index} />
               ))
             : [1, 2, 3, 4].map((item, index) => (
                 <div
@@ -66,10 +55,9 @@ function ResumeBuilderDashboard() {
                 ></div>
               ))}
         </div>
-      </div>
+      </section>
     </>
   );
 }
-
 
 export default ResumeBuilderDashboard;
