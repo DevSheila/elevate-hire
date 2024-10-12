@@ -17,7 +17,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Loader2Icon,} from 'lucide-react'
+import { Loader2Icon } from "lucide-react";
 import { SlOptionsVertical } from "react-icons/sl";
 
 function ResumeCardItem({ resume, refreshData }) {
@@ -58,7 +58,6 @@ function ResumeCardItem({ resume, refreshData }) {
               </div>
             </div>
 
-
             <div className=" flex justify-between ">
               <div class="mt-1 p-2">
                 <h2 class="text-slate-700">{resume?.profileData.jobTitle}</h2>
@@ -69,20 +68,6 @@ function ResumeCardItem({ resume, refreshData }) {
                   <SlOptionsVertical className="text-black h-4 w-4 cursor-pointer" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem
-                    onClick={() =>
-                      navigation("/resumebuilder/resume/" + resume.id + "/edit")
-                    }
-                  >
-                    Edit
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onClick={() =>
-                      navigation("/my-resume/" + resume.id + "/view")
-                    }
-                  >
-                    View
-                  </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() =>
                       navigation("/my-resume/" + resume.id + "/view")
