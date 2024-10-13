@@ -1,9 +1,9 @@
 
 export const resumeInfo = {
-  id: "ghte786376GD87",
+  id: "ghte786376GD92",
   profileData: {
     name: "Sheila Sharon",
-    jobTitle: "Full Stack Engineer",
+    jobTitle: "AI Engineer",
     description: "Short pitch about yourself.",
     email: "sheilasharon10@gmail.com",
     phone: "+254710617776",
@@ -16,8 +16,8 @@ export const resumeInfo = {
   },
   educationData: [
     {
-      degree: "Bsc Computer Science",
-      university: "Maseno University",
+      degree: "Bsc Computer Technology",
+      university: "MIT University",
       startDate: "08/2020",
       endDate: "12/2024",
       city: "",

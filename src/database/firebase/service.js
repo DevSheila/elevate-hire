@@ -9,6 +9,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { firebaseDb } from "./config";
+
 // Function to save or update user data in Firestore
 export const saveUserToFirestore = async (user) => {
   const { id, firstName, lastName, emailAddresses, imageUrl } = user;
@@ -105,6 +106,30 @@ export const getResumesByUserId = async (userId) => {
     return resumes; // Return the array of resumes
   } catch (error) {
     console.error("Error fetching resumes: ", error);
+    throw error; // Rethrow the error for further handling if needed
+  }
+};
+
+// Function to get a resume by its specific id
+export const getResumeById = async (resumeId) => {
+  try {
+    // Reference to the specific resume document by id
+    const resumeRef = doc(firebaseDb, "user_resumes", resumeId);
+
+    // Fetch the resume document
+    const resumeDoc = await getDoc(resumeRef);
+
+    // Check if the document exists
+    if (resumeDoc.exists()) {
+      // Return the resume data if found
+      console.log("resumeDoc.data()", resumeDoc.data())
+      return { id: resumeDoc.id, ...resumeDoc.data() };
+    } else {
+      console.log("No resume found with this ID");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching resume by ID: ", error);
     throw error; // Rethrow the error for further handling if needed
   }
 };

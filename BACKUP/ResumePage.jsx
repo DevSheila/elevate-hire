@@ -24,7 +24,6 @@ import {
 } from "@/database/firebase/service";
 import { useParams } from "react-router-dom";
 import { Loader2 } from "lucide-react";
-import ResumePageLoader from "@/elements/Loaders/SkeletonLoader/ResumePageLoader";
 
 const ResumePage = () => {
   const { id: resumeId } = useParams(); // Use resumeId for clarity
@@ -94,7 +93,7 @@ const ResumePage = () => {
         <>
           <HorizontalToolTabs />
 
-          <div className="transition-opacity duration-500 opacity-100 bg-violet-50 flex flex-col justify-center items-center min-h-screen p-4 sm:p-6 md:p-8">
+          <div className="bg-violet-50 flex flex-col justify-center items-center min-h-screen p-4 sm:p-6 md:p-8">
             <div className="bg-white overflow-hidden shadow-md w-full max-w-2xl md:max-w-4xl lg:max-w-6xl mt-4 sm:mt-6 md:mt-8 mb-4 sm:mb-6 md:mb-8 p-1 sm:p-6 md:p-1 rounded">
               <div className="container p-1 sm:p-1">
                 <div className="flex justify-end mt-2 my-2">
@@ -186,15 +185,15 @@ const ResumePage = () => {
                     </div>
                   </div>
                 </div>
-                
               </div>
             </div>
           </div>
         </>
       ) : (
         <>
-
-          <ResumePageLoader/>
+          <div >
+            <Loader2 />
+          </div>
         </>
       )}
     </>

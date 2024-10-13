@@ -1,13 +1,17 @@
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { useUser } from '@clerk/clerk-react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+import { useUser } from "@clerk/clerk-react";
 
 // PAGES
-import ResumePage from './pages/ResumePage';
-import NotFound from './pages/NotFound';
-import LandingPage from './pages/LandingPage';
-import SignIn from './pages/SignIn';
-import ResumeBuilderDashboard from './pages/ResumeBuilderDashboard/ResumeBuilderDashboard';
-
+import ResumePage from "./pages/ResumePage";
+import NotFound from "./pages/NotFound";
+import LandingPage from "./pages/LandingPage";
+import SignIn from "./pages/SignIn";
+import ResumeBuilderDashboard from "./pages/ResumeBuilderDashboard/ResumeBuilderDashboard";
 
 // PrivateRoute component to protect routes that require authentication
 function PrivateRoute({ element, ...rest }) {
@@ -29,15 +33,29 @@ function PublicRoute({ element, ...rest }) {
 
 function App() {
   return (
-      <Router>
-        <Routes>
-          <Route exact path="/" element={<LandingPage />} />
-          <Route exact path="/resumebuilder" element={<PrivateRoute element={<ResumePage />} />} />
-          <Route exact path="/dashboard" element={<PrivateRoute element={<ResumeBuilderDashboard />} />} />
-          <Route exact path="/sign-in" element={<PublicRoute element={<SignIn />} />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
+    <Router>
+      <Routes>
+        <Route exact path="/" element={<LandingPage />} />
+
+        <Route
+          path="/resumebuilder/:id"
+          element={<PrivateRoute element={<ResumePage />} />}
+        />
+        <Route
+          exact
+          path="/dashboard"
+          element={<PrivateRoute element={<ResumeBuilderDashboard />} />}
+        />
+
+
+        <Route
+          exact
+          path="/sign-in"
+          element={<PublicRoute element={<SignIn />} />}
+        />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
   );
 }
 
