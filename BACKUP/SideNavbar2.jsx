@@ -61,8 +61,8 @@ function SideNavbar() {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              clipRule="evenodd"
-              fillRule="evenodd"
+              clip-rule="evenodd"
+              fill-rule="evenodd"
               d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
             ></path>
           </svg>
@@ -93,7 +93,7 @@ function SideNavbar() {
               aria-label="Close"
               onClick={closeSidebar}
             >
-              <span className="sr-only transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
+              <span className="sr-only transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110duration-300">
                 Close
               </span>
               <svg
@@ -105,9 +105,9 @@ function SideNavbar() {
               >
                 <path
                   stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
                   d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                 />
               </svg>
@@ -121,7 +121,7 @@ function SideNavbar() {
             </span>
           </a>
           {/* NAV ITEMS  */}
-          <ul className="space-y-2 font-medium flex-grow">
+          <ul className="space-y-2 font-medium">
             {[
               {
                 name: "Home",
@@ -167,7 +167,7 @@ function SideNavbar() {
           </ul>
 
           {/* BOTTOM SECTION  */}
-          <div className="mt-auto">
+          <div className=" mt-10 lg:mt-auto justify-center items-center">
             <div
               className="p-4 rounded-xl bg-cover bg-center "
               style={{ backgroundImage: `url(${whitCurvedImg})` }}
@@ -180,7 +180,7 @@ function SideNavbar() {
               </p>
             </div>
 
-            <hr className="my-2 border-blue-gray-50" />
+            <hr class="my-2 border-blue-gray-50" />
 
             <div class=" flex justify-between items-center w-full mt-1">
               <div class="flex justify-center items-center  space-x-2">
