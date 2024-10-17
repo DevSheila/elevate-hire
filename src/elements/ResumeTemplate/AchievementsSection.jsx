@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateResume } from "@/store/slices/resumeSlice";
 import { SlPlus } from "react-icons/sl";
+import { Textarea } from "@/components/ui/textarea";
+import RichTextEditor from "../RichTextEditor";
 
 const AchievementsSection = ({ currentResumeAchievements }) => {
   const dispatch = useDispatch();
@@ -60,6 +62,12 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
     const updatedAchievements = [...achievementsData];
     updatedAchievements.splice(index, 1);
     setAchievementsData(updatedAchievements);
+  };
+
+  const handleRichTextEditor = (e, name, index) => {
+    const updatedAchievements = [...workExperienceData];
+    updatedAchievements[index][name] = e.target.value;
+    setworkExperienceData(updatedAchievements);
   };
 
   useEffect(() => {
@@ -121,12 +129,13 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
                     </label>
                   </div>
                 </div>
-                <textarea
-                  name="description"
-                  value={achievement.description}
-                  onChange={(e) => handleChange(e, index)}
-                  className="border-b mb-2 w-full outline-none"
-                  placeholder="Description"
+
+                <RichTextEditor
+                  index={index}
+                  defaultValue={achievement.description}
+                  onRichTextEditorChange={(event) =>
+                    handleRichTextEditor(event, "achievements", index)
+                  }
                 />
               </div>
             ) : (
@@ -140,9 +149,10 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
                     ? "bg-blue-100 rounded-full p-1"
                     : ""
                 }`}
-
               >
-                {achievement.title || achievement.dates || achievement.description ? (
+                {achievement.title ||
+                achievement.dates ||
+                achievement.description ? (
                   <>
                     <h3 className="font-bold text-lg">{achievement.title}</h3>
                     <p className="text-gray-500">{achievement.dates}</p>

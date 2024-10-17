@@ -60,6 +60,7 @@ function RichTextEditor({ onRichTextEditorChange, index, defaultValue }) {
           )}
         </Button>
       </div>
+      
 
       <div className=" mb-2  outline-none p-0">
         <EditorProvider>

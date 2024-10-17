@@ -4,6 +4,8 @@ import { updateResume } from "@/store/slices/resumeSlice";
 
 import { Link } from "react-router-dom";
 import { SlPlus } from "react-icons/sl";
+import { Textarea } from "@/components/ui/textarea";
+import RichTextEditor from "../RichTextEditor";
 const ProjectsSection = ({ currentProjectsData }) => {
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
@@ -54,6 +56,12 @@ const ProjectsSection = ({ currentProjectsData }) => {
   const removeProject = (index) => {
     const updatedProjects = [...projectsData];
     updatedProjects.splice(index, 1);
+    setProjectsData(updatedProjects);
+  };
+
+  const handleRichTextEditor = (e, name, index) => {
+    const updatedProjects = [...projectsData];
+    updatedProjects[index][name] = e.target.value;
     setProjectsData(updatedProjects);
   };
 
@@ -123,13 +131,13 @@ const ProjectsSection = ({ currentProjectsData }) => {
                 className="border-b mb-2 w-full outline-none py-2 "
                 placeholder="Project Link"
               />
-              <textarea
-                name="description"
-                value={project.description}
-                onChange={(e) => handleChange(e, index)}
-                className="border-b mb-2 w-full outline-none py-2"
-                placeholder="Project Description"
-                rows="4"
+
+              <RichTextEditor
+                index={index}
+                defaultValue={project.description}
+                onRichTextEditorChange={(event) =>
+                  handleRichTextEditor(event, "project", index)
+                }
               />
             </div>
           ) : (
@@ -150,13 +158,15 @@ const ProjectsSection = ({ currentProjectsData }) => {
               project.dates ||
               project.link ||
               project.present ||
-              project.description  ? (
+              project.description ? (
                 <>
                   <h3 className="font-bold text-lg">{project.title}</h3>
                   <p className="text-gray-500">{project.dates}</p>
                   {project.present && <p className="text-gray-500">Present</p>}
                   <a
                     href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-blue-500 hover:underline text-clip overflow-hidden ..."
                   >
                     {project.link}

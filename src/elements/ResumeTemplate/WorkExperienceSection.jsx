@@ -39,7 +39,7 @@ const WorkExperienceSection = ({ currentWorkExperienceData }) => {
 
   const handleRichTextEditor = (e, name, index) => {
     const updatedWorkExperience = [...workExperienceData];
-    updatedWorkExperience[index]["achievements"] = e.target.value;
+    updatedWorkExperience[index][name] = e.target.value;
     setworkExperienceData(updatedWorkExperience);
   };
 
@@ -174,7 +174,7 @@ const WorkExperienceSection = ({ currentWorkExperienceData }) => {
                   index={index}
                   defaultValue={experience.achievements}
                   onRichTextEditorChange={(event) =>
-                    handleRichTextEditor(event, "achievements", index)
+                    handleRichTextEditor(event, "workexperience", index)
                   }
                 />
 
