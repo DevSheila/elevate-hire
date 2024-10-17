@@ -7,6 +7,7 @@ import {
   setDoc,
   getDoc,
   getDocs,
+  deleteDoc,
 } from "firebase/firestore";
 import { firebaseDb } from "./config";
 
@@ -62,19 +63,24 @@ export const saveResumeToFirestore = async (userId, resume) => {
     // Prepare the resume data
     const resumeData = {
       userId: userId,
-      profileData: resume.profileData,
-      educationData: resume.educationData,
-      workExperienceData: resume.workExperienceData,
-      achievementsData: resume.achievementsData,
-      skillsData: resume.skillsData,
-      projectsData: resume.projectsData,
-      certificatesData: resume.certificatesData,
-      interestsData: resume.interestsData,
-      settings:resume.settings,
+      profileData: resume.profileData || {},
+      educationData: resume.educationData || [],
+      workExperienceData: resume.workExperienceData || [],
+      achievementsData: resume.achievementsData || [],
+      skillsData: resume.skillsData || [],
+      projectsData: resume.projectsData || [],
+      certificatesData: resume.certificatesData || [],
+      interestsData: resume.interestsData || [],
+      settings: resume.settings || {},
     };
 
     // If the document exists, update it; if not, create it
     if (resumeDoc.exists()) {
+      const today = new Date();
+      const formattedDate = today.toISOString().split("T")[0];
+    
+      resumeData.settings.updateDate = formattedDate; //Update date to current date
+
       await setDoc(userResumeRef, resumeData, { merge: true }); // Merge to update only changed fields
       console.log("Resume updated successfully!");
     } else {
@@ -122,7 +128,7 @@ export const getResumeById = async (resumeId) => {
     // Check if the document exists
     if (resumeDoc.exists()) {
       // Return the resume data if found
-      console.log("resumeDoc.data()", resumeDoc.data())
+      console.log("resumeDoc.data()", resumeDoc.data());
       return { id: resumeDoc.id, ...resumeDoc.data() };
     } else {
       console.log("No resume found with this ID");
@@ -131,5 +137,23 @@ export const getResumeById = async (resumeId) => {
   } catch (error) {
     console.error("Error fetching resume by ID: ", error);
     throw error; // Rethrow the error for further handling if needed
+  }
+};
+
+// Function to delete a document by its ID
+export const deleteDocumentById = async (documentId) => {
+  try {
+    // Reference to the specific document by collection name and document ID
+    const documentRef = doc(firebaseDb, "user_resumes", documentId);
+
+    // Delete the document
+    await deleteDoc(documentRef);
+
+    console.log(
+      `Document with ID: ${documentId} deleted successfully from collection user_resumes`
+    );
+  } catch (error) {
+    console.error("Error deleting document: ", error);
+    throw error; // Rethrow error for further handling if needed
   }
 };

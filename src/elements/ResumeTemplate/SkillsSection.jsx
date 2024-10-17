@@ -1,13 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateResume } from "@/store/slices/resumeSlice";
 
-import {
-  SlArrowUpCircle,
-  SlArrowDownCircle,
-  SlTrash,
-  SlPlus,
-} from "react-icons/sl";
+import { SlArrowUpCircle, SlArrowDownCircle, SlTrash, SlPlus } from "react-icons/sl";
 
 const SkillsSection = ({ currentSkillsData }) => {
   const dispatch = useDispatch();
@@ -15,6 +10,7 @@ const SkillsSection = ({ currentSkillsData }) => {
   const [skillsData, setSkillsData] = useState(currentSkillsData);
 
   const formRef = useRef(null);
+  
   useEffect(() => {
     if (skillsData) {
       dispatch(updateResume({ skillsData: skillsData }));
@@ -32,7 +28,10 @@ const SkillsSection = ({ currentSkillsData }) => {
   };
 
   const addSkill = () => {
-    setSkillsData([...skillsData, ""]);
+    setSkillsData([...skillsData, ""]);  // Add an empty skill
+    setTimeout(() => {
+      setIsEditing(true);  // Ensure edit mode is enabled after adding
+    }, 0);
   };
 
   const removeSkill = (index) => {
@@ -68,13 +67,14 @@ const SkillsSection = ({ currentSkillsData }) => {
       {isEditing ? (
         <div ref={formRef} className="rounded-md">
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
-            {skillsData.map((skill, index) => (
+            {skillsData?.map((skill, index) => (
               <div key={index}>
                 <input
                   type="text"
                   value={skill}
                   onChange={(e) => handleChange(e, index)}
                   className="border-b w-full outline-none px-3 py-1 rounded"
+                  placeholder={skill === "" ? "New Skill (Click to Edit)" : ""}
                 />
                 {skillsData.length > 1 && (
                   <div className="flex flex-row">
@@ -82,12 +82,12 @@ const SkillsSection = ({ currentSkillsData }) => {
                       <SlArrowUpCircle />
                     </div>
 
-                    <div className="m-1 text-base text-gray-700 hover:text-emerald-500 focus:text-emerald-500 ">
+                    <div className="m-1 text-base text-gray-700 hover:text-emerald-500 focus:text-emerald-500">
                       <SlArrowDownCircle />
                     </div>
 
                     <div
-                      className="m-1 text-base text-gray-700 hover:text-red-500 focus:text-red-500 "
+                      className="m-1 text-base text-gray-700 hover:text-red-500 focus:text-red-500"
                       onClick={() => removeSkill(index)}
                     >
                       <SlTrash />
@@ -101,12 +101,12 @@ const SkillsSection = ({ currentSkillsData }) => {
       ) : (
         <div onClick={handleEditClick} className="cursor-pointer">
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
-            {skillsData.map((skill, index) => (
+            {skillsData?.map((skill, index) => (
               <button
                 key={index}
                 className="text-gray-900 px-3 py-1 border-2 border-solid rounded w-full truncate"
               >
-                {skill}
+                {skill || <span className="italic text-gray-500">New Skill (Click to Edit)</span>}
               </button>
             ))}
           </div>
@@ -114,7 +114,7 @@ const SkillsSection = ({ currentSkillsData }) => {
       )}
 
       <div onClick={addSkill} className="flex items-center mt-4">
-        <div className="text-cyan-600 text-2xl ">
+        <div className="text-cyan-600 text-2xl">
           <SlPlus />
         </div>
 

@@ -24,20 +24,6 @@ function SideNavbar() {
     setIsOpen((prev) => !prev); // Toggle the sidebar state
   };
 
-  // Close sidebar when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
-        setIsOpen(false); // Close sidebar if clicked outside
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
   const closeSidebar = () => {
     setIsOpen(false); // Close sidebar
   };
@@ -172,7 +158,7 @@ function SideNavbar() {
               className="p-4 rounded-xl bg-cover bg-center "
               style={{ backgroundImage: `url(${whitCurvedImg})` }}
             >
-              <Button className="rounded-xl mb-3"> Upgrade Now</Button>
+              <Button className="rounded-xl mb-3 w-full"> Upgrade Now</Button>
 
               <p className="mb-3 text-sm text-blue-800 dark:text-blue-400">
                 Access exclusive templates and advanced AI features. Don’t

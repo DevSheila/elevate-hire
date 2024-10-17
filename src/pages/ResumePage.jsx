@@ -12,7 +12,7 @@ import InterestsSection from "@/elements/ResumeTemplate/InterestsSection";
 import ProfileSection from "@/elements/ResumeTemplate/ProfileSection";
 import HorizontalToolTabs from "@/elements/Tabs/HorizontalToolTabs";
 import Revision from "@/elements/Revision";
-
+ 
 // USER
 import { useUser } from "@clerk/clerk-react"; // Import Clerk's useUser hook
 
@@ -116,9 +116,9 @@ const ResumePage = () => {
                     )}
                     <span className="relative z-10">Save Changes</span>
                   </button>
-                </div>
+                </div> 
 
-                <ProfileSection />
+                <ProfileSection currentProfileData={resume?.profileData} />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 ">
                   <div>

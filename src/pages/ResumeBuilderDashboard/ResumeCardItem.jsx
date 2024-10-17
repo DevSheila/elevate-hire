@@ -19,14 +19,24 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Loader2Icon } from "lucide-react";
 import { SlOptionsVertical } from "react-icons/sl";
+import { deleteDocumentById } from "@/database/firebase/service";
 
 function ResumeCardItem({ resume, refreshData }) {
   const navigation = useNavigate();
   const [openAlert, setOpenAlert] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const onDelete = () => {
+  const onDelete = async (resumeId) => {
     setLoading(true);
+
+    try {
+      deleteDocumentById(resumeId);
+    } catch (error) {
+      console.log("error", error);
+    } finally {
+      setLoading(false);
+      setOpenAlert(false)
+    }
   };
 
   return (
@@ -41,16 +51,17 @@ function ResumeCardItem({ resume, refreshData }) {
               <img src="/template/template1.png" alt="document Photo" />
 
               <div class="absolute bottom-3 left-3 inline-flex items-center rounded-full bg-blue-100 p-2 ">
-
                 <span class="text-blue-500 ml-1 text-sm">80%</span>
               </div>
             </div>
           </div>
 
-          <div className=" flex justify-between ">
-            <div class="mt-1 p-2">
-              <h2 class="text-slate-700">{resume?.profileData.jobTitle}</h2>
-              <p class="text-slate-400 mt-1 text-sm">20th September 2023</p>
+          <div className="flex justify-between">
+            <div className="mt-1 p-2">
+              <h2 class="text-slate-700 line-clamp-1">
+                {resume?.settings?.title}
+              </h2>
+              <p className="text-slate-400 mt-1 text-sm">{resume?.settings?.updateDate}</p>
             </div>
             <DropdownMenu>
               <DropdownMenuTrigger>
@@ -76,14 +87,21 @@ function ResumeCardItem({ resume, refreshData }) {
                   <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                   <AlertDialogDescription>
                     This action cannot be undone. This will permanently delete
-                    your account and remove your data from our servers.
+                    your resume .
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel onClick={() => setOpenAlert(false)}>
+                  <AlertDialogCancel
+                    className="rounded-full"
+                    onClick={() => setOpenAlert(false)}
+                  >
                     Cancel
                   </AlertDialogCancel>
-                  <AlertDialogAction onClick={onDelete} disabled={loading}>
+                  <AlertDialogAction
+                    onClick={() => onDelete(resume?.id)}
+                    disabled={loading}
+                    className="bg-red-500 rounded-full"
+                  >
                     {loading ? (
                       <Loader2Icon className="animate-spin" />
                     ) : (

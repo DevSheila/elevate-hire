@@ -85,7 +85,7 @@ const CertificatesSection = ({ currentCertificatesData }) => {
         CERTIFICATES
       </h2>
 
-      {certificatesData.map((certificate, index) => (
+      {certificatesData?.map((certificate, index) => (
         <div key={index} className="mb-4">
           {isEditing === index ? (
             // Edit Mode (form inputs)
@@ -132,12 +132,34 @@ const CertificatesSection = ({ currentCertificatesData }) => {
             // View Mode (content)
             <div
               onClick={() => handleEditClick(index)}
-              className="cursor-pointer pb-2 mb-2"
+              className={`cursor-pointer pb-2 mb-2 ${
+                !certificate.title &&
+                !certificate.dates &&
+                !certificate.link &&
+                !certificate.present &&
+                !certificate.description
+                  ? "bg-blue-100 rounded-full p-1"
+                  : ""
+              }`}
             >
-              <h3 className="font-bold text-lg">{certificate.title}</h3>
-              <p className="text-gray-500">{certificate.dates}</p>
-              {certificate.present && <p className="text-gray-500">Present</p>}
-              <p className="text-gray-500">{certificate.organization}</p>
+              {certificate.title ||
+              certificate.dates ||
+              certificate.link ||
+              certificate.present ||
+              certificate.organization ? (
+                <>
+                  <h3 className="font-bold text-lg">{certificate.title}</h3>
+                  <p className="text-gray-500">{certificate.dates}</p>
+                  {certificate.present && (
+                    <p className="text-gray-500">Present</p>
+                  )}
+                  <p className="text-gray-500">{certificate.organization}</p>
+                </>
+              ) : (
+                <div className="text-gray-500 italic rounded-xl p-1">
+                  New Certificate (Click to Edit)
+                </div>
+              )}
             </div>
           )}
         </div>

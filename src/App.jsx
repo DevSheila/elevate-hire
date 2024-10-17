@@ -41,12 +41,12 @@ function App() {
           path="/resumebuilder/:id"
           element={<PrivateRoute element={<ResumePage />} />}
         />
+
         <Route
           exact
-          path="/dashboard"
+          path="/resumebuilder"
           element={<PrivateRoute element={<ResumeBuilderDashboard />} />}
         />
-
 
         <Route
           exact

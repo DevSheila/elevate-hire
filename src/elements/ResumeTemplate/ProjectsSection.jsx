@@ -81,7 +81,7 @@ const ProjectsSection = ({ currentProjectsData }) => {
         PROJECTS
       </h2>
 
-      {projectsData.map((project, index) => (
+      {projectsData?.map((project, index) => (
         <div key={index} className="mb-4">
           {isEditing === index ? (
             // Edit Mode (form inputs)
@@ -136,23 +136,38 @@ const ProjectsSection = ({ currentProjectsData }) => {
             // View Mode (content)
             <div
               onClick={() => handleEditClick(index)}
-              className="cursor-pointer pb-2 mb-2"
+              className={`cursor-pointer pb-2 mb-2 ${
+                !project.title &&
+                !project.dates &&
+                !project.link &&
+                !project.present &&
+                !project.description
+                  ? "bg-blue-100 rounded-full p-1"
+                  : ""
+              }`}
             >
-              <h3 className="font-bold text-lg">{project.title}</h3>
-              <p className="text-gray-500">{project.dates}</p>
-              {project.present && <p className="text-gray-500">Present</p>}
-              {/* <Link to={project.link}>
-              <p className="text-blue-500 hover:underline text-clip overflow-hidden ...">
-                {project.link}
-              </p>
-              </Link> */}
-              <a
-                href={project.link}
-                className="text-blue-500 hover:underline text-clip overflow-hidden ..."
-              >
-                {project.link}
-              </a>
-              <p className="text-gray-500">{project.description}</p>
+              {project.title ||
+              project.dates ||
+              project.link ||
+              project.present ||
+              project.description  ? (
+                <>
+                  <h3 className="font-bold text-lg">{project.title}</h3>
+                  <p className="text-gray-500">{project.dates}</p>
+                  {project.present && <p className="text-gray-500">Present</p>}
+                  <a
+                    href={project.link}
+                    className="text-blue-500 hover:underline text-clip overflow-hidden ..."
+                  >
+                    {project.link}
+                  </a>
+                  <p className="text-gray-500">{project.description}</p>
+                </>
+              ) : (
+                <div className="text-gray-500 italic rounded-xl p-1">
+                  New Project (Click to Edit)
+                </div>
+              )}
             </div>
           )}
         </div>

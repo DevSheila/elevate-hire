@@ -68,7 +68,7 @@ const InterestsSection = ({ currentInterestsData }) => {
       {isEditing ? (
         <div ref={formRef} className="rounded-md">
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {interestsData.map((interest, index) => (
+            {interestsData?.map((interest, index) => (
               <div key={index}>
                 <input
                   type="text"
@@ -100,13 +100,17 @@ const InterestsSection = ({ currentInterestsData }) => {
         </div>
       ) : (
         <div onClick={handleEditClick} className="cursor-pointer">
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {interestsData.map((interest, index) => (
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
+            {interestsData?.map((interest, index) => (
               <button
                 key={index}
-                className="text-gray-900 px-3 py-2 border-2 border-solid rounded w-full truncate"
+                className="text-gray-900 px-3 py-1 border-2 border-solid rounded w-full truncate"
               >
-                {interest}
+                {interest || (
+                  <span className="italic text-gray-500">
+                    New Interest (Click to Edit)
+                  </span>
+                )}
               </button>
             ))}
           </div>
