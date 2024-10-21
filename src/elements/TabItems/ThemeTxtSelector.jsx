@@ -13,11 +13,12 @@ export function ThemeTxtSelector() {
       ...resume.settings, // Spreads the existing settings properties (e.g., themeColor, font)
       textColor: color, // Updates or adds the textColor property
     };
+    console.log("updatedSettingsData", updatedSettingsData);
 
     setSelectedColor(color); // Update local component state if necessary
     dispatch(updateResume({ settings: updatedSettingsData })); // Dispatch the updated settings
   };
-  
+
   return (
     <>
       <div className=" bg-neutral-50 px-4 pb-4 rounded-xl">
@@ -41,4 +42,3 @@ export function ThemeTxtSelector() {
     </>
   );
 }
-

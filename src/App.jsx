@@ -12,7 +12,6 @@ import NotFound from "./pages/NotFound";
 import LandingPage from "./pages/LandingPage";
 import SignIn from "./pages/SignIn";
 import ResumeBuilderDashboard from "./pages/ResumeBuilderDashboard/ResumeBuilderDashboard";
-import ResumePage2 from "./pages/ResumePage2";
 
 // PrivateRoute component to protect routes that require authentication
 function PrivateRoute({ element, ...rest }) {
@@ -42,11 +41,6 @@ function App() {
           path="/resumebuilder/:id"
           element={<PrivateRoute element={<ResumePage />} />}
         />
-
-        {/* <Route
-          path="/resumebuilder/:id"
-          element={<PrivateRoute element={<ResumePage2 />} />}
-        /> */}
 
         <Route
           exact

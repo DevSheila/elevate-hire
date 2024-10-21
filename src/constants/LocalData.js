@@ -23,27 +23,27 @@ export const LocalData = {
   ],
 
   backgroundColors: [
-    "#1C1C1C", // Black
-    "#2D2D2D", // Dark Gray
-    "#3B3B3B", // Charcoal Gray
-    "#4A4A4A", // Slate Gray
-    "#3E2723", // Dark Brown
-    "#4A235A", // Deep Maroon
-    "#2C3E50", // Navy Blue
-    "#1C2833", // Deep Navy
-    "#3B3B48", // Slate Blue Gray
-    "#2F2F2F", // Dark Charcoal
-    "#37474F", // Blue Gray
-    "#4E4B3A", // Dark Olive
-    "#1A4D2E", // Dark Green
-    "#4E342E", // Mahogany Brown
-    "#6A1B9A", // Dark Plum
-    "#34495E", // Dark Slate Blue
-    "#1B1B2A", // Dark Indigo
-    "#263238", // Dark Cyan
-    "#3E4A59", // Muted Navy
-    "#212121", // Darker Charcoal
-    "#212F3D", // Dark Teal
+    "#1C1C1C", 
+    "#2D2D2D", 
+    "#3B3B3B", 
+    "#4A4A4A", 
+    "#3E2723", 
+    "#4A235A", 
+    "#2C3E50", 
+    "#1C2833",
+    "#3B3B48", 
+    "#2F2F2F",
+    "#37474F",
+    "#4E4B3A",
+    "#1A4D2E",
+    "#4E342E", 
+    "#6A1B9A", 
+    "#34495E",
+    "#1B1B2A", 
+    "#263238", 
+    "#3E4A59",
+    "#212121", 
+    "#212F3D",
     "#FF5733",
     "#33FF57",
     "#3357FF",
@@ -67,26 +67,26 @@ export const LocalData = {
   ],
 
   textColors: [
-    "#1C1C1C", // Black
-    "#2D2D2D", // Dark Gray
-    "#3B3B3B", // Charcoal Gray
-    "#4A4A4A", // Slate Gray
-    "#4A235A", // Deep Maroon
-    "#3E2723", // Dark Brown
-    "#3B3B48", // Slate Blue Gray
-    "#2C3E50", // Navy Blue
-    "#1C2833", // Deep Navy
-    "#1A4D2E", // Dark Green
-    "#6A1B9A", // Dark Plum
-    "#4E342E", // Mahogany Brown
-    "#5D4037", // Chestnut Brown
-    "#34495E", // Dark Slate Blue
-    "#556070", // Steel Blue
-    "#3E4A59", // Muted Navy
-    "#3F51B5", // Indigo
-    "#1B1B2A", // Dark Indigo
-    "#37474F", // Blue Gray
-    "#4E4B3A", // Dark Olive
-    "#2F2F2F", // Dark Charcoal
+    "#1C1C1C", 
+    "#2D2D2D", 
+    "#3B3B3B", 
+    "#4A4A4A", 
+    "#4A235A", 
+    "#3E2723",
+    "#3B3B48",
+    "#2C3E50",
+    "#1C2833", 
+    "#1A4D2E", 
+    "#6A1B9A", 
+    "#4E342E", 
+    "#5D4037",
+    "#34495E", 
+    "#556070", 
+    "#3E4A59", 
+    "#3F51B5", 
+    "#1B1B2A", 
+    "#37474F",
+    "#4E4B3A",
+    "#2F2F2F", 
   ],
 };
