@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateResume } from "@/store/slices/resumeSlice";
 
 import { SlPlus } from "react-icons/sl";
 const EducationSection = ({ currentEducationSection }) => {
   const dispatch = useDispatch();
+  const resume = useSelector((state) => state.resumeDetails.resume);
 
   const [isEditing, setIsEditing] = useState(false);
   const [educationData, setEducationData] = useState(
@@ -79,9 +80,10 @@ const EducationSection = ({ currentEducationSection }) => {
     };
   }, [isEditing]);
 
+
   return (
     <div className="p-4">
-      <h2 className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2">
+      <h2 className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2" style={{ color: resume.settings.textColor }}>
         EDUCATION
       </h2>
 

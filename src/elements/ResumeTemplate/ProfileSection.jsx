@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   BsEnvelopeFill,
   BsLink45Deg,
@@ -9,7 +11,7 @@ import {
   BsBehance,
   BsInstagram,
   BsDribbble,
-  BsFillPersonFill
+  BsFillPersonFill,
 } from "react-icons/bs";
 
 import { Button } from "@/components/ui/button";
@@ -27,6 +29,9 @@ import { Label } from "@/components/ui/label";
 import EditProfile from "../EditProfile";
 
 function ProfileSection({ currentProfileData }) {
+  const dispatch = useDispatch();
+  const resume = useSelector((state) => state.resumeDetails.resume);
+
   const generateHref = (key, label) => {
     switch (key) {
       case "email":
@@ -147,13 +152,21 @@ function ProfileSection({ currentProfileData }) {
         <DialogTrigger asChild>
           <div>
             <div className="flex flex-col items-start mb-8">
-              <h1 className="text-3xl font-bold">{currentProfileData.name}</h1>
-              <h2 className="text-lg font-semibold">
+              <h1
+                className="text-3xl font-bold"
+                style={{ color: resume.settings.textColor }}
+              >
+                {currentProfileData.name}
+              </h1>
+              <h2
+                className="text-lg font-semibold"
+                style={{ color: resume.settings.textColor }}
+              >
                 {currentProfileData.jobTitle}
               </h2>
               <p className="text-gray-600">{currentProfileData.description}</p>
             </div>
-            <div className="mb-8 p-6 md:p-10 bg-gray-800 text-white">
+            <div className="mb-8 p-6 md:p-10 bg-gray-800 text-white"  style={{ backgroundColor: resume.settings.themeColor }}>
               <ul className="list-none grid grid-cols-1 md:grid-cols-2 gap-4">
                 {contactInfo.map(
                   (item, index) =>

@@ -11,6 +11,7 @@ import {
 
 const InterestsSection = ({ currentInterestsData }) => {
   const dispatch = useDispatch();
+  const resume = useSelector((state) => state.resumeDetails.resume);
   const [isEditing, setIsEditing] = useState(false);
   const [interestsData, setInterestsData] = useState(currentInterestsData);
 
@@ -61,7 +62,7 @@ const InterestsSection = ({ currentInterestsData }) => {
 
   return (
     <div className="p-4 sm:p-6 lg:p-8">
-      <h2 className="font-bold text-gray-700 text-xl sm:text-2xl leading-7 mb-4 pb-2">
+      <h2 className="font-bold text-gray-700 text-xl sm:text-2xl leading-7 mb-4 pb-2"  style={{ color: resume.settings.textColor }}>
         INTERESTS
       </h2>
 

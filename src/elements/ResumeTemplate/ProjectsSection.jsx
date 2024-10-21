@@ -8,6 +8,8 @@ import { Textarea } from "@/components/ui/textarea";
 import RichTextEditor from "../RichTextEditor";
 const ProjectsSection = ({ currentProjectsData }) => {
   const dispatch = useDispatch();
+  const resume = useSelector((state) => state.resumeDetails.resume);
+  
   const [isEditing, setIsEditing] = useState(false);
   const [projectsData, setProjectsData] = useState(currentProjectsData);
 
@@ -83,9 +85,10 @@ const ProjectsSection = ({ currentProjectsData }) => {
     };
   }, [isEditing]);
 
+
   return (
     <div className="p-4">
-      <h2 className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2">
+      <h2 className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2" style={{ color: resume.settings.textColor }}>
         PROJECTS
       </h2>
 

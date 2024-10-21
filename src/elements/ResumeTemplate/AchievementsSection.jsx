@@ -7,6 +7,7 @@ import RichTextEditor from "../RichTextEditor";
 
 const AchievementsSection = ({ currentResumeAchievements }) => {
   const dispatch = useDispatch();
+  const resume = useSelector((state) => state.resumeDetails.resume);
   const [isEditing, setIsEditing] = useState(null);
   const [achievementsData, setAchievementsData] = useState(
     currentResumeAchievements
@@ -91,7 +92,7 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
   return (
     <div className="p-4 flex flex-col md:flex-row">
       <div className="flex-grow md:mr-4">
-        <h2 className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2 w-full">
+        <h2 className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2 w-full"  style={{ color: resume.settings.textColor }}>
           ACHIEVEMENTS
         </h2>
 
@@ -172,7 +173,7 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
         ))}
 
         <div onClick={addAchievement} className="flex items-center mt-4">
-          <div className="text-cyan-600 text-2xl ">
+          <div className="text-cyan-600 text-2xl " >
             <SlPlus />
           </div>
 

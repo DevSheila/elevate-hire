@@ -8,6 +8,8 @@ import RichTextEditor from "../RichTextEditor";
 
 const WorkExperienceSection = ({ currentWorkExperienceData }) => {
   const dispatch = useDispatch();
+  const resume = useSelector((state) => state.resumeDetails.resume);
+
   const [isEditing, setIsEditing] = useState(null); // Make sure `isEditing` starts as null
   const [workExperienceData, setworkExperienceData] = useState(
     currentWorkExperienceData
@@ -95,11 +97,12 @@ const WorkExperienceSection = ({ currentWorkExperienceData }) => {
     };
   }, [isEditing]);
 
+
   return (
     <div className="p-4 flex flex-col md:flex-row">
       {/* Work Experience section */}
       <div className="flex-grow md:mr-4">
-        <h2 className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2">
+        <h2 className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2" style={{ color: resume.settings.textColor }}>
           WORK EXPERIENCE
         </h2>
 

@@ -26,6 +26,7 @@ import { useParams } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import ResumePageLoader from "@/elements/Loaders/SkeletonLoader/ResumePageLoader";
 
+
 const ResumePage = () => {
   const { id: resumeId } = useParams(); // Use resumeId for clarity
   const { user, isLoaded, isSignedIn } = useUser();

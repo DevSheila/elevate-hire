@@ -138,3 +138,4 @@ export const resumeInfo = {
     themeColor:"#4287f5"
   }
 };
+

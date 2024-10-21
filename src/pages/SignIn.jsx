@@ -44,7 +44,7 @@ function SignIn() {
               <div class="relative -mt-16 block lg:hidden">
                 <a
                   class="inline-flex size-16 items-center justify-center rounded-full bg-white text-blue-600 sm:size-20"
-                  href="#"
+                  href="/"
                 >
                   <span class="sr-only">Home</span>
 
