@@ -110,18 +110,6 @@ function SideNavbar() {
           <ul className="space-y-2 font-medium flex-grow">
             {[
               {
-                name: "Home",
-                icon: (
-                  <SlHome className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" />
-                ),
-              },
-              {
-                name: "Templates",
-                icon: (
-                  <SlLayers className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" />
-                ),
-              },
-              {
                 name: "Resume Builder",
                 icon: (
                   <SlDoc className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" />
@@ -137,6 +125,12 @@ function SideNavbar() {
                 name: "Mock Interview",
                 icon: (
                   <SlCamera className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" />
+                ),
+              },
+              {
+                name: "Templates",
+                icon: (
+                  <SlLayers className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" />
                 ),
               },
             ].map((item) => (
