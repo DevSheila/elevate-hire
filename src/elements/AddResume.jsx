@@ -30,13 +30,13 @@ import { v4 as uuidv4 } from "uuid";
 import { saveResumeToFirestore } from "@/database/firebase/service";
 import { useUser } from "@clerk/clerk-react";
 
-function AddResume() {
+function AddResume({ updateResumes }) {
   const { user } = useUser();
   const [loading, setLoading] = useState(false);
   const [resumeTitle, setResumeTitle] = useState("");
   const [profileLink, setProfileLink] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
-
+  const [open, setOpen] = useState(false); // State to manage dialog open/close
   const createResume = async () => {
     try {
       setLoading(true);
@@ -49,15 +49,32 @@ function AddResume() {
         }
       }
 
+      if (!profileLink && resumeTitle) {
+        console.log("here")
+        const profileData = {
+          id: uuidv4(),
+          settings: {
+            title:`${resumeTitle}`,
+            themeColor: "#4287f5", 
+          },
+        };
+
+        if (profileData && user) {
+
+          await saveResumeToFirestore(user.id, profileData);
+        }
+      }
+      setOpen(false); // Close the dialog after successful resume creation
     } catch (error) {
       console.log("error", error);
     } finally {
+      updateResumes();
       setLoading(false);
     }
   };
   return (
     <>
-      <Dialog>
+      <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <div className="mt-4 md:mt-0">
             <Button

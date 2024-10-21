@@ -18,18 +18,20 @@ function ResumeBuilderDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchResumes = async () => {
-      try {
-        const userResumes = await getResumesByUserId(user.id);
-        setResumes(userResumes);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // Function to fetch and update resumes
+  const fetchResumes = async () => {
+    try {
+      setLoading(true)
+      const userResumes = await getResumesByUserId(user.id);
+      setResumes(userResumes);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchResumes();
   }, [user]);
 
@@ -52,15 +54,14 @@ function ResumeBuilderDashboard() {
               </div>
 
               {/* ADD RESUME SECTION */}
-              <AddResume />
+              <AddResume updateResumes={fetchResumes} />
             </div>
             {!loading ? (
-
               <div>
                 {resumes?.length > 0 ? (
                   <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 ">
                     {resumes.map((resume, index) => (
-                      <ResumeCardItem3 resume={resume} key={index} />
+                      <ResumeCardItem3 resume={resume} key={index} updateResumes={fetchResumes} />
                     ))}
                   </div>
                 ) : (
@@ -75,7 +76,7 @@ function ResumeBuilderDashboard() {
                       <p className="text-sm text-muted-foreground">
                         Click button above to create a resume
                       </p>
-                      <AddResume />
+                      <AddResume updateResumes={fetchResumes} />
                     </div>
                   </div>
                 )}
@@ -84,8 +85,6 @@ function ResumeBuilderDashboard() {
               <ResumeDashboardLoader />
             )}
           </div>
-
-          
         </div>
       </div>
     </>

@@ -21,7 +21,7 @@ import { Loader2Icon } from "lucide-react";
 import { SlOptionsVertical } from "react-icons/sl";
 import { deleteDocumentById } from "@/database/firebase/service";
 
-function ResumeCardItem({ resume, refreshData }) {
+function ResumeCardItem({ resume, refreshData , updateResumes}) {
   const navigation = useNavigate();
   const [openAlert, setOpenAlert] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -34,6 +34,7 @@ function ResumeCardItem({ resume, refreshData }) {
     } catch (error) {
       console.log("error", error);
     } finally {
+      updateResumes();
       setLoading(false);
       setOpenAlert(false)
     }
