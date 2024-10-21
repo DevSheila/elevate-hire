@@ -7,10 +7,11 @@ import { SlPlus } from "react-icons/sl";
 import { Textarea } from "@/components/ui/textarea";
 import RichTextEditor from "../RichTextEditor";
 import SectionTabs from "../Tabs/SectionTabs";
+import { PROJECT_PROMPT } from "@/constants/prompts";
 const ProjectsSection = ({ currentProjectsData }) => {
   const dispatch = useDispatch();
   const resume = useSelector((state) => state.resumeDetails.resume);
-  
+
   const [isEditing, setIsEditing] = useState(false);
   const [projectsData, setProjectsData] = useState(currentProjectsData);
 
@@ -65,7 +66,6 @@ const ProjectsSection = ({ currentProjectsData }) => {
     }
   };
 
-  
   const moveProjectUp = (index) => {
     if (index > 0) {
       // Check if the item is not the first one
@@ -88,15 +88,20 @@ const ProjectsSection = ({ currentProjectsData }) => {
       updatedProjects[index] = temp;
       setIsEditing(index + 1);
 
-
       setProjectsData(updatedProjects);
       dispatch(updateResume({ projectsData: updatedProjects }));
     }
   };
+
   const handleRichTextEditor = (e, name, index) => {
     const updatedProjects = [...projectsData];
-    updatedProjects[index][name] = e.target.value;
+    updatedProjects[index] = {
+      ...updatedProjects[index],
+      [name]: e.target.value,
+    };
+
     setProjectsData(updatedProjects);
+    dispatch(updateResume({ projectsData: updatedProjects }));
   };
 
   useEffect(() => {
@@ -117,10 +122,12 @@ const ProjectsSection = ({ currentProjectsData }) => {
     };
   }, [isEditing]);
 
-
   return (
     <div className="p-4">
-      <h2 className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2" style={{ color: resume.settings.textColor }}>
+      <h2
+        className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2"
+        style={{ color: resume.settings.textColor }}
+      >
         PROJECTS
       </h2>
 
@@ -167,19 +174,22 @@ const ProjectsSection = ({ currentProjectsData }) => {
                 placeholder="Project Link"
               />
 
+
+
               <RichTextEditor
+                name="description"
                 index={index}
+                prompt={PROJECT_PROMPT.replace("{projectTitle}", project.title)}
                 defaultValue={project.description}
                 onRichTextEditorChange={(event) =>
-                  handleRichTextEditor(event, "project", index)
+                  handleRichTextEditor(event, "description", index)
                 }
               />
-
-                <SectionTabs
-                  onRemove={() => removeProject(index)}
-                  onMoveUp={() => moveProjectUp(index)}
-                  onMoveDown={() => moveProjectDown(index)}
-                />
+              <SectionTabs
+                onRemove={() => removeProject(index)}
+                onMoveUp={() => moveProjectUp(index)}
+                onMoveDown={() => moveProjectDown(index)}
+              />
             </div>
           ) : (
             // View Mode (content)

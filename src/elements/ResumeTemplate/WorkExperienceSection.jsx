@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import SectionTabs from "../Tabs/SectionTabs";
 import { SlPlus } from "react-icons/sl";
 import RichTextEditor from "../RichTextEditor";
+import { WORK_EXPERIENCE_PROMPT } from "@/constants/prompts";
 
 const WorkExperienceSection = ({ currentWorkExperienceData }) => {
   const dispatch = useDispatch();
@@ -41,9 +42,15 @@ const WorkExperienceSection = ({ currentWorkExperienceData }) => {
 
   const handleRichTextEditor = (e, name, index) => {
     const updatedWorkExperience = [...workExperienceData];
-    updatedWorkExperience[index][name] = e.target.value;
+    updatedWorkExperience[index] = {
+      ...updatedWorkExperience[index],
+      [name]: e.target.value,
+    };
+
     setworkExperienceData(updatedWorkExperience);
+    dispatch(updateResume({ workExperienceData: updatedWorkExperience }));
   };
+;
 
   const handlePresentChange = (index) => {
     const updatedWorkExperience = [...workExperienceData];
@@ -100,7 +107,6 @@ const WorkExperienceSection = ({ currentWorkExperienceData }) => {
       updatedWorkExperience[index + 1] = updatedWorkExperience[index];
       updatedWorkExperience[index] = temp;
       setIsEditing(index + 1);
-
 
       setworkExperienceData(updatedWorkExperience);
       dispatch(updateResume({ workExperienceData: updatedWorkExperience }));
@@ -204,10 +210,15 @@ const WorkExperienceSection = ({ currentWorkExperienceData }) => {
                 </label>
 
                 <RichTextEditor
+                  name="achievements"
                   index={index}
+                  prompt={WORK_EXPERIENCE_PROMPT.replace(
+                    "{positionTitle}",
+                    experience.jobTitle
+                  )}
                   defaultValue={experience.achievements}
                   onRichTextEditorChange={(event) =>
-                    handleRichTextEditor(event, "workexperience", index)
+                    handleRichTextEditor(event, "achievements", index)
                   }
                 />
 

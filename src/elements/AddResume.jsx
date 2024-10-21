@@ -48,6 +48,7 @@ function AddResume() {
           await saveResumeToFirestore(user.id, profileData);
         }
       }
+
     } catch (error) {
       console.log("error", error);
     } finally {

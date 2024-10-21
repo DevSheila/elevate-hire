@@ -5,6 +5,7 @@ import { SlPlus } from "react-icons/sl";
 import { Textarea } from "@/components/ui/textarea";
 import RichTextEditor from "../RichTextEditor";
 import SectionTabs from "../Tabs/SectionTabs";
+import { ACHIEVEMENT_PROMPT } from "@/constants/prompts";
 
 const AchievementsSection = ({ currentResumeAchievements }) => {
   const dispatch = useDispatch();
@@ -71,9 +72,15 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
 
   const handleRichTextEditor = (e, name, index) => {
     const updatedAchievements = [...achievementsData];
-    updatedAchievements[index][name] = e.target.value;
+    updatedAchievements[index] = {
+      ...updatedAchievements[index],
+      [name]: e.target.value,
+    };
+
     setAchievementsData(updatedAchievements);
+    dispatch(updateResume({ achievementsData: updatedAchievements }));
   };
+
 
   const moveAchievementUp = (index) => {
     if (index > 0) {
@@ -165,13 +172,20 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
                   </div>
                 </div>
 
+
                 <RichTextEditor
+                  name="description"
                   index={index}
-                  defaultValue={achievement.description}
+                  prompt={ACHIEVEMENT_PROMPT.replace(
+                    "{achievementTitle}",
+                    achievement.title
+                  )}
+                  defaultValue={achievement.title}
                   onRichTextEditorChange={(event) =>
-                    handleRichTextEditor(event, "achievements", index)
+                    handleRichTextEditor(event, "description", index)
                   }
                 />
+
 
                 <SectionTabs
                   onRemove={() => removeAchievements(index)}

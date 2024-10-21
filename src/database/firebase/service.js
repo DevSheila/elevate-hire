@@ -74,17 +74,18 @@ export const saveResumeToFirestore = async (userId, resume) => {
       settings: resume.settings || {},
     };
 
-    console.log("firebase settings",resume.settings)
+    const today = new Date();
+    const formattedDate = today.toISOString().split("T")[0];
+
+    // Merge the updateDate into a new settings object
+    resumeData.settings = {
+      ...resumeData.settings,
+      updateDate: formattedDate, // Update date to current date
+    };
+    
     // If the document exists, update it; if not, create it
     if (resumeDoc.exists()) {
-      const today = new Date();
-      const formattedDate = today.toISOString().split("T")[0];
 
-      // Merge the updateDate into a new settings object
-      resumeData.settings = {
-        ...resumeData.settings,
-        updateDate: formattedDate, // Update date to current date
-      };
       await setDoc(userResumeRef, resumeData, { merge: true }); // Merge to update only changed fields
       console.log("Resume updated successfully!");
     } else {
