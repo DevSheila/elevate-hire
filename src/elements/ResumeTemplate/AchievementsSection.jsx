@@ -4,6 +4,7 @@ import { updateResume } from "@/store/slices/resumeSlice";
 import { SlPlus } from "react-icons/sl";
 import { Textarea } from "@/components/ui/textarea";
 import RichTextEditor from "../RichTextEditor";
+import SectionTabs from "../Tabs/SectionTabs";
 
 const AchievementsSection = ({ currentResumeAchievements }) => {
   const dispatch = useDispatch();
@@ -59,16 +60,20 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
     }, 0);
   };
 
-  const removeAchievement = (index) => {
+
+  const removeAchievements = (index) => {
     const updatedAchievements = [...achievementsData];
     updatedAchievements.splice(index, 1);
     setAchievementsData(updatedAchievements);
+    if (isEditing === index) {
+      setIsEditing(null);
+    }
   };
 
   const handleRichTextEditor = (e, name, index) => {
-    const updatedAchievements = [...workExperienceData];
+    const updatedAchievements = [...achievementsData];
     updatedAchievements[index][name] = e.target.value;
-    setworkExperienceData(updatedAchievements);
+    setAchievementsData(updatedAchievements);
   };
 
   useEffect(() => {
@@ -92,7 +97,10 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
   return (
     <div className="p-4 flex flex-col md:flex-row">
       <div className="flex-grow md:mr-4">
-        <h2 className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2 w-full"  style={{ color: resume.settings.textColor }}>
+        <h2
+          className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2 w-full"
+          style={{ color: resume.settings.textColor }}
+        >
           ACHIEVEMENTS
         </h2>
 
@@ -138,6 +146,8 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
                     handleRichTextEditor(event, "achievements", index)
                   }
                 />
+
+                <SectionTabs onRemove={() => removeAchievements(index)} />
               </div>
             ) : (
               // View Mode (content or "New Achievement" placeholder)
@@ -173,7 +183,7 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
         ))}
 
         <div onClick={addAchievement} className="flex items-center mt-4">
-          <div className="text-cyan-600 text-2xl " >
+          <div className="text-cyan-600 text-2xl ">
             <SlPlus />
           </div>
 

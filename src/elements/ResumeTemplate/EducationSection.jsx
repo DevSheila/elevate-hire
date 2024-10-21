@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateResume } from "@/store/slices/resumeSlice";
 
 import { SlPlus } from "react-icons/sl";
+import SectionTabs from "../Tabs/SectionTabs";
 const EducationSection = ({ currentEducationSection }) => {
   const dispatch = useDispatch();
   const resume = useSelector((state) => state.resumeDetails.resume);
@@ -56,10 +57,14 @@ const EducationSection = ({ currentEducationSection }) => {
     setIsEditing(updatedEducation.length - 1);
   };
 
+
   const removeEducation = (index) => {
     const updatedEducation = [...educationData];
     updatedEducation.splice(index, 1);
     setEducationData(updatedEducation);
+    if (isEditing === index) {
+      setIsEditing(null);
+    }
   };
 
   useEffect(() => {
@@ -129,6 +134,8 @@ const EducationSection = ({ currentEducationSection }) => {
                 className="border-b mb-2 w-full outline-none py-2"
                 placeholder="Organization"
               />
+                <SectionTabs onRemove={() => removeEducation(index)} />
+
             </div>
           ) : (
             // View Mode (content)

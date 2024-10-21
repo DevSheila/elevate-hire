@@ -79,6 +79,8 @@ const WorkExperienceSection = ({ currentWorkExperienceData }) => {
     }
   };
 
+  
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (formRef.current && !formRef.current.contains(event.target)) {
@@ -181,7 +183,7 @@ const WorkExperienceSection = ({ currentWorkExperienceData }) => {
                   }
                 />
 
-                <SectionTabs />
+                <SectionTabs onRemove={() => removeWorkExperience(index)} />
               </div>
             ) : (
               // View Mode (content)

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { SlPlus } from "react-icons/sl";
 import { Textarea } from "@/components/ui/textarea";
 import RichTextEditor from "../RichTextEditor";
+import SectionTabs from "../Tabs/SectionTabs";
 const ProjectsSection = ({ currentProjectsData }) => {
   const dispatch = useDispatch();
   const resume = useSelector((state) => state.resumeDetails.resume);
@@ -59,8 +60,10 @@ const ProjectsSection = ({ currentProjectsData }) => {
     const updatedProjects = [...projectsData];
     updatedProjects.splice(index, 1);
     setProjectsData(updatedProjects);
+    if (isEditing === index) {
+      setIsEditing(null);
+    }
   };
-
   const handleRichTextEditor = (e, name, index) => {
     const updatedProjects = [...projectsData];
     updatedProjects[index][name] = e.target.value;
@@ -142,6 +145,8 @@ const ProjectsSection = ({ currentProjectsData }) => {
                   handleRichTextEditor(event, "project", index)
                 }
               />
+                <SectionTabs onRemove={() => removeProject(index)} />
+
             </div>
           ) : (
             // View Mode (content)

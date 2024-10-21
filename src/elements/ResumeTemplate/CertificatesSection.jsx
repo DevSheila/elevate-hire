@@ -3,6 +3,7 @@ import { updateResume } from "@/store/slices/resumeSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { SlPlus } from "react-icons/sl";
+import SectionTabs from "../Tabs/SectionTabs";
 const CertificatesSection = ({ currentCertificatesData }) => {
   const dispatch = useDispatch();
   const resume = useSelector((state) => state.resumeDetails.resume);
@@ -56,11 +57,16 @@ const CertificatesSection = ({ currentCertificatesData }) => {
     setIsEditing(updatedCertificate.length - 1);
   };
 
-  const removeCertificate = (index) => {
+
+  const removeCeritificate = (index) => {
     const updatedCertificates = [...certificatesData];
     updatedCertificates.splice(index, 1);
     setCertificatesData(updatedCertificates);
+    if (isEditing === index) {
+      setIsEditing(null);
+    }
   };
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -128,6 +134,8 @@ const CertificatesSection = ({ currentCertificatesData }) => {
                 className="border-b mb-2 w-full outline-none py-2"
                 placeholder="Organization"
               />
+                <SectionTabs onRemove={() => removeCeritificate(index)} />
+
             </div>
           ) : (
             // View Mode (content)
