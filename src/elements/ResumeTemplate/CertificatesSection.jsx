@@ -57,7 +57,6 @@ const CertificatesSection = ({ currentCertificatesData }) => {
     setIsEditing(updatedCertificate.length - 1);
   };
 
-
   const removeCeritificate = (index) => {
     const updatedCertificates = [...certificatesData];
     updatedCertificates.splice(index, 1);
@@ -66,7 +65,32 @@ const CertificatesSection = ({ currentCertificatesData }) => {
       setIsEditing(null);
     }
   };
+  const moveCertificateUp = (index) => {
+    if (index > 0) {
+      // Check if the item is not the first one
+      const updatedCertificates = [...certificatesData];
+      const temp = updatedCertificates[index - 1];
+      updatedCertificates[index - 1] = updatedCertificates[index];
+      updatedCertificates[index] = temp;
+      setIsEditing(index - 1);
 
+      setCertificatesData(updatedCertificates);
+      dispatch(updateResume({ certificatesData: updatedCertificates }));
+    }
+  };
+
+  const moveCertificateDown = (index) => {
+    if (index < certificatesData.length - 1) {
+      const updatedCertificates = [...certificatesData];
+      const temp = updatedCertificates[index + 1];
+      updatedCertificates[index + 1] = updatedCertificates[index];
+      updatedCertificates[index] = temp;
+      setIsEditing(index + 1);
+
+      setCertificatesData(updatedCertificates);
+      dispatch(updateResume({ certificatesData: updatedCertificates }));
+    }
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -88,7 +112,10 @@ const CertificatesSection = ({ currentCertificatesData }) => {
 
   return (
     <div className="p-4">
-      <h2 className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2" style={{ color: resume.settings.textColor }}>
+      <h2
+        className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2"
+        style={{ color: resume.settings.textColor }}
+      >
         CERTIFICATES
       </h2>
 
@@ -134,8 +161,11 @@ const CertificatesSection = ({ currentCertificatesData }) => {
                 className="border-b mb-2 w-full outline-none py-2"
                 placeholder="Organization"
               />
-                <SectionTabs onRemove={() => removeCeritificate(index)} />
-
+              <SectionTabs
+                onRemove={() => removeCeritificate(index)}
+                onMoveUp={() => moveCertificateUp(index)}
+                onMoveDown={() => moveCertificateDown(index)}
+              />
             </div>
           ) : (
             // View Mode (content)

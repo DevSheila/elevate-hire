@@ -67,6 +67,35 @@ const EducationSection = ({ currentEducationSection }) => {
     }
   };
 
+  const moveWorkExperienceUp = (index) => {
+    if (index > 0) {
+      // Check if the item is not the first one
+      const updatedEducation = [...educationData];
+      const temp = updatedEducation[index - 1];
+      updatedEducation[index - 1] = updatedEducation[index];
+      updatedEducation[index] = temp;
+      setIsEditing(index - 1);
+
+      setEducationData(updatedEducation);
+      dispatch(updateResume({ educationData: updatedEducation }));
+    }
+  };
+
+  const moveWorkExperienceDown = (index) => {
+    if (index < educationData.length - 1) {
+      const updatedEducation = [...educationData];
+      const temp = updatedEducation[index + 1];
+      updatedEducation[index + 1] = updatedEducation[index];
+      updatedEducation[index] = temp;
+      setIsEditing(index + 1);
+
+
+      setEducationData(updatedEducation);
+      dispatch(updateResume({ educationData: updatedEducation }));
+    }
+  };
+
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (formRef.current && !formRef.current.contains(event.target)) {
@@ -134,7 +163,11 @@ const EducationSection = ({ currentEducationSection }) => {
                 className="border-b mb-2 w-full outline-none py-2"
                 placeholder="Organization"
               />
-                <SectionTabs onRemove={() => removeEducation(index)} />
+                <SectionTabs
+                  onRemove={() => removeEducation(index)}
+                  onMoveUp={() => moveWorkExperienceUp(index)}
+                  onMoveDown={() => moveWorkExperienceDown(index)}
+                />
 
             </div>
           ) : (

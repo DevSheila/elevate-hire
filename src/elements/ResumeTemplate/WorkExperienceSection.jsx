@@ -79,7 +79,33 @@ const WorkExperienceSection = ({ currentWorkExperienceData }) => {
     }
   };
 
-  
+  const moveWorkExperienceUp = (index) => {
+    if (index > 0) {
+      // Check if the item is not the first one
+      const updatedWorkExperience = [...workExperienceData];
+      const temp = updatedWorkExperience[index - 1];
+      updatedWorkExperience[index - 1] = updatedWorkExperience[index];
+      updatedWorkExperience[index] = temp;
+      setIsEditing(index - 1);
+
+      setworkExperienceData(updatedWorkExperience);
+      dispatch(updateResume({ workExperienceData: updatedWorkExperience }));
+    }
+  };
+
+  const moveWorkExperienceDown = (index) => {
+    if (index < workExperienceData.length - 1) {
+      const updatedWorkExperience = [...workExperienceData];
+      const temp = updatedWorkExperience[index + 1];
+      updatedWorkExperience[index + 1] = updatedWorkExperience[index];
+      updatedWorkExperience[index] = temp;
+      setIsEditing(index + 1);
+
+
+      setworkExperienceData(updatedWorkExperience);
+      dispatch(updateResume({ workExperienceData: updatedWorkExperience }));
+    }
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -99,12 +125,14 @@ const WorkExperienceSection = ({ currentWorkExperienceData }) => {
     };
   }, [isEditing]);
 
-
   return (
     <div className="p-4 flex flex-col md:flex-row">
       {/* Work Experience section */}
       <div className="flex-grow md:mr-4">
-        <h2 className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2" style={{ color: resume.settings.textColor }}>
+        <h2
+          className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2"
+          style={{ color: resume.settings.textColor }}
+        >
           WORK EXPERIENCE
         </h2>
 
@@ -183,7 +211,11 @@ const WorkExperienceSection = ({ currentWorkExperienceData }) => {
                   }
                 />
 
-                <SectionTabs onRemove={() => removeWorkExperience(index)} />
+                <SectionTabs
+                  onRemove={() => removeWorkExperience(index)}
+                  onMoveUp={() => moveWorkExperienceUp(index)}
+                  onMoveDown={() => moveWorkExperienceDown(index)}
+                />
               </div>
             ) : (
               // View Mode (content)

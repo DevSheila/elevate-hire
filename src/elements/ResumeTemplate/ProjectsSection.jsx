@@ -64,6 +64,35 @@ const ProjectsSection = ({ currentProjectsData }) => {
       setIsEditing(null);
     }
   };
+
+  
+  const moveProjectUp = (index) => {
+    if (index > 0) {
+      // Check if the item is not the first one
+      const updatedProjects = [...projectsData];
+      const temp = updatedProjects[index - 1];
+      updatedProjects[index - 1] = updatedProjects[index];
+      updatedProjects[index] = temp;
+      setIsEditing(index - 1);
+
+      setProjectsData(updatedProjects);
+      dispatch(updateResume({ projectsData: updatedProjects }));
+    }
+  };
+
+  const moveProjectDown = (index) => {
+    if (index < projectsData.length - 1) {
+      const updatedProjects = [...projectsData];
+      const temp = updatedProjects[index + 1];
+      updatedProjects[index + 1] = updatedProjects[index];
+      updatedProjects[index] = temp;
+      setIsEditing(index + 1);
+
+
+      setProjectsData(updatedProjects);
+      dispatch(updateResume({ projectsData: updatedProjects }));
+    }
+  };
   const handleRichTextEditor = (e, name, index) => {
     const updatedProjects = [...projectsData];
     updatedProjects[index][name] = e.target.value;
@@ -145,8 +174,12 @@ const ProjectsSection = ({ currentProjectsData }) => {
                   handleRichTextEditor(event, "project", index)
                 }
               />
-                <SectionTabs onRemove={() => removeProject(index)} />
 
+                <SectionTabs
+                  onRemove={() => removeProject(index)}
+                  onMoveUp={() => moveProjectUp(index)}
+                  onMoveDown={() => moveProjectDown(index)}
+                />
             </div>
           ) : (
             // View Mode (content)

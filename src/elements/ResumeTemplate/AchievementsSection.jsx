@@ -60,7 +60,6 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
     }, 0);
   };
 
-
   const removeAchievements = (index) => {
     const updatedAchievements = [...achievementsData];
     updatedAchievements.splice(index, 1);
@@ -74,6 +73,33 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
     const updatedAchievements = [...achievementsData];
     updatedAchievements[index][name] = e.target.value;
     setAchievementsData(updatedAchievements);
+  };
+
+  const moveAchievementUp = (index) => {
+    if (index > 0) {
+      // Check if the item is not the first one
+      const updatedAchievements = [...achievementsData];
+      const temp = updatedAchievements[index - 1];
+      updatedAchievements[index - 1] = updatedAchievements[index];
+      updatedAchievements[index] = temp;
+      setIsEditing(index - 1);
+
+      setAchievementsData(updatedAchievements);
+      dispatch(updateResume({ achievementsData: updatedAchievements }));
+    }
+  };
+
+  const moveAchievementDown = (index) => {
+    if (index < achievementsData.length - 1) {
+      const updatedAchievements = [...achievementsData];
+      const temp = updatedAchievements[index + 1];
+      updatedAchievements[index + 1] = updatedAchievements[index];
+      updatedAchievements[index] = temp;
+      setIsEditing(index + 1);
+
+      setAchievementsData(updatedAchievements);
+      dispatch(updateResume({ achievementsData: updatedAchievements }));
+    }
   };
 
   useEffect(() => {
@@ -147,7 +173,11 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
                   }
                 />
 
-                <SectionTabs onRemove={() => removeAchievements(index)} />
+                <SectionTabs
+                  onRemove={() => removeAchievements(index)}
+                  onMoveUp={() => moveAchievementUp(index)}
+                  onMoveDown={() => moveAchievementDown(index)}
+                />
               </div>
             ) : (
               // View Mode (content or "New Achievement" placeholder)
