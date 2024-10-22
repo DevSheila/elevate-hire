@@ -7,7 +7,8 @@ import { SlPlus } from "react-icons/sl";
 import { Textarea } from "@/components/ui/textarea";
 import RichTextEditor from "../RichTextEditor";
 import SectionTabs from "../Tabs/SectionTabs";
-import { PROJECT_PROMPT } from "@/constants/prompts";
+import { PROJECT_PROMPT } from "@/constants/Prompts";
+
 const ProjectsSection = ({ currentProjectsData }) => {
   const dispatch = useDispatch();
   const resume = useSelector((state) => state.resumeDetails.resume);

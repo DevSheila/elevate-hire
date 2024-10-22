@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { WORK_EXPERIENCE_PROMPT } from "@/constants/prompts";
-import { AIChatSession } from "@/services/AIModal";
+import { WORK_EXPERIENCE_PROMPT } from "@/constants/Prompts";
+import { AIChatSession } from "@/services/AIModal"; 
 import { Brain, LoaderCircle } from "lucide-react";
 import React, { useContext, useState } from "react";
 import {

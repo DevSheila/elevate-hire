@@ -10,7 +10,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { chatSession } from '@/utils/GeminiAIModal'
+import { AIChatSession } from "@/services/AIModal";
 import { LoaderCircle } from 'lucide-react'
 import { db } from '@/utils/db'
 import { MockInterview } from '@/utils/schema'
@@ -39,7 +39,7 @@ function AddNewInterview() {
 
         const InputPrompt="Job position: "+jobPosition+", Job Description: "+jobDesc+", Years of Experience : "+jobExperience+" , Depends on Job Position, Job Description & Years of Experience give us "+import.meta.env.VITE_INTERVIEW_QUESTION_COUNT+" Interview question along with Answer in JSON format, Give us question and answer field on JSON"
 
-        const result=await chatSession.sendMessage(InputPrompt);
+        const result=await AIChatSession.sendMessage(InputPrompt);
         const MockJsonResp=(result.response.text()).replace('```json','').replace('```','')
         console.log("result",result.response.text());
         console.log("MockJsonResp",MockJsonResp);

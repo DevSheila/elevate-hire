@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import SectionTabs from "../Tabs/SectionTabs";
 import { SlPlus } from "react-icons/sl";
 import RichTextEditor from "../RichTextEditor";
-import { WORK_EXPERIENCE_PROMPT } from "@/constants/prompts";
+import { WORK_EXPERIENCE_PROMPT } from "@/constants/Prompts";
+
 
 const WorkExperienceSection = ({ currentWorkExperienceData }) => {
   const dispatch = useDispatch();
