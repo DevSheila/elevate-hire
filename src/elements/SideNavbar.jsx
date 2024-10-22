@@ -111,24 +111,28 @@ function SideNavbar() {
             {[
               {
                 name: "Resume Builder",
+                href: "/resumebuilder",
                 icon: (
                   <SlDoc className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" />
                 ),
               },
               {
                 name: "Cover Letter",
+                href: "#",
                 icon: (
                   <SlEnvolope className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" />
                 ),
               },
               {
                 name: "Mock Interview",
+                href: "/mockinterview",
                 icon: (
                   <SlCamera className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" />
                 ),
               },
               {
                 name: "Templates",
+                href: "#",
                 icon: (
                   <SlLayers className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" />
                 ),
@@ -136,7 +140,7 @@ function SideNavbar() {
             ].map((item) => (
               <li key={item.name}>
                 <a
-                  href="#"
+                  href={item.href}
                   className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-indigo-600 hover:text-white hover:rounded-xl dark:hover:bg-gray-700 group transition-all ease-linear duration-100 "
                 >
                   {item.icon}

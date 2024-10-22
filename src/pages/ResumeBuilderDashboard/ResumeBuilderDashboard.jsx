@@ -37,7 +37,7 @@ function ResumeBuilderDashboard() {
 
   return (
     <>
-      <SideNavbar />
+      <SideNavbar /> 
 
       <div class="h-screen p-4 sm:ml-64 bg-slate-50">
         <div class="p-2 md:mt-5 ">
