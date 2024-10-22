@@ -48,7 +48,7 @@ function NavBar() {
           className="peer-checked:mt-8 peer-checked:max-h-56 flex max-h-0 w-full flex-col items-center justify-between overflow-hidden transition-all md:ml-24 md:max-h-full md:flex-row md:items-start"
         >
           <ul className="flex flex-col items-center space-y-2 md:ml-auto md:flex-row md:space-y-0">
-          <Link to={"/dashboard"}>
+            <Link to={"/dashboard"}>
               <li
                 className={`hover:text-blue-600  transition-all md:mr-12 cursor-pointer   ${
                   path == "/dashboard" && "text-blue-600 font-bold"
@@ -86,10 +86,28 @@ function NavBar() {
                 Full Prep
               </li>
             </Link>
+
+            <div className="flex items-center gap-4">
+              <div className="sm:flex sm:gap-4">
+                <div className=" sm:flex">
+                  {isSignedIn ? (
+                    <div>
+                      <UserButton />
+                    </div>
+                  ) : (
+                    <Link to={"/sign-in"}>
+                      <Button className="rounded-full bg-blue-600 text-white hover:bg-blue-800 hover:text-white">
+                        Get Started
+                      </Button>
+                    </Link>
+                  )}
+                </div>
+              </div>
+            </div>
           </ul>
         </nav>
 
-        <div className="flex items-center gap-4">
+        {/* <div className="flex items-center gap-4">
           <div className="sm:flex sm:gap-4">
             <div className="hidden sm:flex">
               {isSignedIn ? (
@@ -105,7 +123,7 @@ function NavBar() {
               )}
             </div>
           </div>
-        </div>
+        </div> */}
       </header>
     </>
   );

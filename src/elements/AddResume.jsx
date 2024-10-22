@@ -55,7 +55,6 @@ function AddResume({ updateResumes }) {
           id: uuidv4(),
           settings: {
             title:`${resumeTitle}`,
-            themeColor: "#4287f5", 
           },
         };
 

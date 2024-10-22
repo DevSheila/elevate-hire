@@ -74,7 +74,7 @@ function ResumeBuilderDashboard() {
                         You have no resumes
                       </h3>
                       <p className="text-sm text-muted-foreground">
-                        Click button above to create a resume
+                        Click below above to create a resume
                       </p>
                       <AddResume updateResumes={fetchResumes} />
                     </div>

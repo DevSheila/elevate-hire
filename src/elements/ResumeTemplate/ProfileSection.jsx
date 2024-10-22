@@ -109,7 +109,6 @@ function ProfileSection({ currentProfileData }) {
         return "#";
     }
   };
-
   const contactInfo = [
     { key: "email", label: currentProfileData.email, icon: <BsEnvelopeFill /> },
     {
@@ -141,7 +140,7 @@ function ProfileSection({ currentProfileData }) {
     },
     {
       key: "dribble",
-      label: currentProfileData.behance,
+      label: currentProfileData.dribble,
       icon: <BsDribbble />,
     },
   ];
@@ -156,35 +155,57 @@ function ProfileSection({ currentProfileData }) {
                 className="text-3xl font-bold"
                 style={{ color: resume.settings.textColor }}
               >
-                {currentProfileData.name}
+                {currentProfileData.name || "Your Name"}
               </h1>
               <h2
                 className="text-lg font-semibold"
                 style={{ color: resume.settings.textColor }}
               >
-                {currentProfileData.jobTitle}
+                {currentProfileData.jobTitle || "Your Job Title"}
               </h2>
-              <p className="text-gray-600">{currentProfileData.description}</p>
+              <p className="text-gray-600">
+                {currentProfileData.description ||
+                  "Short Description About Yourself ."}
+              </p>
             </div>
-            <div className="mb-8 p-6 md:p-10 bg-gray-800 text-white"  style={{ backgroundColor: resume.settings.themeColor }}>
-              <ul className="list-none grid grid-cols-1 md:grid-cols-2 gap-4">
-                {contactInfo.map(
-                  (item, index) =>
-                    item.label && (
-                      <li key={index} className="flex items-center">
-                        {item.icon}
-                        <a
-                          href={generateHref(item.key, item.label)}
-                          className="text-white hover:underline truncate ml-2"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {item.label}
-                        </a>
-                      </li>
-                    )
-                )}
-              </ul>
+            <div
+              className="mb-8 p-6 md:p-10 bg-gray-800 text-white"
+              style={{ backgroundColor: resume.settings.themeColor }}
+            >
+              {!currentProfileData.email &&
+              !currentProfileData.website &&
+              !currentProfileData.twitter &&
+              !currentProfileData.phone &&
+              !currentProfileData.linkedin &&
+              !currentProfileData.github &&
+              !currentProfileData.instagram &&
+              !currentProfileData.behance &&
+              !currentProfileData.dribble ? (
+                <p className="text-white hover:underline ">
+                  No contact information . Click here to add contact info
+                </p>
+              ) : (
+                <>
+                  <ul className="list-none grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {contactInfo.map(
+                      (item, index) =>
+                        item.label && (
+                          <li key={index} className="flex items-center">
+                            {item.icon}
+                            <a
+                              href={generateHref(item.key, item.label)}
+                              className="text-white hover:underline truncate ml-2"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {item.label}
+                            </a>
+                          </li>
+                        )
+                    )}
+                  </ul>
+                </>
+              )}
             </div>
           </div>
         </DialogTrigger>

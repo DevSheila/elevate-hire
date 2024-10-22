@@ -119,7 +119,8 @@ export const formatLinkedInProfileToTemplate = (data) => {
       ? data.interests.map((interest) => interest.section_name)
       : [], // Return empty array if `interests` is undefined
     settings: {
-      themeColor: "#4287f5", // Default theme color, customize as needed
+      themeColor: "#374151", // Default theme color, customize as needed
+      textColor: "#374151", // Default text color, customize as needed
     },
   };
 
