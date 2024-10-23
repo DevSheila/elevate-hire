@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
 import { updateResume } from "@/store/slices/resumeSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 import { SlPlus } from "react-icons/sl";
+import SectionTabs from "../Tabs/SectionTabs";
 const CertificatesSection = ({ currentCertificatesData }) => {
   const dispatch = useDispatch();
+  const resume = useSelector((state) => state.resumeDetails.resume);
 
   const [isEditing, setIsEditing] = useState(false);
   const [certificatesData, setCertificatesData] = useState(
@@ -55,10 +57,39 @@ const CertificatesSection = ({ currentCertificatesData }) => {
     setIsEditing(updatedCertificate.length - 1);
   };
 
-  const removeCertificate = (index) => {
+  const removeCeritificate = (index) => {
     const updatedCertificates = [...certificatesData];
     updatedCertificates.splice(index, 1);
     setCertificatesData(updatedCertificates);
+    if (isEditing === index) {
+      setIsEditing(null);
+    }
+  };
+  const moveCertificateUp = (index) => {
+    if (index > 0) {
+      // Check if the item is not the first one
+      const updatedCertificates = [...certificatesData];
+      const temp = updatedCertificates[index - 1];
+      updatedCertificates[index - 1] = updatedCertificates[index];
+      updatedCertificates[index] = temp;
+      setIsEditing(index - 1);
+
+      setCertificatesData(updatedCertificates);
+      dispatch(updateResume({ certificatesData: updatedCertificates }));
+    }
+  };
+
+  const moveCertificateDown = (index) => {
+    if (index < certificatesData.length - 1) {
+      const updatedCertificates = [...certificatesData];
+      const temp = updatedCertificates[index + 1];
+      updatedCertificates[index + 1] = updatedCertificates[index];
+      updatedCertificates[index] = temp;
+      setIsEditing(index + 1);
+
+      setCertificatesData(updatedCertificates);
+      dispatch(updateResume({ certificatesData: updatedCertificates }));
+    }
   };
 
   useEffect(() => {
@@ -81,11 +112,14 @@ const CertificatesSection = ({ currentCertificatesData }) => {
 
   return (
     <div className="p-4">
-      <h2 className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2">
+      <h2
+        className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2"
+        style={{ color: resume.settings.textColor }}
+      >
         CERTIFICATES
       </h2>
 
-      {certificatesData.map((certificate, index) => (
+      {certificatesData?.map((certificate, index) => (
         <div key={index} className="mb-4">
           {isEditing === index ? (
             // Edit Mode (form inputs)
@@ -127,17 +161,44 @@ const CertificatesSection = ({ currentCertificatesData }) => {
                 className="border-b mb-2 w-full outline-none py-2"
                 placeholder="Organization"
               />
+              <SectionTabs
+                onRemove={() => removeCeritificate(index)}
+                onMoveUp={() => moveCertificateUp(index)}
+                onMoveDown={() => moveCertificateDown(index)}
+              />
             </div>
           ) : (
             // View Mode (content)
             <div
               onClick={() => handleEditClick(index)}
-              className="cursor-pointer pb-2 mb-2"
+              className={`cursor-pointer pb-2 mb-2 ${
+                !certificate.title &&
+                !certificate.dates &&
+                !certificate.link &&
+                !certificate.present &&
+                !certificate.description
+                  ? "bg-blue-100 rounded-full p-1"
+                  : ""
+              }`}
             >
-              <h3 className="font-bold text-lg">{certificate.title}</h3>
-              <p className="text-gray-500">{certificate.dates}</p>
-              {certificate.present && <p className="text-gray-500">Present</p>}
-              <p className="text-gray-500">{certificate.organization}</p>
+              {certificate.title ||
+              certificate.dates ||
+              certificate.link ||
+              certificate.present ||
+              certificate.organization ? (
+                <>
+                  <h3 className="font-bold text-lg">{certificate.title}</h3>
+                  <p className="text-gray-500">{certificate.dates}</p>
+                  {certificate.present && (
+                    <p className="text-gray-500">Present</p>
+                  )}
+                  <p className="text-gray-500">{certificate.organization}</p>
+                </>
+              ) : (
+                <div className="text-gray-500 italic rounded-xl p-1">
+                  New Certificate (Click to Edit)
+                </div>
+              )}
             </div>
           )}
         </div>

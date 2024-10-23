@@ -5,10 +5,14 @@ import { Link } from "react-router-dom";
 import SectionTabs from "../Tabs/SectionTabs";
 import { SlPlus } from "react-icons/sl";
 import RichTextEditor from "../RichTextEditor";
+import { WORK_EXPERIENCE_PROMPT } from "@/constants/Prompts";
 
+ 
 const WorkExperienceSection = ({ currentWorkExperienceData }) => {
   const dispatch = useDispatch();
-  const [isEditing, setIsEditing] = useState(false);
+  const resume = useSelector((state) => state.resumeDetails.resume);
+
+  const [isEditing, setIsEditing] = useState(null); // Make sure `isEditing` starts as null
   const [workExperienceData, setworkExperienceData] = useState(
     currentWorkExperienceData
   );
@@ -33,15 +37,21 @@ const WorkExperienceSection = ({ currentWorkExperienceData }) => {
       [name]: value,
     };
 
-    // Update the state with the new achievements array
     setworkExperienceData(updatedWorkExperience);
     dispatch(updateResume({ workExperienceData: updatedWorkExperience }));
   };
+
   const handleRichTextEditor = (e, name, index) => {
     const updatedWorkExperience = [...workExperienceData];
-    updatedWorkExperience[index]["achievements"] = e.target.value;
+    updatedWorkExperience[index] = {
+      ...updatedWorkExperience[index],
+      [name]: e.target.value,
+    };
+
     setworkExperienceData(updatedWorkExperience);
+    dispatch(updateResume({ workExperienceData: updatedWorkExperience }));
   };
+;
 
   const handlePresentChange = (index) => {
     const updatedWorkExperience = [...workExperienceData];
@@ -65,13 +75,43 @@ const WorkExperienceSection = ({ currentWorkExperienceData }) => {
     ];
 
     setworkExperienceData(updatedWorkExperience);
-    setIsEditing(updatedWorkExperience.length - 1); // Set isEditing to the index of the new experience
+    setIsEditing(updatedWorkExperience.length - 1); // Set `isEditing` to the index of the new experience
   };
 
   const removeWorkExperience = (index) => {
     const updatedWorkExperience = [...workExperienceData];
     updatedWorkExperience.splice(index, 1);
     setworkExperienceData(updatedWorkExperience);
+    if (isEditing === index) {
+      setIsEditing(null);
+    }
+  };
+
+  const moveWorkExperienceUp = (index) => {
+    if (index > 0) {
+      // Check if the item is not the first one
+      const updatedWorkExperience = [...workExperienceData];
+      const temp = updatedWorkExperience[index - 1];
+      updatedWorkExperience[index - 1] = updatedWorkExperience[index];
+      updatedWorkExperience[index] = temp;
+      setIsEditing(index - 1);
+
+      setworkExperienceData(updatedWorkExperience);
+      dispatch(updateResume({ workExperienceData: updatedWorkExperience }));
+    }
+  };
+
+  const moveWorkExperienceDown = (index) => {
+    if (index < workExperienceData.length - 1) {
+      const updatedWorkExperience = [...workExperienceData];
+      const temp = updatedWorkExperience[index + 1];
+      updatedWorkExperience[index + 1] = updatedWorkExperience[index];
+      updatedWorkExperience[index] = temp;
+      setIsEditing(index + 1);
+
+      setworkExperienceData(updatedWorkExperience);
+      dispatch(updateResume({ workExperienceData: updatedWorkExperience }));
+    }
   };
 
   useEffect(() => {
@@ -94,13 +134,16 @@ const WorkExperienceSection = ({ currentWorkExperienceData }) => {
 
   return (
     <div className="p-4 flex flex-col md:flex-row">
-      {/* Work Exoerience section */}
+      {/* Work Experience section */}
       <div className="flex-grow md:mr-4">
-        <h2 className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2">
+        <h2
+          className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2"
+          style={{ color: resume.settings.textColor }}
+        >
           WORK EXPERIENCE
         </h2>
 
-        {workExperienceData.map((experience, index) => (
+        {workExperienceData?.map((experience, index) => (
           <div key={index} className="mb-4">
             {isEditing === index ? (
               // Edit Mode (form inputs)
@@ -168,38 +211,72 @@ const WorkExperienceSection = ({ currentWorkExperienceData }) => {
                 </label>
 
                 <RichTextEditor
+                  name="achievements"
                   index={index}
+                  prompt={WORK_EXPERIENCE_PROMPT.replace(
+                    "{positionTitle}",
+                    experience.jobTitle
+                  )}
                   defaultValue={experience.achievements}
                   onRichTextEditorChange={(event) =>
                     handleRichTextEditor(event, "achievements", index)
                   }
                 />
 
-                <SectionTabs />
+                <SectionTabs
+                  onRemove={() => removeWorkExperience(index)}
+                  onMoveUp={() => moveWorkExperienceUp(index)}
+                  onMoveDown={() => moveWorkExperienceDown(index)}
+                />
               </div>
             ) : (
               // View Mode (content)
               <div
                 onClick={() => handleEditClick(index)}
-                className="cursor-pointer pb-2 mb-2"
+                className={`cursor-pointer pb-2 mb-2 ${
+                  !experience.jobTitle &&
+                  !experience.dates &&
+                  !experience.companyName &&
+                  !experience.present &&
+                  !experience.location &&
+                  !experience.companyDesc &&
+                  !experience.achievements
+                    ? "bg-blue-100 rounded-full p-1"
+                    : ""
+                }`}
               >
-                <h3 className="font-bold text-lg">{experience.jobTitle}</h3>
-                <p className="text-gray-600 ">{experience.companyName}</p>
-                <p className="text-gray-500">{experience.dates} </p>
-                {experience.present && <p className="text-gray-500">Present</p>}
+                {experience.jobTitle ||
+                experience.dates ||
+                experience.companyName ||
+                experience.present ||
+                experience.location ||
+                experience.companyDesc ||
+                experience.achievements ? (
+                  <>
+                    <h3 className="font-bold text-lg">{experience.jobTitle}</h3>
+                    <p className="text-gray-600 ">{experience.companyName}</p>
+                    <p className="text-gray-500">{experience.dates} </p>
+                    {experience.present && (
+                      <p className="text-gray-500">Present</p>
+                    )}
 
-                <p className="text-gray-500">{experience.location}</p>
-                <p className="text-gray-500 font-normal italic">
-                  {experience.companyDesc}
-                </p>
-                <h3 className="text-gray-600 font-normal italic mt-4 mb-2">
-                  Achievements/Tasks
-                </h3>
+                    <p className="text-gray-500">{experience.location}</p>
+                    <p className="text-gray-500 font-normal italic">
+                      {experience.companyDesc}
+                    </p>
 
-                <p
-                  className="text-gray-500 mb-2"
-                  dangerouslySetInnerHTML={{ __html: experience.achievements }}
-                />
+                    <p
+                      className="text-gray-500 mb-2"
+                      dangerouslySetInnerHTML={{
+                        __html: experience.achievements,
+                      }}
+                    />
+                  </>
+                ) : (
+                  <div className="text-gray-500 italic rounded-xl p-1">
+                    New Work Experience (Click to Edit)
+                  </div>
+                )}
               </div>
             )}
           </div>

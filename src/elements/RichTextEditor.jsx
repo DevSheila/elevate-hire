@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { AIChatSession } from "@/services/AIModal";
+import { WORK_EXPERIENCE_PROMPT } from "@/constants/Prompts";
+import { AIChatSession } from "@/services/AIModal"; 
 import { Brain, LoaderCircle } from "lucide-react";
 import React, { useContext, useState } from "react";
 import {
@@ -22,22 +23,24 @@ import {
   Toolbar,
 } from "react-simple-wysiwyg";
 
-import { toast } from "sonner";
 
-const PROMPT =
-  "position titile: {positionTitle} , Depends on position title give me 5-7 bullet points for my experience in resume (Please do not add experince level and No JSON array) , give me result in HTML tags";
 
-function RichTextEditor({ onRichTextEditorChange, index, defaultValue }) {
+function RichTextEditor({ name, index, prompt,defaultValue ,onRichTextEditorChange }) {
   const [value, setValue] = useState(defaultValue);
   const [loading, setLoading] = useState(false);
   const GenerateSummeryFromAI = async () => {
     setLoading(true);
-    const prompt = PROMPT.replace("{positionTitle}", "Full Stack engineer");
+    const prompt = WORK_EXPERIENCE_PROMPT.replace(
+      "{positionTitle}",
+      "Full Stack engineer"
+    );
 
     const result = await AIChatSession.sendMessage(prompt);
     console.log(result.response.text());
     const resp = result.response.text();
-    setValue(resp.replace("[", "").replace("]", ""));
+    setValue(
+      resp.replace("[", "").replace("]", "").replace('"', "").replace('","', "")
+    );
     setLoading(false);
   };
 

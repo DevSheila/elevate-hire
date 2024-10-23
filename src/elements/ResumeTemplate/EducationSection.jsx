@@ -1,39 +1,55 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateResume } from "@/store/slices/resumeSlice";
 
 import { SlPlus } from "react-icons/sl";
-
+import SectionTabs from "../Tabs/SectionTabs";
 const EducationSection = ({ currentEducationSection }) => {
-  // State to manage whether we are editing or viewing the content
+  const dispatch = useDispatch();
+  const resume = useSelector((state) => state.resumeDetails.resume);
+
   const [isEditing, setIsEditing] = useState(false);
+  const [educationData, setEducationData] = useState(
+    currentEducationSection
+  );
 
-  // State to hold the education data
-  const [educationData, setEducationData] = useState(currentEducationSection);
-
-  // Ref for the form container
   const formRef = useRef(null);
+  useEffect(() => {
+    if (educationData) {
+      dispatch(updateResume({ educationData: educationData }));
+    }
+  }, [educationData, dispatch]);
 
-  const handleEditClick = () => {
-    setIsEditing(true);
+  const handleEditClick = (index) => {
+    setIsEditing(index);
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e, index) => {
     const { name, value } = e.target;
-    setEducationData({
-      ...educationData,
+    const updatedEducation = [...educationData];
+    updatedEducation[index] = {
+      ...updatedEducation[index],
       [name]: value,
-    });
+    };
+
+    // Update the state with the new certificates array
+    setEducationData(updatedEducation);
   };
 
-  const addEducation = () => {
+  const handlePresentChange = (index) => {
+    const updatedEducation = [...educationData];
+    updatedEducation[index].present = !updatedEducation[index].present;
+    setEducationData(updatedEducation);
+  };
+
+  const addCertificate = () => {
     const updatedEducation = [
       ...educationData,
       {
         degree: "",
+        dates: "",
+        present: false,
         university: "",
-        startDate: "",
-        endDate: "",
-        city: "",
-        courses: "",
       },
     ];
 
@@ -41,19 +57,55 @@ const EducationSection = ({ currentEducationSection }) => {
     setIsEditing(updatedEducation.length - 1);
   };
 
-  // Effect to detect click outside the form to toggle back to view mode
+
+  const removeEducation = (index) => {
+    const updatedEducation = [...educationData];
+    updatedEducation.splice(index, 1);
+    setEducationData(updatedEducation);
+    if (isEditing === index) {
+      setIsEditing(null);
+    }
+  };
+
+  const moveWorkExperienceUp = (index) => {
+    if (index > 0) {
+      // Check if the item is not the first one
+      const updatedEducation = [...educationData];
+      const temp = updatedEducation[index - 1];
+      updatedEducation[index - 1] = updatedEducation[index];
+      updatedEducation[index] = temp;
+      setIsEditing(index - 1);
+
+      setEducationData(updatedEducation);
+      dispatch(updateResume({ educationData: updatedEducation }));
+    }
+  };
+
+  const moveWorkExperienceDown = (index) => {
+    if (index < educationData.length - 1) {
+      const updatedEducation = [...educationData];
+      const temp = updatedEducation[index + 1];
+      updatedEducation[index + 1] = updatedEducation[index];
+      updatedEducation[index] = temp;
+      setIsEditing(index + 1);
+
+
+      setEducationData(updatedEducation);
+      dispatch(updateResume({ educationData: updatedEducation }));
+    }
+  };
+
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (formRef.current && !formRef.current.contains(event.target)) {
-        setIsEditing(false);
+        setIsEditing(null);
       }
     };
 
-    if (isEditing) {
-      // Add the event listener when in editing mode
+    if (isEditing !== null) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
-      // Remove the event listener when not editing
       document.removeEventListener("mousedown", handleClickOutside);
     }
 
@@ -62,12 +114,14 @@ const EducationSection = ({ currentEducationSection }) => {
     };
   }, [isEditing]);
 
+
   return (
     <div className="p-4">
-      <h2 className=" font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2">
+      <h2 className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2" style={{ color: resume.settings.textColor }}>
         EDUCATION
       </h2>
-      {educationData.map((education, index) => (
+
+      {educationData?.map((education, index) => (
         <div key={index} className="mb-4">
           {isEditing === index ? (
             // Edit Mode (form inputs)
@@ -76,70 +130,84 @@ const EducationSection = ({ currentEducationSection }) => {
                 type="text"
                 name="degree"
                 value={education.degree}
-                onChange={handleChange}
-                className="border-b mb-2 w-full outline-none"
-                placeholder="Degree"
+                onChange={(e) => handleChange(e, index)}
+                className="border-b mb-2 w-full outline-none py-2"
+                placeholder="Education Title"
               />
+              <div className="flex flex-col md:flex-row md:space-x-2">
+                <input
+                  type="text"
+                  name="dates"
+                  value={education.dates}
+                  onChange={(e) => handleChange(e, index)}
+                  className="border-b w-full md:w-1/2 outline-none py-2 mb-2 md:mb-0"
+                  placeholder="mm / yyyy - mm / yyyy"
+                />
+                <div className="flex items-center mt-1">
+                  <input
+                    type="checkbox"
+                    checked={education.present}
+                    onChange={() => handlePresentChange(index)}
+                    className="mt-1"
+                  />
+                  <label htmlFor="present" className="ml-2">
+                    Present
+                  </label>
+                </div>
+              </div>
               <input
                 type="text"
                 name="university"
                 value={education.university}
-                onChange={handleChange}
-                className="border-b mb-2 w-full outline-none"
-                placeholder="University"
+                onChange={(e) => handleChange(e, index)}
+                className="border-b mb-2 w-full outline-none py-2"
+                placeholder="Organization"
               />
-              <div className="flex space-x-2">
-                <input
-                  type="text"
-                  name="startDate"
-                  value={education.startDate}
-                  onChange={handleChange}
-                  className="border-b w-1/2 outline-none"
-                  placeholder="Start Date"
+                <SectionTabs
+                  onRemove={() => removeEducation(index)}
+                  onMoveUp={() => moveWorkExperienceUp(index)}
+                  onMoveDown={() => moveWorkExperienceDown(index)}
                 />
-                <input
-                  type="text"
-                  name="endDate"
-                  value={education.endDate}
-                  onChange={handleChange}
-                  className="border-b w-1/2 outline-none"
-                  placeholder="End Date"
-                />
-              </div>
-              <input
-                type="text"
-                name="city"
-                value={education.city}
-                onChange={handleChange}
-                className="border-b mb-2 w-full outline-none"
-                placeholder="City, Country or GPA"
-              />
-              <textarea
-                name="courses"
-                value={education.courses}
-                onChange={handleChange}
-                className="border-b mb-2 w-full outline-none"
-                placeholder="Courses/Thesis/Project"
-              />
+
             </div>
           ) : (
             // View Mode (content)
-            <div onClick={handleEditClick} className="cursor-pointer">
-              <h3 className="font-bold text-lg">{education.degree}</h3>
-              <p className="text-gray-600">{education.university}</p>
-              <p className="font-italic  text-sm leading-5 text-gray-500">{`${education.startDate} - ${education.endDate}`}</p>
-              <p className="font-italic  text-sm leading-5 text-gray-500">
-                {education.city}
-              </p>
-              <p className="font-italic  text-sm leading-5 text-gray-500">
-                {education.courses}
-              </p>
+            <div
+              onClick={() => handleEditClick(index)}
+              className={`cursor-pointer pb-2 mb-2 ${
+                !education.degree &&
+                !education.dates &&
+                !education.link &&
+                !education.present &&
+                !education.description
+                  ? "bg-blue-100 rounded-full p-1"
+                  : ""
+              }`}
+            >
+              {education.degree ||
+              education.dates ||
+              education.link ||
+              education.present ||
+              education.university ? (
+                <>
+                  <h3 className="font-bold text-lg">{education.degree}</h3>
+                  <p className="text-gray-500">{education.dates}</p>
+                  {education.present && (
+                    <p className="text-gray-500">Present</p>
+                  )}
+                  <p className="text-gray-500">{education.university}</p>
+                </>
+              ) : (
+                <div className="text-gray-500 italic rounded-xl p-1">
+                  New Education (Click to Edit)
+                </div>
+              )}
             </div>
           )}
         </div>
       ))}
 
-      <div onClick={addEducation} className="flex items-center mt-4">
+      <div onClick={addCertificate} className="flex items-center mt-4">
         <div className="text-cyan-600 text-2xl ">
           <SlPlus />
         </div>

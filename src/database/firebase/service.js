@@ -7,8 +7,10 @@ import {
   setDoc,
   getDoc,
   getDocs,
+  deleteDoc,
 } from "firebase/firestore";
 import { firebaseDb } from "./config";
+ 
 // Function to save or update user data in Firestore
 export const saveUserToFirestore = async (user) => {
   const { id, firstName, lastName, emailAddresses, imageUrl } = user;
@@ -61,19 +63,29 @@ export const saveResumeToFirestore = async (userId, resume) => {
     // Prepare the resume data
     const resumeData = {
       userId: userId,
-      profileData: resume.profileData,
-      educationData: resume.educationData,
-      workExperienceData: resume.workExperienceData,
-      achievementsData: resume.achievementsData,
-      skillsData: resume.skillsData,
-      projectsData: resume.projectsData,
-      certificatesData: resume.certificatesData,
-      interestsData: resume.interestsData,
-      settings:resume.settings,
+      profileData: resume.profileData || {},
+      educationData: resume.educationData || [],
+      workExperienceData: resume.workExperienceData || [],
+      achievementsData: resume.achievementsData || [],
+      skillsData: resume.skillsData || [],
+      projectsData: resume.projectsData || [],
+      certificatesData: resume.certificatesData || [],
+      interestsData: resume.interestsData || [],
+      settings: resume.settings || {},
     };
 
+    const today = new Date();
+    const formattedDate = today.toISOString().split("T")[0];
+
+    // Merge the updateDate into a new settings object
+    resumeData.settings = {
+      ...resumeData.settings,
+      updateDate: formattedDate, // Update date to current date
+    };
+    
     // If the document exists, update it; if not, create it
     if (resumeDoc.exists()) {
+
       await setDoc(userResumeRef, resumeData, { merge: true }); // Merge to update only changed fields
       console.log("Resume updated successfully!");
     } else {
@@ -106,5 +118,47 @@ export const getResumesByUserId = async (userId) => {
   } catch (error) {
     console.error("Error fetching resumes: ", error);
     throw error; // Rethrow the error for further handling if needed
+  }
+};
+
+// Function to get a resume by its specific id
+export const getResumeById = async (resumeId) => {
+  try {
+    // Reference to the specific resume document by id
+    const resumeRef = doc(firebaseDb, "user_resumes", resumeId);
+
+    // Fetch the resume document
+    const resumeDoc = await getDoc(resumeRef);
+
+    // Check if the document exists
+    if (resumeDoc.exists()) {
+      // Return the resume data if found
+      console.log("resumeDoc.data()", resumeDoc.data());
+      return { id: resumeDoc.id, ...resumeDoc.data() };
+    } else {
+      console.log("No resume found with this ID");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching resume by ID: ", error);
+    throw error; // Rethrow the error for further handling if needed
+  }
+};
+
+// Function to delete a document by its ID
+export const deleteDocumentById = async (documentId) => {
+  try {
+    // Reference to the specific document by collection name and document ID
+    const documentRef = doc(firebaseDb, "user_resumes", documentId);
+
+    // Delete the document
+    await deleteDoc(documentRef);
+
+    console.log(
+      `Document with ID: ${documentId} deleted successfully from collection user_resumes`
+    );
+  } catch (error) {
+    console.error("Error deleting document: ", error);
+    throw error; // Rethrow error for further handling if needed
   }
 };

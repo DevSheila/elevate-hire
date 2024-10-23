@@ -119,7 +119,7 @@ img {
 }
 
 .section {
-  padding-block: 4rem 2rem;
+  /* padding-block: 4rem 2rem; */
 }
 
 .section__title-1,
@@ -322,7 +322,7 @@ img {
     margin-inline: auto;
   }
   .section {
-    padding-block: 7rem 2rem;
+    /* padding-block: 7rem 2rem; */
   }
   .section__title-1::after,
   .section__title-2::after {
@@ -331,7 +331,7 @@ img {
   }
   .projects__container {
     grid-template-columns: repeat(3, 352px);
-    padding-block: 3rem 1rem;
+    /* padding-block: 3rem 1rem; */
   }
   .projects__card {
     padding: 1.25rem 1.25rem 2.5rem;

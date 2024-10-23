@@ -5,18 +5,24 @@ import { AiOutlineFileSearch } from "react-icons/ai";
 import { TfiBrush } from "react-icons/tfi";
 import { ThemeSelector } from "../TabItems/ThemeSelector";
 import TemplatePreview2 from "../TemplatePreview2";
-
+import { ThemeTxtSelector } from "../TabItems/ThemeTxtSelector";
 
 const HorizontalToolTabs = () => {
   const [activeTab, setActiveTab] = useState(""); // Track active tab
   const [isSheetOpen, setIsSheetOpen] = useState(false); // Track sheet open state
   const tabsRef = useRef(null); // Ref for the tabs container
+  const contentRef = useRef(null); // Ref for the tabs content
 
   // Handle clicks outside the active tab
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // Check if the click is outside the active tab container
-      if (tabsRef.current && !tabsRef.current.contains(event.target)) {
+      // Check if the click is outside both the tab triggers and the tab content
+      if (
+        tabsRef.current &&
+        !tabsRef.current.contains(event.target) &&
+        contentRef.current &&
+        !contentRef.current.contains(event.target)
+      ) {
         setActiveTab(""); // Reset to a default tab, change as needed
         setIsSheetOpen(false); // Close the sheet if clicked outside
       }
@@ -71,7 +77,14 @@ const HorizontalToolTabs = () => {
                 <div className="m-1 text-lg">
                   <TfiBrush />
                 </div>
-                <span className="hidden md:inline">Theme</span>
+                <span className="hidden md:inline">Theme Color</span>
+              </TabsTrigger>
+
+              <TabsTrigger value="text">
+                <div className="m-1 text-lg">
+                  <TfiBrush />
+                </div>
+                <span className="hidden md:inline">Text Color</span>
               </TabsTrigger>
 
               <TabsTrigger value="template">
@@ -89,13 +102,20 @@ const HorizontalToolTabs = () => {
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="theme">
-              <ThemeSelector />
-            </TabsContent>
+            {/* Wrap the TabsContent with a ref */}
+            <div ref={contentRef}>
+              <TabsContent value="theme">
+                <ThemeSelector />
+              </TabsContent>
 
-            <TabsContent value="template">
-              <TemplatePreview2 />
-            </TabsContent>
+              <TabsContent value="text">
+                <ThemeTxtSelector />
+              </TabsContent>
+
+              <TabsContent value="template">
+                <TemplatePreview2 />
+              </TabsContent>
+            </div>
           </Tabs>
         </div>
       </div>
