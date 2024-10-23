@@ -56,7 +56,7 @@ function App() {
             element={<PrivateRoute element={<ResumeBuilderDashboard />} />}
           />
           {/* ------------- */}
-          <Route
+          <Route 
             exact
             path="/mockinterview"
             element={<PrivateRoute element={<MockInterview />} />}

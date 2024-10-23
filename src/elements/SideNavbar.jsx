@@ -14,6 +14,7 @@ import whitCurvedImg from "../../public/white-curved.jpeg";
 // CLERK
 import { UserButton, useUser } from "@clerk/clerk-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 function SideNavbar() {
   const { user, isLoaded, isSignedIn } = useUser();
@@ -140,13 +141,15 @@ function SideNavbar() {
               },
             ].map((item) => (
               <li key={item.name}>
-                <a
-                  href={item.href}
+                 <Link to={item.href}>
+                <div
                   className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-indigo-600 hover:text-white hover:rounded-xl dark:hover:bg-gray-700 group transition-all ease-linear duration-100 "
                 >
                   {item.icon}
                   <span className="ms-3">{item.name}</span>
-                </a>
+                </div>
+                </Link>
+
               </li>
             ))}
           </ul>
