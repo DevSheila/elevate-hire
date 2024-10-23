@@ -58,7 +58,9 @@ function StartInterview() {
           <div className="flex justify-end gap-6">
             {activeQuestionIndex > 0 && (
               <Button
+              variant="outline"
                 onClick={() => setActiveQuestionIndex(activeQuestionIndex - 1)}
+                className="rounded-full"
               >
                 Previous Question
               </Button>
@@ -66,6 +68,8 @@ function StartInterview() {
             {activeQuestionIndex != mockInterviewQuestion?.length - 1 && (
               <Button
                 onClick={() => setActiveQuestionIndex(activeQuestionIndex + 1)}
+                className="rounded-full"
+
               >
                 Next Question
               </Button>

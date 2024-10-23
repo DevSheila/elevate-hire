@@ -93,7 +93,7 @@ function Interview() {
           </div>
           <div className="flex justify-end items-end">
             <Link to={"/mockinterview/interview/" + interviewId + "/start"}>
-              <Button>Start Interview</Button>
+              <Button className="rounded-full">Start Interview</Button>
             </Link>
           </div>
         </div>

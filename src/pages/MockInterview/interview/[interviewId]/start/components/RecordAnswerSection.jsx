@@ -198,7 +198,7 @@ function RecordAnswerSection({
       <Button
         disabled={loading}
         variant="outline"
-        className="my-10"
+        className="my-10 rounded-full"
         onClick={StartStopRecording}
       >
         {isRecording ? (

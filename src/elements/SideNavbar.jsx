@@ -110,19 +110,20 @@ function SideNavbar() {
           <ul className="space-y-2 font-medium flex-grow">
             {[
               {
+                name: "Templates",
+                href: "#",
+                icon: (
+                  <SlLayers className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" />
+                ),
+              },
+              {
                 name: "Resume Builder",
                 href: "/resumebuilder",
                 icon: (
                   <SlDoc className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" />
                 ),
               },
-              {
-                name: "Cover Letter",
-                href: "#",
-                icon: (
-                  <SlEnvolope className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" />
-                ),
-              },
+
               {
                 name: "Mock Interview",
                 href: "/mockinterview",
@@ -131,10 +132,10 @@ function SideNavbar() {
                 ),
               },
               {
-                name: "Templates",
+                name: "Cover Letter",
                 href: "#",
                 icon: (
-                  <SlLayers className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" />
+                  <SlEnvolope className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" />
                 ),
               },
             ].map((item) => (
@@ -182,17 +183,6 @@ function SideNavbar() {
                 </div>
               </div>
               <SlSettings />
-            </div>
-
-            <div>
-              <a
-                href="#"
-                className="flex items-center py-4 text-gray-900 rounded-lg dark:text-white hover:rounded-xl dark:hover:bg-gray-700 group transition-all ease-linear duration-100 "
-              >
-                <SlLogout className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-indigo-700 dark:group-hover:text-white" />
-
-                <span className="ms-3">Logout</span>
-              </a>
             </div>
           </div>
         </div>

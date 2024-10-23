@@ -115,7 +115,7 @@ function AddNewInterview() {
                 </div>
                 <div className='flex gap-5 justify-end'>
                     <Button type="button" variant="ghost" onClick={()=>setOpenDailog(false)}>Cancel</Button>
-                    <Button type="submit" disabled={loading} >
+                    <Button type="submit" disabled={loading} className="rounded-full">
                         {loading? 
                         <>
                         <LoaderCircle className='animate-spin' /> Generating from AI
