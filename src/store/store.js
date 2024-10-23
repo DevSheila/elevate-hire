@@ -29,6 +29,11 @@ export const store = configureStore({
 // Create a persistor
 export const persistor = persistStore(store);
 
+// Function to clear the persisted state
+export const clearPersistedData = () => {
+  persistor.purge();
+};
+
 setupListeners(store.dispatch);
 
 export default store;

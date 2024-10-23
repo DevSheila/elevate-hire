@@ -1,24 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
-import { updateResume } from "@/store/slices/resumeSlice";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import { redo, undo, updateResume } from "@/store/slices/resumeSlice";
 import { SlPlus } from "react-icons/sl";
+import { Textarea } from "@/components/ui/textarea";
+import RichTextEditor from "../RichTextEditor";
 import SectionTabs from "../Tabs/SectionTabs";
-const CertificatesSection = ({ currentCertificatesData }) => {
+import { ACHIEVEMENT_PROMPT } from "@/constants/Prompts";
+
+const CertificatesSection = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state) => state.resumeDetails.resume);
-
-  const [isEditing, setIsEditing] = useState(false);
-  const [certificatesData, setCertificatesData] = useState(
-    currentCertificatesData
-  );
-
+  const certificatesData = useSelector(
+    (state) => state.resumeDetails.resume.certificatesData
+  ); // Use Redux state directly
+  const [isEditing, setIsEditing] = useState(null);
   const formRef = useRef(null);
-  useEffect(() => {
-    if (certificatesData) {
-      dispatch(updateResume({ certificatesData: certificatesData }));
-    }
-  }, [certificatesData, dispatch]);
 
   const handleEditClick = (index) => {
     setIsEditing(index);
@@ -32,14 +28,13 @@ const CertificatesSection = ({ currentCertificatesData }) => {
       [name]: value,
     };
 
-    // Update the state with the new certificates array
-    setCertificatesData(updatedCertificates);
+    dispatch(updateResume({ certificatesData: updatedCertificates })); // Update Redux state directly
   };
 
   const handlePresentChange = (index) => {
     const updatedCertificates = [...certificatesData];
     updatedCertificates[index].present = !updatedCertificates[index].present;
-    setCertificatesData(updatedCertificates);
+    dispatch(updateResume({ certificatesData: updatedCertificates }));
   };
 
   const addCertificate = () => {
@@ -48,34 +43,42 @@ const CertificatesSection = ({ currentCertificatesData }) => {
       {
         title: "",
         dates: "",
-        present: false,
         organization: "",
+        present: false,
       },
     ];
 
-    setCertificatesData(updatedCertificate);
-    setIsEditing(updatedCertificate.length - 1);
+    dispatch(updateResume({ certificatesData: updatedCertificate }));
+    setIsEditing(updatedCertificate.length - 1); // Set edit mode to the new certificate
   };
 
-  const removeCeritificate = (index) => {
+  const removeCertificates = (index) => {
     const updatedCertificates = [...certificatesData];
     updatedCertificates.splice(index, 1);
-    setCertificatesData(updatedCertificates);
+    dispatch(updateResume({ certificatesData: updatedCertificates }));
     if (isEditing === index) {
       setIsEditing(null);
     }
   };
+
+  const handleRichTextEditor = (e, name, index) => {
+    const updatedCertificates = [...certificatesData];
+    updatedCertificates[index] = {
+      ...updatedCertificates[index],
+      [name]: e.target.value,
+    };
+
+    dispatch(updateResume({ certificatesData: updatedCertificates }));
+  };
+
   const moveCertificateUp = (index) => {
     if (index > 0) {
-      // Check if the item is not the first one
       const updatedCertificates = [...certificatesData];
       const temp = updatedCertificates[index - 1];
       updatedCertificates[index - 1] = updatedCertificates[index];
       updatedCertificates[index] = temp;
-      setIsEditing(index - 1);
-
-      setCertificatesData(updatedCertificates);
       dispatch(updateResume({ certificatesData: updatedCertificates }));
+      setIsEditing(index - 1);
     }
   };
 
@@ -85,10 +88,8 @@ const CertificatesSection = ({ currentCertificatesData }) => {
       const temp = updatedCertificates[index + 1];
       updatedCertificates[index + 1] = updatedCertificates[index];
       updatedCertificates[index] = temp;
-      setIsEditing(index + 1);
-
-      setCertificatesData(updatedCertificates);
       dispatch(updateResume({ certificatesData: updatedCertificates }));
+      setIsEditing(index + 1);
     }
   };
 
@@ -111,105 +112,102 @@ const CertificatesSection = ({ currentCertificatesData }) => {
   }, [isEditing]);
 
   return (
-    <div className="p-4">
-      <h2
-        className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2"
-        style={{ color: resume.settings.textColor }}
-      >
-        CERTIFICATES
-      </h2>
+    <div className="p-4 flex flex-col md:flex-row">
+      <div className="flex-grow md:mr-4">
+        <h2
+          className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2"
+          style={{ color: resume.settings.textColor }}
+        >
+          CERTIFICATES
+        </h2>
 
-      {certificatesData?.map((certificate, index) => (
-        <div key={index} className="mb-4">
-          {isEditing === index ? (
-            // Edit Mode (form inputs)
-            <div ref={formRef} className="rounded-md">
-              <input
-                type="text"
-                name="title"
-                value={certificate.title}
-                onChange={(e) => handleChange(e, index)}
-                className="border-b mb-2 w-full outline-none py-2"
-                placeholder="Certificate Title"
-              />
-              <div className="flex flex-col md:flex-row md:space-x-2">
+        {certificatesData?.map((certificate, index) => (
+          <div key={index} className="mb-4">
+            {isEditing === index ? (
+              <div ref={formRef}>
                 <input
                   type="text"
-                  name="dates"
-                  value={certificate.dates}
+                  name="title"
+                  value={certificate.title}
                   onChange={(e) => handleChange(e, index)}
-                  className="border-b w-full md:w-1/2 outline-none py-2 mb-2 md:mb-0"
-                  placeholder="mm / yyyy - mm / yyyy"
+                  className="border-b mb-2 w-full outline-none"
+                  placeholder="Title"
                 />
-                <div className="flex items-center mt-1">
+                <div className="flex flex-col md:flex-row md:space-x-2">
                   <input
-                    type="checkbox"
-                    checked={certificate.present}
-                    onChange={() => handlePresentChange(index)}
-                    className="mt-1"
+                    type="text"
+                    name="dates"
+                    value={certificate.dates}
+                    onChange={(e) => handleChange(e, index)}
+                    className="border-b mb-2 md:mb-0 w-full md:w-1/2 outline-none"
+                    placeholder="Start Date - End Date"
                   />
-                  <label htmlFor="present" className="ml-2">
-                    Present
-                  </label>
+                  <div className="flex items-center md:ml-2 mt-1">
+                    <input
+                      type="checkbox"
+                      checked={certificate.present}
+                      onChange={() => handlePresentChange(index)}
+                      className="mt-1"
+                    />
+                    <label htmlFor="present" className="ml-2">
+                      Present
+                    </label>
+                  </div>
                 </div>
+
+                <input
+                  type="text"
+                  name="university"
+                  value={certificate.organization}
+                  onChange={(e) => handleChange(e, index)}
+                  className="border-b mb-2 w-full outline-none py-2"
+                  placeholder="Organization"
+                />
+
+                <SectionTabs
+                  onRemove={() => removeCertificates(index)}
+                  onMoveUp={() => moveCertificateUp(index)}
+                  onMoveDown={() => moveCertificateDown(index)}
+                />
               </div>
-              <input
-                type="text"
-                name="organization"
-                value={certificate.organization}
-                onChange={(e) => handleChange(e, index)}
-                className="border-b mb-2 w-full outline-none py-2"
-                placeholder="Organization"
-              />
-              <SectionTabs
-                onRemove={() => removeCeritificate(index)}
-                onMoveUp={() => moveCertificateUp(index)}
-                onMoveDown={() => moveCertificateDown(index)}
-              />
-            </div>
-          ) : (
-            // View Mode (content)
-            <div
-              onClick={() => handleEditClick(index)}
-              className={`cursor-pointer pb-2 mb-2 ${
-                !certificate.title &&
-                !certificate.dates &&
-                !certificate.link &&
-                !certificate.present &&
-                !certificate.description
-                  ? "bg-blue-100 rounded-full p-1"
-                  : ""
-              }`}
-            >
-              {certificate.title ||
-              certificate.dates ||
-              certificate.link ||
-              certificate.present ||
-              certificate.organization ? (
-                <>
-                  <h3 className="font-bold text-lg">{certificate.title}</h3>
-                  <p className="text-gray-500">{certificate.dates}</p>
-                  {certificate.present && (
-                    <p className="text-gray-500">Present</p>
-                  )}
-                  <p className="text-gray-500">{certificate.organization}</p>
-                </>
-              ) : (
-                <div className="text-gray-500 italic rounded-xl p-1">
-                  New Certificate (Click to Edit)
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      ))}
+            ) : (
+              <div
+                onClick={() => handleEditClick(index)}
+                className={`cursor-pointer pb-2 mb-2 ${
+                  !certificate.title &&
+                  !certificate.dates &&
+                  !certificate.organization
+                    ? "bg-blue-100 rounded-full p-1"
+                    : ""
+                }`}
+              >
+                {certificate.title ||
+                certificate.dates ||
+                certificate.organization ? (
+                  <>
+                    <h3 className="font-bold text-lg">{certificate.title}</h3>
+                    <p className="text-gray-500">{certificate.dates}</p>
+                    {certificate.present && (
+                      <p className="text-gray-500">Present</p>
+                    )}
+                    <p className="text-gray-500">{certificate.organization}</p>
+                  </>
+                ) : (
+                  <p className="text-gray-500 italic rounded-full p-1">
+                    New Certificate (Click to Edit)
+                  </p>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
 
-      <div onClick={addCertificate} className="flex items-center mt-4">
-        <div className="text-cyan-600 text-2xl ">
-          <SlPlus />
+        <div onClick={addCertificate} className="flex items-center mt-4">
+          <div className="text-cyan-600 text-2xl ">
+            <SlPlus />
+          </div>
+          <div className="border-t-2 border-dotted border-cyan-600 w-full ml-2"></div>
         </div>
-
-        <div className="border-t-2 border-dotted border-cyan-600 w-full ml-2"></div>
       </div>
     </div>
   );

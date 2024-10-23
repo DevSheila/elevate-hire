@@ -7,7 +7,7 @@ import { ThemeSelector } from "../TabItems/ThemeSelector";
 import TemplatePreview2 from "../TemplatePreview2";
 import { ThemeTxtSelector } from "../TabItems/ThemeTxtSelector";
 import { redo, undo } from "@/store/slices/resumeSlice";
-import { useDispatch, useSelector } from "react-redux"; // Import useSelector
+import { useDispatch } from "react-redux";
 
 const HorizontalToolTabs = () => {
   const dispatch = useDispatch();
@@ -16,39 +16,17 @@ const HorizontalToolTabs = () => {
   const tabsRef = useRef(null); // Ref for the tabs container
   const contentRef = useRef(null); // Ref for the tabs content
 
-  // Get the past and future states from the Redux store
-  const past = useSelector((state) => state.resumeDetails.past);
-  const resume = useSelector((state) => state.resumeDetails.resume);
-  const future = useSelector((state) => state.resumeDetails.future);
-
   const handleUndo = () => {
-    if (past.length > 0) {
-      dispatch(undo());
-      console.log("_________________________________________")
-      console.log("undo is called")
-      console.log("past",past)
-      console.log("resume",resume)
-      console.log("future",future)
-      console.log("_________________________________________")
-
-    }
+    dispatch(undo());
   };
 
   const handleRedo = () => {
-    if (future.length > 0) {
-      dispatch(redo());
-      console.log("_________________________________________")
-      console.log("redo is called")
-      console.log("past",past)
-      console.log("resume",resume)
-      console.log("future",future)
-      console.log("_________________________________________")
-    }
+    dispatch(redo());
   };
-
   // Handle clicks outside the active tab
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Check if the click is outside both the tab triggers and the tab content
       if (
         tabsRef.current &&
         !tabsRef.current.contains(event.target) &&
@@ -93,13 +71,13 @@ const HorizontalToolTabs = () => {
               className="flex justify-center"
               ref={tabsRef} // Attach the ref to the tabs container
             >
-              <TabsTrigger value="undo" onClick={handleUndo} disabled={past.length === 0}>
+              <TabsTrigger value="undo">
                 <div className="m-1 text-lg">
                   <SlActionUndo />
                 </div>
               </TabsTrigger>
 
-              <TabsTrigger value="redo" onClick={handleRedo} disabled={future.length === 0}>
+              <TabsTrigger value="redo" >
                 <div className="m-1 text-lg">
                   <SlActionRedo />
                 </div>

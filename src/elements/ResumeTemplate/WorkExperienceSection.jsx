@@ -1,70 +1,47 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateResume } from "@/store/slices/resumeSlice";
-import { Link } from "react-router-dom";
-import SectionTabs from "../Tabs/SectionTabs";
+import { redo, undo, updateResume } from "@/store/slices/resumeSlice";
 import { SlPlus } from "react-icons/sl";
+import { Textarea } from "@/components/ui/textarea";
 import RichTextEditor from "../RichTextEditor";
+import SectionTabs from "../Tabs/SectionTabs";
 import { WORK_EXPERIENCE_PROMPT } from "@/constants/Prompts";
 
- 
-const WorkExperienceSection = ({ currentWorkExperienceData }) => {
+const WorkExperienceSection = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state) => state.resumeDetails.resume);
-
-  const [isEditing, setIsEditing] = useState(null); // Make sure `isEditing` starts as null
-  const [workExperienceData, setworkExperienceData] = useState(
-    currentWorkExperienceData
-  );
-
+  const workExperienceData = useSelector(
+    (state) => state.resumeDetails.resume.workExperienceData
+  ); // Use Redux state directly
+  const [isEditing, setIsEditing] = useState(null);
   const formRef = useRef(null);
 
   const handleEditClick = (index) => {
     setIsEditing(index);
   };
 
-  useEffect(() => {
-    if (workExperienceData) {
-      dispatch(updateResume({ workExperienceData: workExperienceData }));
-    }
-  }, [workExperienceData, dispatch]);
-
   const handleChange = (e, index) => {
     const { name, value } = e.target;
-    const updatedWorkExperience = [...workExperienceData];
-    updatedWorkExperience[index] = {
-      ...updatedWorkExperience[index],
+    const updatedWorkExperiences = [...workExperienceData];
+    updatedWorkExperiences[index] = {
+      ...updatedWorkExperiences[index],
       [name]: value,
     };
 
-    setworkExperienceData(updatedWorkExperience);
-    dispatch(updateResume({ workExperienceData: updatedWorkExperience }));
+    dispatch(updateResume({ workExperienceData: updatedWorkExperiences })); // Update Redux state directly
   };
-
-  const handleRichTextEditor = (e, name, index) => {
-    const updatedWorkExperience = [...workExperienceData];
-    updatedWorkExperience[index] = {
-      ...updatedWorkExperience[index],
-      [name]: e.target.value,
-    };
-
-    setworkExperienceData(updatedWorkExperience);
-    dispatch(updateResume({ workExperienceData: updatedWorkExperience }));
-  };
-;
 
   const handlePresentChange = (index) => {
-    const updatedWorkExperience = [...workExperienceData];
-    updatedWorkExperience[index].present =
-      !updatedWorkExperience[index].present;
-    setworkExperienceData(updatedWorkExperience);
+    const updatedWorkExperiences = [...workExperienceData];
+    updatedWorkExperiences[index].present = !updatedWorkExperiences[index].present;
+    dispatch(updateResume({ workExperienceData: updatedWorkExperiences }));
   };
 
   const addWorkExperience = () => {
     const updatedWorkExperience = [
       ...workExperienceData,
       {
-        jobTitle: "",
+        jobTitle : "",
         companyName: "",
         dates: "",
         location: "",
@@ -74,43 +51,48 @@ const WorkExperienceSection = ({ currentWorkExperienceData }) => {
       },
     ];
 
-    setworkExperienceData(updatedWorkExperience);
-    setIsEditing(updatedWorkExperience.length - 1); // Set `isEditing` to the index of the new experience
+    dispatch(updateResume({ workExperienceData: updatedWorkExperience }));
+    setIsEditing(updatedWorkExperience.length - 1); // Set edit mode to the new achievement
   };
 
-  const removeWorkExperience = (index) => {
-    const updatedWorkExperience = [...workExperienceData];
-    updatedWorkExperience.splice(index, 1);
-    setworkExperienceData(updatedWorkExperience);
+  const removeWorkExperiences = (index) => {
+    const updatedWorkExperiences = [...workExperienceData];
+    updatedWorkExperiences.splice(index, 1);
+    dispatch(updateResume({ workExperienceData: updatedWorkExperiences }));
     if (isEditing === index) {
       setIsEditing(null);
     }
   };
 
+  const handleRichTextEditor = (e, name, index) => {
+    const updatedWorkExperiences = [...workExperienceData];
+    updatedWorkExperiences[index] = {
+      ...updatedWorkExperiences[index],
+      [name]: e.target.value,
+    };
+
+    dispatch(updateResume({ workExperienceData: updatedWorkExperiences }));
+  };
+
   const moveWorkExperienceUp = (index) => {
     if (index > 0) {
-      // Check if the item is not the first one
-      const updatedWorkExperience = [...workExperienceData];
-      const temp = updatedWorkExperience[index - 1];
-      updatedWorkExperience[index - 1] = updatedWorkExperience[index];
-      updatedWorkExperience[index] = temp;
+      const updatedWorkExperiences = [...workExperienceData];
+      const temp = updatedWorkExperiences[index - 1];
+      updatedWorkExperiences[index - 1] = updatedWorkExperiences[index];
+      updatedWorkExperiences[index] = temp;
+      dispatch(updateResume({ workExperienceData: updatedWorkExperiences }));
       setIsEditing(index - 1);
-
-      setworkExperienceData(updatedWorkExperience);
-      dispatch(updateResume({ workExperienceData: updatedWorkExperience }));
     }
   };
 
   const moveWorkExperienceDown = (index) => {
     if (index < workExperienceData.length - 1) {
-      const updatedWorkExperience = [...workExperienceData];
-      const temp = updatedWorkExperience[index + 1];
-      updatedWorkExperience[index + 1] = updatedWorkExperience[index];
-      updatedWorkExperience[index] = temp;
+      const updatedWorkExperiences = [...workExperienceData];
+      const temp = updatedWorkExperiences[index + 1];
+      updatedWorkExperiences[index + 1] = updatedWorkExperiences[index];
+      updatedWorkExperiences[index] = temp;
+      dispatch(updateResume({ workExperienceData: updatedWorkExperiences }));
       setIsEditing(index + 1);
-
-      setworkExperienceData(updatedWorkExperience);
-      dispatch(updateResume({ workExperienceData: updatedWorkExperience }));
     }
   };
 

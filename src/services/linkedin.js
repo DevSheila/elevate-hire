@@ -47,6 +47,7 @@ export const formatLinkedInProfileToTemplate = (data) => {
       instagram: "", // Could be added if available
       github: "", // Could be added if available
       behance: "", // Could be added if available
+      dribbble:""
     },
     educationData: Array.isArray(data.educations)
       ? data.educations.map((edu) => ({
