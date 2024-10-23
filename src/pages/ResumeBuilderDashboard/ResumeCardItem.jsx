@@ -42,7 +42,7 @@ function ResumeCardItem({ resume, refreshData, updateResumes }) {
 
   return (
     <>
-      <Link to={`/resumebuilder/${resume?.id}`} target="_blank">
+      <Link to={`/resumebuilder/${resume?.id}`} >
         <article class="rounded-xl bg-white p-3  hover:shadow-lg">
           <div class="relative flex items-end overflow-hidden rounded-xl bg-blue-100">
             <div
