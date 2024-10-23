@@ -97,7 +97,7 @@ function Feedback() {
           )}
 
           {/* <Button onClick={()=>router.replace('/mockinterview')}>Go Home</Button> */}
-          <Button onClick={() => navigate("/mockinterview")}>Go Home</Button>
+          <Button onClick={() => navigate("/mockinterview")} className="rounded-full">Go Home</Button>
         </div>
       </div>
     </>

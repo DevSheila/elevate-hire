@@ -7,7 +7,7 @@ import { SlPlus } from "react-icons/sl";
 import RichTextEditor from "../RichTextEditor";
 import { WORK_EXPERIENCE_PROMPT } from "@/constants/Prompts";
 
-
+ 
 const WorkExperienceSection = ({ currentWorkExperienceData }) => {
   const dispatch = useDispatch();
   const resume = useSelector((state) => state.resumeDetails.resume);

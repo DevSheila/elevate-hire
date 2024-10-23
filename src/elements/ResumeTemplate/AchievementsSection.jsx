@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import RichTextEditor from "../RichTextEditor";
 import SectionTabs from "../Tabs/SectionTabs";
 import { ACHIEVEMENT_PROMPT } from "@/constants/Prompts";
+
 const AchievementsSection = ({ currentResumeAchievements }) => {
   const dispatch = useDispatch();
   const resume = useSelector((state) => state.resumeDetails.resume);

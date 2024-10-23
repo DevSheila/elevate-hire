@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+ 
 // ELEMENTS
 import WorkExperienceSection from "@/elements/ResumeTemplate/WorkExperienceSection";
 import EducationSection from "@/elements/ResumeTemplate/EducationSection";

@@ -10,7 +10,7 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { firebaseDb } from "./config";
-
+ 
 // Function to save or update user data in Firestore
 export const saveUserToFirestore = async (user) => {
   const { id, firstName, lastName, emailAddresses, imageUrl } = user;

@@ -1,10 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-
 const initialState = {
   resume: null,
 };
-
-
 const resumeDetailsSlice = createSlice({
   name: 'resumeDetails',
   initialState,

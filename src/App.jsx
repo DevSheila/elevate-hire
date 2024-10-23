@@ -18,6 +18,7 @@ import StartInterview from "./pages/MockInterview/interview/[interviewId]/start/
 import Feedback from "./pages/MockInterview/interview/[interviewId]/feedback/page";
 import Interview from "./pages/MockInterview/interview/[interviewId]/page";
 import { Toaster } from "./components/ui/toaster";
+import Upgrade from "./pages/MockInterview/upgrade/page";
 
 // PrivateRoute component to protect routes that require authentication
 function PrivateRoute({ element, ...rest }) {
@@ -40,7 +41,6 @@ function PublicRoute({ element, ...rest }) {
 function App() {
   return (
     <Router>
-
       <main>
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
@@ -80,6 +80,12 @@ function App() {
             element={<PrivateRoute element={<Feedback />} />}
           />
 
+          <Route
+            exact
+            path="/upgrade"
+            element={<PrivateRoute element={<Upgrade />} />}
+          />
+
           {/* ------------ */}
 
           <Route
@@ -91,7 +97,6 @@ function App() {
         </Routes>
       </main>
       <Toaster />
-
     </Router>
   );
 }

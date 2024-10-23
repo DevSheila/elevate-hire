@@ -22,7 +22,7 @@ function QuestionsSection({mockInterviewQuestion,activeQuestionIndex}) {
                 ${activeQuestionIndex==index&&'bg-primary text-white'}`}>Question #{index+1}</h2>
             ))}
         </div>
-        <h2 className='my-5 text-md md:text-lg'>{mockInterviewQuestion[activeQuestionIndex]?.question}</h2>
+        <h2 className='my-5 text-md '>{mockInterviewQuestion[activeQuestionIndex]?.question}</h2>
         <Volume2 className='cursor-pointer' onClick={()=>textToSpeach(mockInterviewQuestion[activeQuestionIndex]?.question)} />
         
         <div className='border rounded-lg p-5 bg-blue-100 mt-20 '>

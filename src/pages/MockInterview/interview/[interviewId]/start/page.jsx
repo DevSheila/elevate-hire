@@ -82,7 +82,7 @@ function StartInterview() {
                   "/feedback"
                 }
               >
-                <Button>End Interview</Button>
+                <Button className="rounded-full">End Interview</Button>
               </Link>
             )}
           </div>

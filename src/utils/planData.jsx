@@ -3,7 +3,7 @@ export default[
         id:1,
         name:'Free',
         cost:0,
-        offering:[
+        offering:[ 
             {
                 value:'✔️ Create 3 Free Mock Interview'
             },
@@ -14,7 +14,7 @@ export default[
                 value:'❌ Practice Question'
             },
             {
-                value:'❌ DevSheila.com Exlcusive App Access'
+                value:'❌ elevatehire.com  Exlcusive App Access'
             },
             {
                 value:'❌ Email Support'
@@ -37,7 +37,7 @@ export default[
                 value:'✔️ Practice Question'
             },
             {
-                value:'✔️ DevSheila.Com Exlcusive App Access'
+                value:'✔️ elevatehire.com Exlcusive App Access'
             },
             {
                 value:'✔️ Email Support'
