@@ -21,7 +21,7 @@ import { Loader2Icon } from "lucide-react";
 import { SlOptionsVertical } from "react-icons/sl";
 import { deleteDocumentById } from "@/database/firebase/service";
 
-function ResumeCardItem({ resume, refreshData , updateResumes}) {
+function ResumeCardItem({ resume, refreshData, updateResumes }) {
   const navigation = useNavigate();
   const [openAlert, setOpenAlert] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -36,7 +36,7 @@ function ResumeCardItem({ resume, refreshData , updateResumes}) {
     } finally {
       updateResumes();
       setLoading(false);
-      setOpenAlert(false)
+      setOpenAlert(false);
     }
   };
 
@@ -59,10 +59,13 @@ function ResumeCardItem({ resume, refreshData , updateResumes}) {
 
           <div className="flex justify-between">
             <div className="mt-1 p-2">
-              <h2 class="text-slate-700 line-clamp-1">
+              <h2 class="text-gray-700 line-clamp-1">
                 {resume?.settings?.title}
               </h2>
-              <p className="text-slate-400 mt-1 text-sm">{resume?.settings?.updateDate}</p>
+              <p className="text-gray-400 mt-1 text-sm">
+                {resume?.settings?.updateDate}
+              </p>
+
             </div>
             <DropdownMenu>
               <DropdownMenuTrigger>

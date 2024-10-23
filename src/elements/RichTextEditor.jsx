@@ -23,7 +23,6 @@ import {
   Toolbar,
 } from "react-simple-wysiwyg";
 
-import { toast } from "sonner";
 
 
 function RichTextEditor({ name, index, prompt,defaultValue ,onRichTextEditorChange }) {

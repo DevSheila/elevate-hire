@@ -5,12 +5,13 @@ import { useUser } from "@clerk/clerk-react";
 // ELEMENTS
 import ResumeDashboardLoader from "@/elements/Loaders/SkeletonLoader/ResumeDashboardLoader";
 import SideNavbar from "@/elements/SideNavbar";
-import ResumeCardItem3 from "./ResumeCardItem";
+import ResumeCardItem from "./ResumeCardItem";
 import AddResume from "@/elements/AddResume";
 
 // FIREBASE
 import { getResumesByUserId } from "@/database/firebase/service";
 import { Button } from "@/components/ui/button";
+
 
 function ResumeBuilderDashboard() {
   const { user } = useUser();
@@ -21,7 +22,7 @@ function ResumeBuilderDashboard() {
   // Function to fetch and update resumes
   const fetchResumes = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const userResumes = await getResumesByUserId(user.id);
       setResumes(userResumes);
     } catch (err) {
@@ -37,7 +38,7 @@ function ResumeBuilderDashboard() {
 
   return (
     <>
-      <SideNavbar /> 
+      <SideNavbar />
 
       <div class="h-screen p-4 sm:ml-64 bg-slate-50">
         <div class="p-2 md:mt-5 ">
@@ -61,7 +62,11 @@ function ResumeBuilderDashboard() {
                 {resumes?.length > 0 ? (
                   <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 ">
                     {resumes.map((resume, index) => (
-                      <ResumeCardItem3 resume={resume} key={index} updateResumes={fetchResumes} />
+                      <ResumeCardItem
+                        resume={resume}
+                        key={index}
+                        updateResumes={fetchResumes}
+                      />
                     ))}
                   </div>
                 ) : (
@@ -85,6 +90,7 @@ function ResumeBuilderDashboard() {
               <ResumeDashboardLoader />
             )}
           </div>
+
         </div>
       </div>
     </>

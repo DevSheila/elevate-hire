@@ -17,6 +17,7 @@ import MockInterview from "./pages/MockInterview/page";
 import StartInterview from "./pages/MockInterview/interview/[interviewId]/start/page";
 import Feedback from "./pages/MockInterview/interview/[interviewId]/feedback/page";
 import Interview from "./pages/MockInterview/interview/[interviewId]/page";
+import { Toaster } from "./components/ui/toaster";
 
 // PrivateRoute component to protect routes that require authentication
 function PrivateRoute({ element, ...rest }) {
@@ -39,53 +40,58 @@ function PublicRoute({ element, ...rest }) {
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route exact path="/" element={<LandingPage />} />
 
-        <Route
-          path="/resumebuilder/:id"
-          element={<PrivateRoute element={<ResumePage />} />}
-        />
+      <main>
+        <Routes>
+          <Route exact path="/" element={<LandingPage />} />
 
-        <Route
-          exact
-          path="/resumebuilder"
-          element={<PrivateRoute element={<ResumeBuilderDashboard />} />}
-        />
-        {/* ------------- */}
-        <Route
-          exact
-          path="/mockinterview"
-          element={<PrivateRoute element={<MockInterview />} />}
-        />
+          <Route
+            path="/resumebuilder/:id"
+            element={<PrivateRoute element={<ResumePage />} />}
+          />
 
-        <Route
-          exact
-          path="/mockinterview/interview/:interviewId"
-          element={<PrivateRoute element={<Interview />} />}
-        />
+          <Route
+            exact
+            path="/resumebuilder"
+            element={<PrivateRoute element={<ResumeBuilderDashboard />} />}
+          />
+          {/* ------------- */}
+          <Route
+            exact
+            path="/mockinterview"
+            element={<PrivateRoute element={<MockInterview />} />}
+          />
 
-        <Route
-          exact
-          path="/mockinterview/interview/:interviewId/start"
-          element={<PrivateRoute element={<StartInterview />} />}
-        />
+          <Route
+            exact
+            path="/mockinterview/interview/:interviewId"
+            element={<PrivateRoute element={<Interview />} />}
+          />
 
-        <Route
-          exact
-          path="/mockinterview/interview/:interviewId/feedback"
-          element={<PrivateRoute element={<Feedback />} />}
-        />
+          <Route
+            exact
+            path="/mockinterview/interview/:interviewId/start"
+            element={<PrivateRoute element={<StartInterview />} />}
+          />
 
-        {/* ------------ */}
+          <Route
+            exact
+            path="/mockinterview/interview/:interviewId/feedback"
+            element={<PrivateRoute element={<Feedback />} />}
+          />
 
-        <Route
-          exact
-          path="/sign-in"
-          element={<PublicRoute element={<SignIn />} />}
-        />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          {/* ------------ */}
+
+          <Route
+            exact
+            path="/sign-in"
+            element={<PublicRoute element={<SignIn />} />}
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+      <Toaster />
+
     </Router>
   );
 }
