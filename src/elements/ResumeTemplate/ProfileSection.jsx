@@ -28,10 +28,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import EditProfile from "../EditProfile";
 
-function ProfileSection({ currentProfileData }) {
+function ProfileSection() {
   const dispatch = useDispatch();
   const resume = useSelector((state) => state.resumeDetails.resume);
-
+  const currentProfileData = useSelector(
+    (state) => state.resumeDetails.resume.profileData
+  ); // Use Redux state directly
   const generateHref = (key, label) => {
     switch (key) {
       case "email":
@@ -211,7 +213,8 @@ function ProfileSection({ currentProfileData }) {
         </DialogTrigger>
 
         {/* POPUP FORM CONTENT */}
-        <EditProfile currentProfileData={currentProfileData} />
+        {/* <EditProfile currentProfileData={currentProfileData} /> */}
+        <EditProfile />
       </Dialog>
     </>
   );

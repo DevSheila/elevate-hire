@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -31,10 +31,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateResume } from "@/store/slices/resumeSlice";
 import { useUser } from "@clerk/clerk-react";
 
-function EditProfile({ currentProfileData }) {
+function EditProfile() {
   const dispatch = useDispatch();
   const resume = useSelector((state) => state.resumeDetails.resume);
-  const [profileData, setProfileData] = useState(currentProfileData);
+  const currentProfileData = useSelector(
+    (state) => state.resumeDetails.resume.profileData
+  ); 
   const [isFocused, setIsFocused] = useState(false);
   const { user, isLoaded, isSignedIn } = useUser();
 
@@ -53,15 +55,17 @@ function EditProfile({ currentProfileData }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     const updatedProfileData = {
-      ...profileData,
+      ...currentProfileData,
       [name]: value,
     };
-
-    console.log("updatedProfileData", updatedProfileData);
-
-    setProfileData(updatedProfileData);
     dispatch(updateResume({ profileData: updatedProfileData }));
   };
+  useEffect(()=>{
+    console.log("updatedProfileData", currentProfileData);
+
+  },[dispatch])
+
+
 
   return (
     <>
@@ -74,6 +78,39 @@ function EditProfile({ currentProfileData }) {
           </DialogDescription>
         </DialogHeader>
 
+        {/* behance
+: 
+""
+description
+: 
+"I am passionate about everything that i do. Being a programmer has taught me that if i have to create anything it's up to me and that as long as i am disciplined i can learn and do anything."
+email
+: 
+"sheilasharon10@gmail.com"
+github
+: 
+""
+instagram
+: 
+""
+jobTitle
+: 
+"Mobile applications developer (Kotlin, Java and Flutter ) | Spring boot dev"
+linkedin
+: 
+"linkedin.com/in/samuel-kimani-kenya"
+name
+: 
+"Samuel Kimani"
+phone
+: 
+""
+twitter
+: 
+""
+website
+: 
+"" */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Reusable input field component */}
           {[
@@ -81,73 +118,73 @@ function EditProfile({ currentProfileData }) {
               id: "name",
               icon: <SlUser />,
               placeholder: "name",
-              defaultValue: profileData.name,
+              defaultValue: currentProfileData.name,
             },
             {
               id: "title",
               icon: <SlTag />,
               placeholder: "job title",
-              defaultValue: profileData.title,
+              defaultValue: currentProfileData.jobTitle,
             },
             {
               id: "description",
               icon: <BsList />,
               placeholder: "Short description about yourself ...",
-              defaultValue: profileData.description,
+              defaultValue: currentProfileData.description,
             },
             {
               id: "email",
               icon: <SlEnvolope />,
               placeholder: "email",
-              defaultValue: profileData.email,
+              defaultValue: currentProfileData.email,
             },
             {
               id: "phone",
               icon: <SlPhone />,
               placeholder: "phone",
-              defaultValue: profileData.phone,
+              defaultValue: currentProfileData.phone,
             },
             {
               id: "twitter",
               icon: <SlSocialTwitter />,
               placeholder: "twitter",
-              defaultValue: profileData.twitter,
+              defaultValue: currentProfileData.twitter,
             },
             {
               id: "linkedin",
               icon: <SlSocialLinkedin />,
               placeholder: "linkedin",
-              defaultValue: profileData.linkedin,
+              defaultValue: currentProfileData.linkedin,
             },
             {
               id: "github",
               icon: <SlSocialGithub />,
               placeholder: "github",
-              defaultValue: profileData.github,
+              defaultValue: currentProfileData.github,
             },
             {
               id: "website",
               icon: <SlLink />,
               placeholder: "website",
-              defaultValue: profileData.website,
+              defaultValue: currentProfileData.website,
             },
             {
               id: "instagram",
               icon: <SlSocialInstagram />,
               placeholder: "instagram",
-              defaultValue: profileData.instagram,
+              defaultValue: currentProfileData.instagram,
             },
             {
               id: "behance",
               icon: <SlSocialBehance />,
               placeholder: "behance",
-              defaultValue: profileData.behance,
+              defaultValue: currentProfileData.behance,
             },
             {
               id: "dribbble",
               icon: <SlSocialDribbble />,
               placeholder: "dribbble",
-              defaultValue: profileData.dribbble,
+              defaultValue: currentProfileData.dribbble,
             },
           ].map(({ id, icon, placeholder, defaultValue }) => (
             <div
@@ -170,13 +207,6 @@ function EditProfile({ currentProfileData }) {
         </div>
 
         <DialogFooter>
-          {/* <Button
-            onClick={handleSaveChanges}
-            type="submit"
-            className="w-full rounded-full"
-          >
-            Save changes
-          </Button> */}
 
           <div className="flex justify-end mt-2 my-2">
             <button

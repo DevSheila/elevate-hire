@@ -1,27 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateResume } from "@/store/slices/resumeSlice";
+import { redo, undo, updateResume } from "@/store/slices/resumeSlice";
 import { SlPlus } from "react-icons/sl";
 import { Textarea } from "@/components/ui/textarea";
 import RichTextEditor from "../RichTextEditor";
 import SectionTabs from "../Tabs/SectionTabs";
 import { ACHIEVEMENT_PROMPT } from "@/constants/Prompts";
-
-const AchievementsSection = ({ currentResumeAchievements }) => {
+ 
+const AchievementsSection = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state) => state.resumeDetails.resume);
+  const achievementsData = useSelector(
+    (state) => state.resumeDetails.resume.achievementsData
+  ); // Use Redux state directly
   const [isEditing, setIsEditing] = useState(null);
-  const [achievementsData, setAchievementsData] = useState(
-    currentResumeAchievements
-  );
-
   const formRef = useRef(null);
-
-  useEffect(() => {
-    if (achievementsData) {
-      dispatch(updateResume({ achievementsData: achievementsData }));
-    }
-  }, [achievementsData, dispatch]);
 
   const handleEditClick = (index) => {
     setIsEditing(index);
@@ -35,13 +28,13 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
       [name]: value,
     };
 
-    setAchievementsData(updatedAchievements);
+    dispatch(updateResume({ achievementsData: updatedAchievements })); // Update Redux state directly
   };
 
   const handlePresentChange = (index) => {
     const updatedAchievements = [...achievementsData];
     updatedAchievements[index].present = !updatedAchievements[index].present;
-    setAchievementsData(updatedAchievements);
+    dispatch(updateResume({ achievementsData: updatedAchievements }));
   };
 
   const addAchievement = () => {
@@ -55,16 +48,14 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
       },
     ];
 
-    setAchievementsData(updatedAchievement);
-    setTimeout(() => {
-      setIsEditing(updatedAchievement.length - 1); // Set edit mode to the new achievement
-    }, 0);
+    dispatch(updateResume({ achievementsData: updatedAchievement }));
+    setIsEditing(updatedAchievement.length - 1); // Set edit mode to the new achievement
   };
 
   const removeAchievements = (index) => {
     const updatedAchievements = [...achievementsData];
     updatedAchievements.splice(index, 1);
-    setAchievementsData(updatedAchievements);
+    dispatch(updateResume({ achievementsData: updatedAchievements }));
     if (isEditing === index) {
       setIsEditing(null);
     }
@@ -77,22 +68,17 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
       [name]: e.target.value,
     };
 
-    setAchievementsData(updatedAchievements);
     dispatch(updateResume({ achievementsData: updatedAchievements }));
   };
 
-
   const moveAchievementUp = (index) => {
     if (index > 0) {
-      // Check if the item is not the first one
       const updatedAchievements = [...achievementsData];
       const temp = updatedAchievements[index - 1];
       updatedAchievements[index - 1] = updatedAchievements[index];
       updatedAchievements[index] = temp;
-      setIsEditing(index - 1);
-
-      setAchievementsData(updatedAchievements);
       dispatch(updateResume({ achievementsData: updatedAchievements }));
+      setIsEditing(index - 1);
     }
   };
 
@@ -102,10 +88,8 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
       const temp = updatedAchievements[index + 1];
       updatedAchievements[index + 1] = updatedAchievements[index];
       updatedAchievements[index] = temp;
-      setIsEditing(index + 1);
-
-      setAchievementsData(updatedAchievements);
       dispatch(updateResume({ achievementsData: updatedAchievements }));
+      setIsEditing(index + 1);
     }
   };
 
@@ -131,7 +115,7 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
     <div className="p-4 flex flex-col md:flex-row">
       <div className="flex-grow md:mr-4">
         <h2
-          className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2 w-full"
+          className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2"
           style={{ color: resume.settings.textColor }}
         >
           ACHIEVEMENTS
@@ -140,8 +124,7 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
         {achievementsData?.map((achievement, index) => (
           <div key={index} className="mb-4">
             {isEditing === index ? (
-              // Edit Mode (form inputs)
-              <div ref={formRef} className="">
+              <div ref={formRef}>
                 <input
                   type="text"
                   name="title"
@@ -171,8 +154,6 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
                     </label>
                   </div>
                 </div>
-
-
                 <RichTextEditor
                   name="description"
                   index={index}
@@ -180,13 +161,11 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
                     "{achievementTitle}",
                     achievement.title
                   )}
-                  defaultValue={achievement.title}
+                  defaultValue={achievement.description}
                   onRichTextEditorChange={(event) =>
                     handleRichTextEditor(event, "description", index)
                   }
                 />
-
-
                 <SectionTabs
                   onRemove={() => removeAchievements(index)}
                   onMoveUp={() => moveAchievementUp(index)}
@@ -194,7 +173,6 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
                 />
               </div>
             ) : (
-              // View Mode (content or "New Achievement" placeholder)
               <div
                 onClick={() => handleEditClick(index)}
                 className={`cursor-pointer pb-2 mb-2 ${
@@ -230,7 +208,6 @@ const AchievementsSection = ({ currentResumeAchievements }) => {
           <div className="text-cyan-600 text-2xl ">
             <SlPlus />
           </div>
-
           <div className="border-t-2 border-dotted border-cyan-600 w-full ml-2"></div>
         </div>
       </div>

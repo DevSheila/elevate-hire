@@ -1,26 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { updateResume } from "@/store/slices/resumeSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { SlArrowUpCircle, SlArrowDownCircle, SlTrash, SlPlus } from "react-icons/sl";
 
-import {
-  SlArrowUpCircle,
-  SlArrowDownCircle,
-  SlTrash,
-  SlPlus,
-} from "react-icons/sl";
-
-const InterestsSection = ({ currentInterestsData }) => {
+const InterestsSection = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state) => state.resumeDetails.resume);
+  const interestsData = useSelector(
+    (state) => state.resumeDetails.resume.interestsData
+  ); 
   const [isEditing, setIsEditing] = useState(false);
-  const [interestsData, setInterestsData] = useState(currentInterestsData);
 
   const formRef = useRef(null);
-  useEffect(() => {
-    if (interestsData) {
-      dispatch(updateResume({ interestsData: interestsData }));
-    }
-  }, [interestsData, dispatch]);
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -29,17 +20,20 @@ const InterestsSection = ({ currentInterestsData }) => {
   const handleChange = (e, index) => {
     const updatedInterests = [...interestsData];
     updatedInterests[index] = e.target.value;
-    setInterestsData(updatedInterests);
+     dispatch(updateResume({ interestsData: updatedInterests }));
   };
 
   const addInterest = () => {
-    setInterestsData([...interestsData, ""]);
+    const addedInterests = [...interestsData, ""];  // Add an empty interest
+
+    dispatch(updateResume({ interestsData: addedInterests }));
+    setIsEditing(true);  // Ensure edit mode is enabled after adding
   };
 
   const removeInterest = (index) => {
     const updatedInterests = [...interestsData];
     updatedInterests.splice(index, 1);
-    setInterestsData(updatedInterests);
+     dispatch(updateResume({ interestsData: interestsData }));
   };
 
   useEffect(() => {
@@ -60,22 +54,24 @@ const InterestsSection = ({ currentInterestsData }) => {
     };
   }, [isEditing]);
 
+
   return (
-    <div className="p-4 sm:p-6 lg:p-8">
-      <h2 className="font-bold text-gray-700 text-xl sm:text-2xl leading-7 mb-4 pb-2"  style={{ color: resume.settings.textColor }}>
+    <div className="p-4">
+      <h2 className="font-bold text-gray-700 text-2xl leading-7 mb-2 pb-2" style={{ color: resume.settings.textColor }}>
         INTERESTS
       </h2>
 
       {isEditing ? (
         <div ref={formRef} className="rounded-md">
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
             {interestsData?.map((interest, index) => (
               <div key={index}>
                 <input
                   type="text"
                   value={interest}
                   onChange={(e) => handleChange(e, index)}
-                  className="border-b w-full outline-none px-3 py-2 rounded"
+                  className="border-b w-full outline-none px-3 py-1 rounded"
+                  placeholder={interest === "" ? "New Interest (Click to Edit)" : ""}
                 />
                 {interestsData.length > 1 && (
                   <div className="flex flex-row">
@@ -83,12 +79,12 @@ const InterestsSection = ({ currentInterestsData }) => {
                       <SlArrowUpCircle />
                     </div>
 
-                    <div className="m-1 text-base text-gray-700 hover:text-emerald-500 focus:text-emerald-500 ">
+                    <div className="m-1 text-base text-gray-700 hover:text-emerald-500 focus:text-emerald-500">
                       <SlArrowDownCircle />
                     </div>
 
                     <div
-                      className="m-1 text-base text-gray-700 hover:text-red-500 focus:text-red-500 "
+                      className="m-1 text-base text-gray-700 hover:text-red-500 focus:text-red-500"
                       onClick={() => removeInterest(index)}
                     >
                       <SlTrash />
@@ -107,11 +103,7 @@ const InterestsSection = ({ currentInterestsData }) => {
                 key={index}
                 className="text-gray-900 px-3 py-1 border-2 border-solid rounded w-full truncate"
               >
-                {interest || (
-                  <span className="italic text-gray-500">
-                    New Interest (Click to Edit)
-                  </span>
-                )}
+                {interest || <span className="italic text-gray-500">New Interest (Click to Edit)</span>}
               </button>
             ))}
           </div>
@@ -119,7 +111,7 @@ const InterestsSection = ({ currentInterestsData }) => {
       )}
 
       <div onClick={addInterest} className="flex items-center mt-4">
-        <div className="text-cyan-600 text-2xl ">
+        <div className="text-cyan-600 text-2xl">
           <SlPlus />
         </div>
 

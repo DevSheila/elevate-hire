@@ -10,10 +10,6 @@ const resumeSlice = createSlice({
   name: "resumeDetails",
   initialState,
   reducers: {
-    resetPastFuture: (state) => {
-      state.future = [];  
-      state.past = [];  
-    },
     updateResume: (state, action) => {
       const past = state.past || []; // Ensure past is always an array
       const resume = state.resume;
@@ -49,5 +45,5 @@ const resumeSlice = createSlice({
   },
 });
 
-export const { resetPastFuture ,updateResume, undo, redo } = resumeSlice.actions;
+export const { updateResume, undo, redo } = resumeSlice.actions;
 export default resumeSlice.reducer;

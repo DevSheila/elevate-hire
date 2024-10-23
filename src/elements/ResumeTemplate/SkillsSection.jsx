@@ -3,20 +3,15 @@ import { updateResume } from "@/store/slices/resumeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { SlArrowUpCircle, SlArrowDownCircle, SlTrash, SlPlus } from "react-icons/sl";
 
-const SkillsSection = ({ currentSkillsData }) => {
+const SkillsSection = () => {
   const dispatch = useDispatch();
   const resume = useSelector((state) => state.resumeDetails.resume);
-
+  const skillsData = useSelector(
+    (state) => state.resumeDetails.resume.skillsData
+  ); 
   const [isEditing, setIsEditing] = useState(false);
-  const [skillsData, setSkillsData] = useState(currentSkillsData);
 
   const formRef = useRef(null);
-  
-  useEffect(() => {
-    if (skillsData) {
-      dispatch(updateResume({ skillsData: skillsData }));
-    }
-  }, [skillsData, dispatch]);
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -25,20 +20,20 @@ const SkillsSection = ({ currentSkillsData }) => {
   const handleChange = (e, index) => {
     const updatedSkills = [...skillsData];
     updatedSkills[index] = e.target.value;
-    setSkillsData(updatedSkills);
+     dispatch(updateResume({ skillsData: updatedSkills }));
   };
 
   const addSkill = () => {
-    setSkillsData([...skillsData, ""]);  // Add an empty skill
-    setTimeout(() => {
-      setIsEditing(true);  // Ensure edit mode is enabled after adding
-    }, 0);
+    const addedSkills = [...skillsData, ""];  // Add an empty skill
+
+    dispatch(updateResume({ skillsData: addedSkills }));
+    setIsEditing(true);  // Ensure edit mode is enabled after adding
   };
 
   const removeSkill = (index) => {
     const updatedSkills = [...skillsData];
     updatedSkills.splice(index, 1);
-    setSkillsData(updatedSkills);
+     dispatch(updateResume({ skillsData: skillsData }));
   };
 
   useEffect(() => {

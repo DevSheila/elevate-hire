@@ -17,7 +17,7 @@ import Revision from "@/elements/Revision";
 import { useUser } from "@clerk/clerk-react"; // Import Clerk's useUser hook
 
 // DATA
-import { updateResume } from "@/store/slices/resumeSlice";
+import {  updateResume } from "@/store/slices/resumeSlice";
 import {
   getResumeById,
   saveResumeToFirestore,
@@ -25,6 +25,7 @@ import {
 import { useParams } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import ResumePageLoader from "@/elements/Loaders/SkeletonLoader/ResumePageLoader";
+import { persistor } from "@/store/store";
 
 
 const ResumePage = () => {
@@ -34,6 +35,7 @@ const ResumePage = () => {
   const [currentResume, setCurrentResume] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const resume = useSelector((state) => state.resumeDetails.resume);
+  const resumeDetails = useSelector((state) => state.resumeDetails);
   const dispatch = useDispatch();
 
   if (!isLoaded) {
@@ -56,6 +58,16 @@ const ResumePage = () => {
     }
   };
 
+  const handleClearPersistedData = () => {
+    persistor
+      .purge()
+      .then(() => {
+        console.log("Persisted state has been purged");
+      })
+      .catch((err) => {
+        console.error("Error purging persisted state:", err);
+      });
+  };
   useEffect(() => {
     const fetchResume = async () => {
       setIsLoading(true);
@@ -65,6 +77,7 @@ const ResumePage = () => {
           if (fetchedResume) {
             // Dispatch action to save fetched resume to Redux store
             dispatch(updateResume(fetchedResume));
+            console.log("resumeDetails", resumeDetails); // Log the fetched resume
             console.log("Fetched Resume:", fetchedResume); // Log the fetched resume
           } else {
             console.log("No resume found with this ID.");
@@ -77,7 +90,6 @@ const ResumePage = () => {
       setCurrentResume(resume);
       setIsLoading(false);
     };
-
     fetchResume();
   }, [resumeId, resume, dispatch]);
 
@@ -88,6 +100,7 @@ const ResumePage = () => {
   useEffect(() => {
     console.log("Redux Resume Updated:", resume);
   }, [resume]);
+
 
   return (
     <>
@@ -145,7 +158,6 @@ const ResumePage = () => {
                       <div className="flex items-start mb-4">
                         <Revision />
                         <AchievementsSection
-                          currentResumeAchievements={resume?.achievementsData}
                         />
                       </div>
                     </div>
@@ -155,7 +167,8 @@ const ResumePage = () => {
                     <div className="mt-2">
                       <div className="flex items-start mb-4">
                         <Revision />
-                        <SkillsSection currentSkillsData={resume?.skillsData} />
+                        {/* <SkillsSection currentSkillsData={resume?.skillsData} /> */}
+                        <SkillsSection />
                       </div>
                     </div>
 
@@ -172,7 +185,6 @@ const ResumePage = () => {
                       <div className="flex items-start mb-4">
                         <Revision />
                         <CertificatesSection
-                          currentCertificatesData={resume?.certificatesData}
                         />
                       </div>
                     </div>
