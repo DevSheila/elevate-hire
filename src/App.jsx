@@ -46,17 +46,18 @@ function App() {
           <Route exact path="/" element={<LandingPage />} />
 
           <Route
-            path="/resumebuilder/:id"
-            element={<PrivateRoute element={<ResumePage />} />}
-          />
-
-          <Route
             exact
             path="/resumebuilder"
             element={<PrivateRoute element={<ResumeBuilderDashboard />} />}
           />
+
+          <Route
+            exact
+            path="/resumebuilder/:id"
+            element={<PrivateRoute element={<ResumePage />} />}
+          />
           {/* ------------- */}
-          <Route 
+          <Route
             exact
             path="/mockinterview"
             element={<PrivateRoute element={<MockInterview />} />}
