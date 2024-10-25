@@ -112,7 +112,7 @@ function SideNavbar() {
             {[
               {
                 name: "Templates",
-                href: "#",
+                href: "/templates",
                 icon: (
                   <SlLayers className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" />
                 ),

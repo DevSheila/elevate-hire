@@ -47,7 +47,7 @@ function ResumeCardItem({ resume, refreshData, updateResumes }) {
           <div class="relative flex items-end overflow-hidden rounded-xl bg-blue-100">
             <div
               className=" bg-gradient-to-b from-pink-100 via-purple-200 to-blue-200 rounded-xl border-t-4 "
-              style={{ borderColor: "#4287f5" }}
+              style={{ borderColor: `${resume?.settings?.themeColor ||  "#4287f5"}` }}
             >
               <img src="/template/template1.png" alt="document Photo" />
 
@@ -65,7 +65,9 @@ function ResumeCardItem({ resume, refreshData, updateResumes }) {
               <p className="text-gray-400 mt-1 text-sm">
                 {resume?.settings?.updateDate}
               </p>
-
+              <p className="text-gray-400 mt-1 text-sm">
+                {resume?.settings?.themeColor }
+              </p>
             </div>
             <DropdownMenu>
               <DropdownMenuTrigger>
