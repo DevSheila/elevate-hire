@@ -15,7 +15,7 @@ function TemplatePreview2() {
                   width={250}
                   height={250}
                   className="rounded-xl object-cover transition-all duration-300"
-                  src={resume?.source || "/doc.png"}
+                  src={resume?.source || "/placeholder.png"}
                   alt="resume template"
                 />
 

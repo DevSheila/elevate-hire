@@ -40,11 +40,11 @@ function Templates() {
     <>
       <SideNavbar />
 
-      <div class="h-screen p-4 sm:ml-64 bg-slate-50">
-        <div class="p-2 md:mt-5 ">
-          <div className="mx-auto max-w-screen-xl px-6 bg-slate-50">
+      <div class="h-screen  sm:ml-64 bg-slate-50">
+        <div class="  bg-slate-50">
+          <div className="mx-auto max-w-screen-xl px-6 ">
             <div className="flex flex-col md:flex-row justify-between items-center mb-4 space-y-4 md:space-y-0">
-              <div className="text-center md:text-left">
+              <div className="text-center md:text-left md:mt-5">
                 <p className="text-2xl font-bold self-center  whitespace-nowrap dark:text-white">
                   Job Winning Templates <span className="text-blue-600">.</span>
                 </p>
@@ -55,6 +55,8 @@ function Templates() {
                 </p>
               </div>
             </div>
+
+            
             {!loading ? (
               <div>
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 ">
