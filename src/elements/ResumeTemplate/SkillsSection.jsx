@@ -34,8 +34,30 @@ const SkillsSection = () => {
     const updatedSkills = [...skillsData];
     updatedSkills.splice(index, 1);
      dispatch(updateResume({ skillsData: skillsData }));
+  }; 
+  const moveSkillUp = (index) => {
+    if (index > 0) {
+      const updatedSkills = [...skillsData];
+      const temp = updatedSkills[index - 1];
+      updatedSkills[index - 1] = updatedSkills[index];
+      updatedSkills[index] = temp;
+      dispatch(updateResume({ skillsData: updatedSkills }));
+      setIsEditing(index - 1);
+    }
   };
 
+  const moveSkillDown = (index) => {
+    if (index < skillsData.length - 1) {
+      const updatedSkills = [...skillsData];
+      const temp = updatedSkills[index + 1];
+      updatedSkills[index + 1] = updatedSkills[index];
+      updatedSkills[index] = temp;
+      dispatch(updateResume({ skillsData: updatedSkills }));
+      setIsEditing(index + 1);
+    }
+  };
+
+  
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (formRef.current && !formRef.current.contains(event.target)) {
@@ -75,11 +97,11 @@ const SkillsSection = () => {
                 />
                 {skillsData.length > 1 && (
                   <div className="flex flex-row">
-                    <div className="m-1 text-base text-gray-700 hover:text-emerald-500 focus:text-emerald-500">
+                    <div onClick={() => moveSkillUp(index)} className="m-1 text-base text-gray-700 hover:text-emerald-500 focus:text-emerald-500">
                       <SlArrowUpCircle />
                     </div>
 
-                    <div className="m-1 text-base text-gray-700 hover:text-emerald-500 focus:text-emerald-500">
+                    <div onClick={() => moveSkillDown(index)}  className="m-1 text-base text-gray-700 hover:text-emerald-500 focus:text-emerald-500">
                       <SlArrowDownCircle />
                     </div>
 

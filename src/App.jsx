@@ -19,6 +19,7 @@ import Feedback from "./pages/MockInterview/interview/[interviewId]/feedback/pag
 import Interview from "./pages/MockInterview/interview/[interviewId]/page";
 import { Toaster } from "./components/ui/toaster";
 import Upgrade from "./pages/MockInterview/upgrade/page";
+import Templates from "./pages/Templates/Templates";
 
 // PrivateRoute component to protect routes that require authentication
 function PrivateRoute({ element, ...rest }) {
@@ -43,45 +44,51 @@ function App() {
     <Router>
       <main>
         <Routes>
-          <Route exact path="/" element={<LandingPage />} />
+          <Route  path="/" element={<LandingPage />} />
 
           <Route
-            path="/resumebuilder/:id"
-            element={<PrivateRoute element={<ResumePage />} />}
+            path="/templates"
+            element={<PrivateRoute element={<Templates />} />}
           />
 
           <Route
-            exact
+            
             path="/resumebuilder"
             element={<PrivateRoute element={<ResumeBuilderDashboard />} />}
           />
+
+          <Route
+            
+            path="/resumebuilder/:id"
+            element={<PrivateRoute element={<ResumePage />} />}
+          />
           {/* ------------- */}
-          <Route 
-            exact
+          <Route
+            
             path="/mockinterview"
             element={<PrivateRoute element={<MockInterview />} />}
           />
 
           <Route
-            exact
+            
             path="/mockinterview/interview/:interviewId"
             element={<PrivateRoute element={<Interview />} />}
           />
 
           <Route
-            exact
+            
             path="/mockinterview/interview/:interviewId/start"
             element={<PrivateRoute element={<StartInterview />} />}
           />
 
           <Route
-            exact
+            
             path="/mockinterview/interview/:interviewId/feedback"
             element={<PrivateRoute element={<Feedback />} />}
           />
 
           <Route
-            exact
+            
             path="/upgrade"
             element={<PrivateRoute element={<Upgrade />} />}
           />
@@ -89,7 +96,7 @@ function App() {
           {/* ------------ */}
 
           <Route
-            exact
+            
             path="/sign-in"
             element={<PublicRoute element={<SignIn />} />}
           />

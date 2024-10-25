@@ -14,9 +14,13 @@ import whitCurvedImg from "../../public/white-curved.jpeg";
 // CLERK
 import { UserButton, useUser } from "@clerk/clerk-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function SideNavbar() {
+  const location = useLocation();
+
+  const path = location.pathname;
+
   const { user, isLoaded, isSignedIn } = useUser();
 
   const [isOpen, setIsOpen] = useState(false); // State for sidebar visibility
@@ -112,44 +116,42 @@ function SideNavbar() {
             {[
               {
                 name: "Templates",
-                href: "#",
-                icon: (
-                  <SlLayers className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" />
-                ),
+                href: "/templates",
+                icon: SlLayers,
               },
               {
                 name: "Resume Builder",
                 href: "/resumebuilder",
-                icon: (
-                  <SlDoc className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" />
-                ),
+                icon: SlDoc,
               },
 
               {
                 name: "Mock Interview",
                 href: "/mockinterview",
-                icon: (
-                  <SlCamera className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" />
-                ),
+                icon: SlCamera,
               },
               {
                 name: "Cover Letter",
                 href: "#",
-                icon: (
-                  <SlEnvolope className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white" />
-                ),
+                icon: SlEnvolope,
               },
             ].map((item) => (
               <li key={item.name}>
-                 <Link to={item.href}>
-                <div
-                  className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-indigo-600 hover:text-white hover:rounded-xl dark:hover:bg-gray-700 group transition-all ease-linear duration-100 "
-                >
-                  {item.icon}
-                  <span className="ms-3">{item.name}</span>
-                </div>
+                <Link to={item.href}>
+                  <div
+                    className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-indigo-600 hover:text-white hover:rounded-xl dark:hover:bg-gray-700 group transition-all ease-linear duration-100 ${
+                      path == item.href &&
+                      "bg-indigo-600 text-white rounded-xl"
+                    } `}
+                  >
+                    <item.icon
+                      className={`w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-white dark:group-hover:text-white ${
+                        path === item.href && "text-white"
+                      }`}
+                    />
+                    <span className="ms-3">{item.name}</span>
+                  </div>
                 </Link>
-
               </li>
             ))}
           </ul>
@@ -161,7 +163,7 @@ function SideNavbar() {
               style={{ backgroundImage: `url(${whitCurvedImg})` }}
             >
               <Button className="rounded-xl mb-3 w-full">
-                <a href="/upgrade" > Upgrade Now</a>
+                <a href="/upgrade"> Upgrade Now</a>
               </Button>
 
               <p className="mb-3 text-sm text-blue-800 dark:text-blue-400">

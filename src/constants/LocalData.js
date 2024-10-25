@@ -1,25 +1,97 @@
 export const LocalData = {
   resumeTemplates: [
     {
-      name: "divided1",
-      source: "/template1.png",
+      name: "Divided1",
+      source: "/template/template1.png",
       type: "free",
     },
     {
-      name: "divided2",
-      source: "/template2.png",
+      name: "Divided2",
+      source: "/template/template2.png",
       type: "free",
     },
     {
-      name: "divided3",
-      source: "/template3.webp",
-      type: "premeium",
+      name: "Divided3",
+      source: "/template/template3.webp",
+      type: "premium",
     },
     {
-      name: "",
-      source: "/template4.png",
-      type: "premeium",
+      name: "Clean",
+      source: "/template/template4.png",
+      type: "premium",
     },
+    {
+      name: "Amsterdam",
+      source: "/template/amsterdam-resume-templates.avif",
+      type: "premium",
+    },
+    {
+      name: "Dublin",
+      source: "/template/dublin-resume-templates.avif",
+      type: "premium",
+    },
+    {
+      name: "London",
+      source: "/template/london-resume-templates.avif",
+      type: "premium",
+    },
+    {
+      name: "Madrid",
+      source: "/template/madrid-resume-templates.avif",
+      type: "premium",
+    },
+    {
+      name: "Moscow",
+      source: "/template/moscow-resume-templates.avif",
+      type: "premium",
+    },
+    {
+      name: "New york",
+      source: "/template/new-york-resume-templates.avif",
+      type: "premium",
+    },
+    {
+      name: "Oslo",
+      source: "/template/oslo-resume-templates.avif",
+      type: "premium",
+    },
+    {
+      name: "Paris",
+      source: "/template/paris-resume-templates.avif",
+      type: "premium",
+    },
+    {
+      name: "Santiago",
+      source: "/template/santiago-resume-templates.avif",
+      type: "premium",
+    },
+    {
+      name: "Singapore",
+      source: "/template/singapore-resume-templates.avif",
+      type: "premium",
+    },
+    {
+      name: "Stockholm",
+      source: "/template/stockholm-resume-templates.avif",
+      type: "premium",
+    },
+    {
+      name: "Sydney",
+      source: "/template/sydney-resume-templates.avif",
+      type: "premium",
+    },
+    {
+      name: "Toronto",
+      source: "/template/toronto-resume-templates.avif",
+      type: "premium",
+    },
+    {
+      name: "Vienna",
+      source: "/template/vienna-resume-templates.avif",
+      type: "premium",
+    },
+
+
   ],
 
   backgroundColors: [

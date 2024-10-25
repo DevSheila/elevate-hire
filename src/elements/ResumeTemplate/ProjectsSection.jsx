@@ -16,7 +16,7 @@ const ProjectsSection = () => {
   const [isEditing, setIsEditing] = useState(null);
   const formRef = useRef(null);
 
-  const handleEditClick = (index) => {
+  const handleEditClick = (index) => { 
     setIsEditing(index);
   };
 

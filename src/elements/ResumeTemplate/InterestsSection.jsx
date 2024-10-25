@@ -11,7 +11,7 @@ const InterestsSection = () => {
   ); 
   const [isEditing, setIsEditing] = useState(false);
 
-  const formRef = useRef(null);
+  const formRef = useRef(null); 
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -34,6 +34,28 @@ const InterestsSection = () => {
     const updatedInterests = [...interestsData];
     updatedInterests.splice(index, 1);
      dispatch(updateResume({ interestsData: interestsData }));
+  };
+
+  const moveInterestUp = (index) => {
+    if (index > 0) {
+      const updatedInterests = [...interestsData];
+      const temp = updatedInterests[index - 1];
+      updatedInterests[index - 1] = updatedInterests[index];
+      updatedInterests[index] = temp;
+      dispatch(updateResume({ interestsData: updatedInterests }));
+      setIsEditing(index - 1);
+    }
+  };
+
+  const moveInterestDown = (index) => {
+    if (index < interestsData.length - 1) {
+      const updatedInterests = [...interestsData];
+      const temp = updatedInterests[index + 1];
+      updatedInterests[index + 1] = updatedInterests[index];
+      updatedInterests[index] = temp;
+      dispatch(updateResume({ interestsData: updatedInterests }));
+      setIsEditing(index + 1);
+    }
   };
 
   useEffect(() => {
@@ -75,11 +97,11 @@ const InterestsSection = () => {
                 />
                 {interestsData.length > 1 && (
                   <div className="flex flex-row">
-                    <div className="m-1 text-base text-gray-700 hover:text-emerald-500 focus:text-emerald-500">
+                    <div onClick={() => moveInterestUp(index)} className="m-1 text-base text-gray-700 hover:text-emerald-500 focus:text-emerald-500">
                       <SlArrowUpCircle />
                     </div>
 
-                    <div className="m-1 text-base text-gray-700 hover:text-emerald-500 focus:text-emerald-500">
+                    <div onClick={() => moveInterestDown(index)} className="m-1 text-base text-gray-700 hover:text-emerald-500 focus:text-emerald-500">
                       <SlArrowDownCircle />
                     </div>
 
