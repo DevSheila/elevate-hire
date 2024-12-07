@@ -8,7 +8,7 @@ export function ThemeSelector() {
   const resume = useSelector((state) => state.resumeDetails.resume);
   const dispatch = useDispatch();
 
-  const onColorSelect = (color) => {
+  const onColorSelect = (color) => { 
     const updatedSettingsData = {
       ...resume.settings, // Spreads the existing settings properties (e.g., themeColor, font)
       themeColor: color, // Updates or adds the textColor property

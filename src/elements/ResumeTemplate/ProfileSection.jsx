@@ -169,7 +169,7 @@ function ProfileSection() {
                 {currentProfileData.description ||
                   "Short Description About Yourself ."}
               </p>
-            </div>
+            </div> 
             <div
               className="mb-8 p-6 md:p-10 bg-gray-800 text-white"
               style={{ backgroundColor: resume.settings.themeColor }}

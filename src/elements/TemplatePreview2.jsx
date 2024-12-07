@@ -1,7 +1,7 @@
 import { LocalData } from "@/constants/LocalData";
 import React from "react";
 
-function TemplatePreview2() {
+function TemplatePreview2() { 
   return (
     <>
         <div className="m-1 p-2 max-w-sm bg-gray-200  rounded-xl overflow-y-auto h-80  scrollbar-thin scrollbar-thumb-cyan-400 scrollbar-track-gray-300 shadow-sm">
@@ -10,7 +10,7 @@ function TemplatePreview2() {
               <div
                 key={index}
                 className="relative flex items-end overflow-hidden rounded-xl hover:border hover:border-cyan-400"
-              >
+              > 
                 <img
                   width={250}
                   height={250}
@@ -50,4 +50,4 @@ function TemplatePreview2() {
   );
 }
 
-export default TemplatePreview2;
+export default TemplatePreview2; 

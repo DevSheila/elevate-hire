@@ -4,7 +4,7 @@ import { redo, undo, updateResume } from "@/store/slices/resumeSlice";
 import { SlPlus } from "react-icons/sl";
 import { Textarea } from "@/components/ui/textarea";
 import RichTextEditor from "../RichTextEditor";
-import SectionTabs from "../Tabs/SectionTabs";
+import SectionTabs from "../Tabs/SectionTabs"; 
 import { ACHIEVEMENT_PROMPT } from "@/constants/Prompts";
  
 const AchievementsSection = () => {

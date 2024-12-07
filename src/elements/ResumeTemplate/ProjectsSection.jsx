@@ -169,7 +169,7 @@ const ProjectsSection = () => {
                   prompt={PROJECT_PROMPT .replace(
                     "{ProjectTitle}",
                     project.title
-                  )}
+                  )} 
                   defaultValue={project.description}
                   onRichTextEditorChange={(event) =>
                     handleRichTextEditor(event, "description", index)

@@ -90,7 +90,7 @@ const SkillsSection = () => {
               <div key={index}>
                 <input
                   type="text"
-                  value={skill}
+                  value={skill} 
                   onChange={(e) => handleChange(e, index)}
                   className="border-b w-full outline-none px-3 py-1 rounded"
                   placeholder={skill === "" ? "New Skill (Click to Edit)" : ""}

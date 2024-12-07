@@ -20,6 +20,7 @@ import Interview from "./pages/MockInterview/interview/[interviewId]/page";
 import { Toaster } from "./components/ui/toaster";
 import Upgrade from "./pages/MockInterview/upgrade/page";
 import Templates from "./pages/Templates/Templates";
+import ResumePreview from "./elements/ResumeTemplate2/ResumePreview";
 
 // PrivateRoute component to protect routes that require authentication
 function PrivateRoute({ element, ...rest }) {
@@ -44,7 +45,7 @@ function App() {
     <Router>
       <main>
         <Routes>
-          <Route  path="/" element={<LandingPage />} />
+          <Route path="/" element={<LandingPage />} />
 
           <Route
             path="/templates"
@@ -52,43 +53,41 @@ function App() {
           />
 
           <Route
-            
             path="/resumebuilder"
             element={<PrivateRoute element={<ResumeBuilderDashboard />} />}
           />
 
           <Route
-            
             path="/resumebuilder/:id"
             element={<PrivateRoute element={<ResumePage />} />}
           />
+
+          <Route
+            path="/preview/:id"
+            element={<PrivateRoute element={<ResumePreview />} />}
+          />
           {/* ------------- */}
           <Route
-            
             path="/mockinterview"
             element={<PrivateRoute element={<MockInterview />} />}
           />
 
           <Route
-            
             path="/mockinterview/interview/:interviewId"
             element={<PrivateRoute element={<Interview />} />}
           />
 
           <Route
-            
             path="/mockinterview/interview/:interviewId/start"
             element={<PrivateRoute element={<StartInterview />} />}
           />
 
           <Route
-            
             path="/mockinterview/interview/:interviewId/feedback"
             element={<PrivateRoute element={<Feedback />} />}
           />
 
           <Route
-            
             path="/upgrade"
             element={<PrivateRoute element={<Upgrade />} />}
           />
@@ -96,7 +95,6 @@ function App() {
           {/* ------------ */}
 
           <Route
-            
             path="/sign-in"
             element={<PublicRoute element={<SignIn />} />}
           />

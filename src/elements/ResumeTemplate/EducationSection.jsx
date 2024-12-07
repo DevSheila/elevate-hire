@@ -180,7 +180,7 @@ const EducationSection = () => {
                 }`}
               >
                 {education.degree ||
-                education.dates ||
+                education.dates || 
                 education.university ? (
                   <>
                     <h3 className="font-bold text-lg">{education.degree}</h3>

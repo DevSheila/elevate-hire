@@ -1,23 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
- 
-// ELEMENTS
-import WorkExperienceSection from "@/elements/ResumeTemplate/WorkExperienceSection";
-import EducationSection from "@/elements/ResumeTemplate/EducationSection";
-import AchievementsSection from "@/elements/ResumeTemplate/AchievementsSection";
-import SkillsSection from "@/elements/ResumeTemplate/SkillsSection";
-import ProjectsSection from "@/elements/ResumeTemplate/ProjectsSection";
-import CertificatesSection from "@/elements/ResumeTemplate/CertificatesSection";
-import InterestsSection from "@/elements/ResumeTemplate/InterestsSection";
-import ProfileSection from "@/elements/ResumeTemplate/ProfileSection";
-import HorizontalToolTabs from "@/elements/Tabs/HorizontalToolTabs";
-import Revision from "@/elements/Revision";
-  
+//COMPONENTS
+import PersonalDetailPreview from "./PersonalDetailPreview";
+import SummeryPreview from "./SummeryPreview";
+import ExperiencePreview from "./ExperiencePreview";
+import EducationalPreview from "./EducationalPreview";
+import SkillsPreview from "./SkillsPreview";
+
 // USER
 import { useUser } from "@clerk/clerk-react"; // Import Clerk's useUser hook
 
 // DATA
-import {  updateResume } from "@/store/slices/resumeSlice";
+import { updateResume } from "@/store/slices/resumeSlice";
 import {
   getResumeById,
   saveResumeToFirestore,
@@ -26,9 +20,12 @@ import { useParams } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import ResumePageLoader from "@/elements/Loaders/SkeletonLoader/ResumePageLoader";
 import { persistor } from "@/store/store";
+import HorizontalToolTabs from "../Tabs/HorizontalToolTabs";
+import InterestsPreview from "./InterestsPreview";
+import ProjectsPreview from "./ProjectsPreview";
+import AchievementsPreview from "./AchievementsPreview";
 
-
-const ResumePage = () => {
+function ResumePreview() {
   const { id: resumeId } = useParams(); // Use resumeId for clarity
   const { user, isLoaded, isSignedIn } = useUser();
   const [isFocused, setIsFocused] = useState(false);
@@ -101,7 +98,6 @@ const ResumePage = () => {
     console.log("Redux Resume Updated:", resume);
   }, [resume]);
 
-
   return (
     <>
       {!isLoading ? (
@@ -130,88 +126,39 @@ const ResumePage = () => {
                     )}
                     <span className="relative z-10">Save Changes</span>
                   </button>
-                </div> 
-
-                <ProfileSection currentProfileData={resume?.profileData} />
-
-                <div className="grid grid-cols-1 md:grid-cols-2 ">
-                  <div>
-                    <div className="mt-2">
-                      <div className="flex  items-start mb-4">
-                        <Revision />
-                        <EducationSection
-                          currentEducationSection={resume?.educationData}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="mt-2">
-                      <div className="flex items-start mb-4">
-                        <Revision />
-                        <WorkExperienceSection
-                          currentWorkExperienceData={resume?.workExperienceData}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="mt-2">
-                      <div className="flex items-start mb-4">
-                        <Revision />
-                        <AchievementsSection
-                        />
-                      </div>
-                    </div>
-                  </div> 
-
-                  <div>
-                    <div className="mt-2">
-                      <div className="flex items-start mb-4">
-                        <Revision />
-                        {/* <SkillsSection currentSkillsData={resume?.skillsData} /> */}
-                        <SkillsSection />
-                      </div>
-                    </div>
-
-                    <div className="mt-2">
-                      <div className="flex items-start mb-4">
-                        <Revision />
-                        <ProjectsSection
-                          currentProjectsData={resume?.projectsData}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="mt-2">
-                      <div className="flex items-start mb-4">
-                        <Revision />
-                        <CertificatesSection
-                        />
-                      </div>
-                    </div>
-
-                    <div className="mt-2">
-                      <div className="flex  items-start mb-4">
-                        <Revision />
-                        <InterestsSection
-                          currentInterestsData={resume?.interestsData}
-                        />
-                      </div>
-                    </div>
-                  </div>
                 </div>
-                
+                {/* Personal Detail  */}
+                <PersonalDetailPreview resumeInfo={resume} />
+
+                {/* Summery  */}
+                <SummeryPreview resumeInfo={resume?.profileData} />
+
+                {/* Educational  */}
+                <EducationalPreview resumeInfo={resume} />
+
+                {/* Professional Experience  */}
+                <ExperiencePreview resumeInfo={resume} />
+
+                {/* Projects  */}
+                <ProjectsPreview resumeInfo={resume} />
+
+                {/* Achievements  */}
+                <AchievementsPreview resumeInfo={resume} />
+
+                {/* Skills  */}
+                <SkillsPreview resumeInfo={resume} />
+
+                {/* Interests  */}
+                <InterestsPreview resumeInfo={resume} />
               </div>
             </div>
           </div>
         </>
       ) : (
-        <>
-
-          <ResumePageLoader/>
-        </>
+        <ResumePageLoader />
       )}
     </>
   );
-};
+}
 
-export default ResumePage;
+export default ResumePreview;

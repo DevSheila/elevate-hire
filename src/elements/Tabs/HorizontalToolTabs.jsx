@@ -123,7 +123,7 @@ const HorizontalToolTabs = () => {
                 <div className="m-1 text-lg">
                   <SlLayers />
                 </div>
-                <span className="hidden md:inline">Template</span>
+                <span className="hidden md:inline">Template</span> 
               </TabsTrigger>
 
               <TabsTrigger value="preview">
@@ -146,7 +146,7 @@ const HorizontalToolTabs = () => {
 
               <TabsContent value="template">
                 <TemplatePreview2 />
-              </TabsContent>
+              </TabsContent> 
             </div>
           </Tabs>
         </div>
