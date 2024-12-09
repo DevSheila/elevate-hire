@@ -26,7 +26,7 @@ function EducationalPreview({resumeInfo}) {
                 {education?.description}
             </p> */}
         </div>
-    ))}
+    ))} 
 
     </div>
   )
