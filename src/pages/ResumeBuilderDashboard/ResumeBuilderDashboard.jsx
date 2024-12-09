@@ -56,7 +56,7 @@ function ResumeBuilderDashboard() {
 
               {/* ADD RESUME SECTION */}
               <AddResume updateResumes={fetchResumes} />
-            </div>
+            </div> 
             {!loading ? (
               <div>
                 {resumes?.length > 0 ? (
@@ -81,7 +81,7 @@ function ResumeBuilderDashboard() {
                       <p className="text-sm text-muted-foreground">
                         Click below above to create a resume
                       </p>
-                      <AddResume updateResumes={fetchResumes} />
+                      <AddResume updateResumes={fetchResumes} /> 
                     </div>
                   </div>
                 )}

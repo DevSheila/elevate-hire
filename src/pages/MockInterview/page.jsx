@@ -8,22 +8,26 @@ function MockInterview() {
   return (
     <>
       <SideNavbar />
+
       <div class="h-screen p-4 sm:ml-64 bg-slate-50">
-        <div className="p-10">
-          <p className="text-2xl font-bold self-center  whitespace-nowrap dark:text-white">
-            Mock Interview<span className="text-blue-600">.</span>
-          </p>
+        <div class="p-2 md:mt-5 ">
+          <div className="mx-auto max-w-screen-xl px-6 bg-slate-50">
+            <div className="flex flex-col md:flex-row justify-between items-center mb-4 space-y-4 md:space-y-0">
+              <div className="text-center md:text-left">
+                <p className="text-2xl font-bold self-center  whitespace-nowrap dark:text-white">
+                  Mock Interview<span className="text-blue-600">.</span>
+                </p>
 
-          <p className="text-gray-500">
-            Create and Start your AI Mockup Interview
-          </p>
+                <p className="text-base text-gray-500 dark:text-gray-400">
+                  Create and Start your AI Mockup Interview
+                </p>
+              </div>
+              <AddNewInterview />
+            </div> 
 
-          <div className="grid grid-cols-1 md:grid-cols-3 my-5 gap-5">
-            <AddNewInterview />
+            {/* Previous Interview List  */}
+            <InterviewList />
           </div>
-
-          {/* Previous Interview List  */}
-          <InterviewList />
         </div>
       </div>
     </>
