@@ -90,11 +90,11 @@ const SkillsSection = () => {
               <div key={index}>
                 <input
                   type="text"
-                  value={skill}
+                  value={skill} 
                   onChange={(e) => handleChange(e, index)}
                   className="border-b w-full outline-none px-3 py-1 rounded"
                   placeholder={skill === "" ? "New Skill (Click to Edit)" : ""}
-                />
+                /> 
                 {skillsData.length > 1 && (
                   <div className="flex flex-row">
                     <div onClick={() => moveSkillUp(index)} className="m-1 text-base text-gray-700 hover:text-emerald-500 focus:text-emerald-500">

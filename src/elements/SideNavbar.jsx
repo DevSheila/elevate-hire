@@ -115,25 +115,19 @@ function SideNavbar() {
           <ul className="space-y-2 font-medium flex-grow">
             {[
               {
-                name: "Templates",
-                href: "/templates",
-                icon: SlLayers,
-              },
-              {
                 name: "Resume Builder",
                 href: "/resumebuilder",
                 icon: SlDoc,
               },
-
               {
                 name: "Mock Interview",
                 href: "/mockinterview",
                 icon: SlCamera,
               },
               {
-                name: "Cover Letter",
-                href: "#",
-                icon: SlEnvolope,
+                name: "Templates",
+                href: "/templates",
+                icon: SlLayers,
               },
             ].map((item) => (
               <li key={item.name}>

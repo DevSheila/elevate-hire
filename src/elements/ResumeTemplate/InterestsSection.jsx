@@ -130,7 +130,7 @@ const InterestsSection = () => {
             ))}
           </div>
         </div>
-      )}
+      )} 
 
       <div onClick={addInterest} className="flex items-center mt-4">
         <div className="text-cyan-600 text-2xl">
